@@ -10,62 +10,6 @@ const giveId = (function idGenerator() {
   return () => counter++;
 })();
 
-// OLD TODOS
-/* const todos = [
-  {
-    date: this.today,
-    activities: [
-      {
-        id: giveId(),
-        done: false,
-        time: "17:00",
-        name: "Feed a cat",
-        description: "Give this fat bastard some tuna <3",
-      },
-      {
-        id: giveId(),
-        done: false,
-        time: "19:00",
-        name: "Cook some dinner",
-        description: "Coke + cereal - what could be more tasty?"
-      },
-      {
-        id: giveId(),
-        done: false,
-        time: "19:00",
-        name: "Make some damn good coffee for D.",
-        description: "Don't forget about cinnamon",
-      }
-    ]
-  },
-  {
-    date: this.today.addDays(1),
-    activities: [
-      {
-        id: giveId(),
-        done: false,
-        time: "12:00",
-        name: "Feed a cat",
-        description: "Feed this fat bastard with some tuna <3",
-      },
-      {
-        id: giveId(),
-        done: false,
-        time: "17:00",
-        name: "Cook some dinner",
-        description: "Healthy food, huh?"
-      },
-      {
-        id: giveId(),
-        done: false,
-        time: "19:00",
-        name: "Make a cup of tea for D.",
-        description: "Cup should be big!",
-      }
-    ]
-  }
-] */
-
 class Calendar extends Component {
   today = new NiceDate();
 
