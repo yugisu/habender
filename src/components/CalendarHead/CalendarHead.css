@@ -1,0 +1,40 @@
+.calendar-head {
+  grid-area: cal-head;
+
+  height: 8vh;
+  
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  
+  font-size: 5vh;
+  color: #fff;
+  text-shadow: -1px -1px 1px khaki, 1px 1px 3px rgba(240, 128, 128, 0.7);
+
+  border-bottom: dashed .1vh rgb(255, 255, 255);
+}
+
+.calendar-head > span {
+  margin-right: 2vw;
+  width: 26vw;
+}
+
+.calendar-head > div > button {
+  height: 3vh;
+  border: none;
+  outline: none;
+  background: transparent;
+  
+  font-size: 3vh;
+  color: #fff;
+  text-shadow: -1px -1px 1px khaki, 1px 1px 3px rgba(240, 128, 128, 0.7);
+  user-select: none;
+
+  cursor: pointer;
+}
+
+.calendar-head > div > button:hover {
+  text-shadow: -1px -1px 1px rgb(223, 213, 129), 
+                1px 1px 3px rgba(223, 119, 119, 0.7);
+
+}

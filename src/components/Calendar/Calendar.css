@@ -1,0 +1,16 @@
+.calendar {
+  display: grid;
+  
+  padding: 0 5vw;
+  grid-template-rows: 8vh 80vh;
+  grid-template-areas: 
+    "cal-head"
+    "cal-body"
+    ;
+}
+
+.calendar-body {
+  grid-area: cal-body;
+  height: 80vh;  
+  border-radius: .5rem; 
+}
