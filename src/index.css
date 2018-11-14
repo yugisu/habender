@@ -125,7 +125,6 @@ header {
 
 .calendar-head > span {
   margin-right: 2vw;
-  width: 26vw;
 }
 
 .calendar-head > div > button {
@@ -165,20 +164,20 @@ header {
 
 .tile {
   z-index: 40;
-  height: 100px;
+  height: 13vh;
   padding: 0;
   color: #ffffff;
   -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
           box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
   background: rgba(0, 0, 0, 0.274);
   border-radius: 0;
-  border: 0.3rem solid transparent;
+  border: 0.4vh solid transparent;
 }
 
 .day {
   z-index: 50;
   height: 100%;
-  margin-top: -50%;
+  margin-top: -12.2vh;
   padding: 4%;
   overflow: auto;
 }
@@ -196,7 +195,6 @@ header {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding: 0 0.5rem;
   color: #fff;
   text-shadow: 2px 2px 0px black;
   font-size: 2em;
@@ -206,7 +204,6 @@ header {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  opacity: 1;
   -webkit-transition: 0.15s;
   transition: 0.15s;
   border-radius: 0;
@@ -234,6 +231,6 @@ header {
 }
 
 .todo::before {
-  content: '-';
+  content: '> ';
 }
 /*# sourceMappingURL=index.css.map */
