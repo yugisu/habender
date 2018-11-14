@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import NiceDate from '../../NiceDate';
 
-import './Calendar.css';
 import Month from '../Month';
 import CalendarHead from '../CalendarHead';
 

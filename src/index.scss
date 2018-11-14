@@ -1,0 +1,271 @@
+// Themes
+// - Light
+// #region
+$theme-light: (
+  bg: ghostwhite,
+  text: #000,
+  text-shadow: none,
+  header-bg: lightcoral,
+  header-shadow: none,
+  header-text: #fff,
+  header-text-shadow: (
+    -1px -2px 2px orange,
+    1px 1px 2px cyan,
+  ),
+  calendar-head-text: #fff,
+  calendar-head-text-shadow: (
+    -1px -1px 1px rgb(223, 213, 129),
+    1px 1px 2px rgba(223, 119, 119, 0.7),
+  ),
+  calendar-head-btn-hover-text: #fff,
+  calendar-head-btn-hover-text-shadow: (
+    -1px -1px 1px rgb(223, 213, 129),
+    1px 1px 3px rgba(223, 119, 119, 0.7),
+  ),
+  tile-bg: #fff,
+  tile-text: #000,
+  tile-label-bg: rgba(250, 250, 210, 0.8),
+  tile-label-bg-other-month: rgba(238, 238, 238, 0.8),
+  tile-label-text: rgb(87, 99, 110),
+  tile-label-text-shadow: 2px 2px 0px #fff,
+  tile-roundness: 0,
+  tile-shadow: 0 2px 2px rgba(0, 0, 0, 0.05),
+  selection-color: rgba(173, 216, 230, 0.61),
+);
+// #endregion
+// - Dark
+// #region
+$theme-dark: (
+  bg: #4a4a48,
+  text: #fff,
+  text-shadow: 2px 2px 0px rgb(0, 0, 0),
+  header-bg: darken(#4a4a48, 10%),
+  header-shadow: 0 0.2rem 0.1rem rgba(0, 0, 0, 0.4),
+  header-text: #fff,
+  header-text-shadow: (
+    -1px -1px 1px rgba(255, 166, 0, 0.8),
+    1px 1px 1px rgba(0, 255, 255, 0.8),
+  ),
+  calendar-head-text: #fff,
+  calendar-head-text-shadow: 2px 2px 0px rgb(0, 0, 0),
+  calendar-head-btn-hover-text: #fff,
+  calendar-head-btn-hover-text-shadow: (
+    -1px -1px 1px rgb(223, 213, 129),
+    1px 1px 3px rgba(223, 119, 119, 0.7),
+  ),
+  tile-bg: rgba(0, 0, 0, 0.274),
+  tile-text: #ffffff,
+  tile-label-bg: rgba(255, 146, 79, 0.706),
+  tile-label-bg-other-month: rgba(238, 238, 238, 0.466),
+  tile-label-text: #fff,
+  tile-label-text-shadow: 2px 2px 0px rgb(0, 0, 0),
+  tile-roundness: 0,
+  tile-shadow: 0 2px 2px rgba(0, 0, 0, 0.25),
+  selection-color: rgba(173, 216, 230, 0.288),
+  pri: #ff934f,
+  sec: #d6f1f5,
+  acc: #e54b4b,
+);
+// #endregion
+// --------
+// Theme selecting and accessing
+// #region
+$current-theme: $theme-dark;
+@function theme($color-name) {
+  @return map-get($map: $current-theme, $key: $color-name);
+}
+// #endregion
+// --------
+// html, body, global, scrollbar
+// #region
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+  font-family: 'Century Gothic', sans-serif;
+  color: theme(text);
+  text-shadow: theme(text-shadow);
+}
+body {
+  margin: 0;
+  padding: 0;
+}
+::selection {
+  background: theme(selection-color);
+}
+::-webkit-scrollbar {
+  height: 1vh;
+  width: 0.5rem;
+}
+::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+// #endregion
+// --------
+// App
+// #region
+.app {
+  background: theme(bg);
+  height: 100vh;
+  width: 100vw;
+}
+// #endregion
+// --------
+// Header
+// #region
+header {
+  z-index: 100;
+  height: 5vh;
+  padding: 0 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background: theme(header-bg); /* font-family: 'Courier New', monospace; */
+  text-decoration: underline;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 3vh;
+  color: theme(header-text);
+  text-shadow: theme(header-text-shadow);
+  user-select: none;
+  box-shadow: theme(header-shadow);
+}
+// #endregion
+// --------
+// Calendar
+// #region
+.calendar {
+  display: grid;
+  padding: 0 5vw;
+  grid-template-rows: 8vh 80vh;
+  grid-template-areas:
+    'cal-head'
+    'cal-body';
+}
+.calendar-body {
+  grid-area: cal-body;
+  height: 80vh;
+  border-radius: 0.5rem;
+}
+// #endregion
+// --------
+// CalendarHead
+// #region
+.calendar-head {
+  grid-area: cal-head;
+  height: 8vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  font-size: 5vh;
+  color: theme(calendar-head-text);
+  text-shadow: theme(calendar-head-text-shadow);
+}
+.calendar-head * {
+  color: inherit;
+  text-shadow: inherit;
+}
+.calendar-head > span {
+  margin-right: 2vw;
+  width: 26vw;
+}
+.calendar-head > div > button {
+  height: 3vh;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 3vh;
+  user-select: none;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.calendar-head > div > button:hover {
+  color: theme(calendar-head-btn-hover-text);
+  text-shadow: theme(calendar-head-btn-hover-text-shadow);
+}
+// #endregion
+// --------
+// Month
+// #region
+.month {
+  box-sizing: content-box;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  width: 90vw;
+  height: 80vh;
+  grid-gap: 0.3rem;
+  padding: 0.3rem;
+}
+// #endregion
+// --------
+// CalendarTile
+// #region
+.tile {
+  z-index: 40;
+  height: 100px;
+  padding: 0;
+  color: theme(tile-text);
+  box-shadow: theme(tile-shadow);
+  background: theme(tile-bg);
+  border-radius: theme(tile-roundness);
+  border: 0.3rem solid transparent;
+}
+.day {
+  z-index: 50;
+  height: 100%;
+  margin-top: -50%;
+  padding: 4%;
+  overflow: auto;
+}
+.day-label {
+  position: relative;
+  z-index: 100;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.5rem;
+  color: theme(tile-label-text);
+  text-shadow: theme(tile-label-text-shadow);
+  font-size: 2em;
+  font-weight: bold;
+  background: theme(tile-label-bg);
+  user-select: none;
+  opacity: 1;
+  transition: 0.15s;
+  border-radius: theme(tile-roundness);
+}
+.tile:hover {
+  border-color: theme(tile-label-bg);
+  .day-label {
+    z-index: -1;
+    opacity: 0;
+  }
+  &.other-month {
+    border-color: theme(tile-label-bg-other-month);
+  }
+}
+.other-month .day-label {
+  background: theme(tile-label-bg-other-month);
+}
+.todo.minified {
+  padding: 0.2rem;
+}
+.todo::before {
+  content: '-';
+}
+// #endregion

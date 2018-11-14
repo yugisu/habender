@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './CalendarHead.css';
-
 const CalendarHead = ({ label, onMonthChange }) => {
   return (
     <div className="calendar-head">
