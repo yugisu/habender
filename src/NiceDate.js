@@ -1,10 +1,21 @@
-const months = ['January', 'March', 'April', 'May', 'June', 'July', 
-  'August', 'September', 'October', 'November', 'December'];
+const months = [
+  'January',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 
 class NiceDate {
-  constructor(givendateObj=Date(), daysToAdd=0) {
+  constructor(givendateObj = Date(), daysToAdd = 0) {
     this.dateObj = new Date(givendateObj);
-    
+
     this.dateObj.setDate(this.dateObj.getDate() + daysToAdd);
 
     this.date = this.dateObj.getDate();
@@ -30,7 +41,7 @@ class NiceDate {
     this.dateObj.setDate(this.dateObj.getDate() + amount);
     this.refresh();
   }
-  
+
   addMonth(amount) {
     this.dateObj.setMonth(this.dateObj.getMonth() + amount);
     this.refresh();

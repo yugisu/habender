@@ -1,4 +1,6 @@
-* {
+*,
+*::before,
+*::after {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
@@ -56,7 +58,7 @@ body {
 header {
   z-index: 100;
   height: 5vh;
-  padding: 0 5vw;
+  padding: 0 5vw 0.3vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -66,8 +68,11 @@ header {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  background: #30302f;
+  background: #3d3d3b;
   /* font-family: 'Courier New', monospace; */
+}
+
+.header__splash {
   text-decoration: underline;
   font-style: italic;
   font-weight: bold;
@@ -78,8 +83,6 @@ header {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  -webkit-box-shadow: 0 0.2rem 0.1rem rgba(0, 0, 0, 0.4);
-          box-shadow: 0 0.2rem 0.1rem rgba(0, 0, 0, 0.4);
 }
 
 .calendar {
@@ -91,7 +94,7 @@ header {
       grid-template-areas: 'cal-head' 'cal-body';
 }
 
-.calendar-body {
+.calendar__body {
   -ms-grid-row: 2;
   -ms-grid-column: 1;
   grid-area: cal-body;
@@ -99,7 +102,7 @@ header {
   border-radius: 0.5rem;
 }
 
-.calendar-head {
+.calendar__head {
   -ms-grid-row: 1;
   -ms-grid-column: 1;
   grid-area: cal-head;
@@ -107,28 +110,36 @@ header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-  font-size: 5vh;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   color: #fff;
   text-shadow: 2px 2px 0px black;
 }
 
-.calendar-head * {
+.calendar__head * {
   color: inherit;
   text-shadow: inherit;
 }
 
-.calendar-head > span {
-  margin-right: 2vw;
+.calendar__head__title {
+  font-size: 2vw;
   width: 27vw;
+  text-align: center;
 }
 
-.calendar-head > div > button {
+.calendar__head__title::before {
+  content: open-quote;
+}
+
+.calendar__head__title::after {
+  content: close-quote;
+}
+
+.calendar__head__button {
   height: 3vh;
   border: none;
   outline: none;
@@ -143,7 +154,7 @@ header {
   transition: 0.25s;
 }
 
-.calendar-head > div > button:hover {
+.calendar__head__button:hover {
   color: #fff;
   text-shadow: -1px -1px 1px #dfd581, 1px 1px 3px rgba(223, 119, 119, 0.7);
 }
@@ -166,29 +177,20 @@ header {
   padding: 0;
   color: #ffffff;
   border-radius: 0;
-  outline: 0.2vh dashed rgba(134, 134, 134, 0.3);
+  outline: 0.2vh solid rgba(134, 134, 134, 0.3);
   -webkit-transition: 0.15s;
   transition: 0.15s;
 }
 
-.tile-other-month {
+.tile--other-month {
   opacity: 0.5;
 }
 
-.tile-other-month:hover {
+.tile--other-month:hover {
   opacity: 1;
 }
 
-.day {
-  z-index: 50;
-  height: 100%;
-  margin: 0;
-  margin-top: -12.2vh;
-  padding: 3%;
-  overflow: auto;
-}
-
-.day-label {
+.tile__label {
   position: relative;
   z-index: 100;
   height: 100%;
@@ -220,12 +222,22 @@ header {
   background: rgba(0, 0, 0, 0.05);
 }
 
-.tile:hover .day-label {
+.tile:hover .tile__label {
   z-index: -1;
-  opacity: 0;
+  opacity: 0.2;
 }
 
-.todo.minified {
+.tile__content {
+  z-index: 50;
+  height: 100%;
+  margin: 0;
+  margin-top: -12.2vh;
+  padding: 3%;
+  font-size: 1.5vh;
+  overflow: auto;
+}
+
+.todo--minified {
   padding: 0.2rem;
 }
 

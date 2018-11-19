@@ -27,7 +27,8 @@ class Calendar extends Component {
     ],
   };
 
-  onMonthChange = (amount) => {
+  onMonthChange = (command) => {
+    const amount = command === 'prev' ? -1 : 1;
     this.setState((state) => ({
       openedMonth: NiceDate.newDate(state.openedMonth, 0, amount),
     }));
@@ -60,7 +61,7 @@ class Calendar extends Component {
           onMonthChange={this.onMonthChange}
         />
 
-        <div className="calendar-body">
+        <div className="calendar__body">
           <Month monthObj={openedMonth} todos={curMonthTodos} />
         </div>
       </div>

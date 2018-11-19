@@ -1,3 +1,5 @@
+// TODO: BRING CALENDARHEAD (MONTH DISPLAY & SELECTION) TO HEADER
+
 // Themes
 // - Light
 // #region
@@ -25,7 +27,7 @@ $theme-light: (
   tile-bg: #fff,
   tile-text: #000,
   tile-label-bg: rgba(250, 250, 210, 0.8),
-  tile-label-bg-tile-other-month: rgba(238, 238, 238, 0.8),
+  tile-label-bg-tile--other-month: rgba(238, 238, 238, 0.8),
   tile-label-text: rgb(87, 99, 110),
   tile-label-text-shadow: 2px 2px 0px #fff,
   tile-roundness: 0,
@@ -39,8 +41,7 @@ $theme-dark: (
   bg: #4a4a48,
   text: #fff,
   text-shadow: 2px 2px 0px rgb(0, 0, 0),
-  header-bg: darken(#4a4a48, 10%),
-  header-shadow: 0 0.2rem 0.1rem rgba(0, 0, 0, 0.4),
+  header-bg: darken(#4a4a48, 5%),
   header-text: #fff,
   header-text-shadow: (
     -1px -1px 1px rgba(255, 166, 0, 0.8),
@@ -56,7 +57,7 @@ $theme-dark: (
   tile-bg: rgba(0, 0, 0, 0.274),
   tile-text: #ffffff,
   tile-label-bg: rgba(255, 146, 79, 0.7),
-  tile-label-bg-tile-other-month: rgba(238, 238, 238, 0.466),
+  tile-label-bg-tile--other-month: rgba(238, 238, 238, 0.466),
   tile-label-text: #fff,
   tile-label-text-shadow: 2px 2px 0px rgb(0, 0, 0),
   tile-roundness: 0,
@@ -78,7 +79,9 @@ $current-theme: $theme-dark;
 // --------
 // html, body, global, scrollbar
 // #region
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 html {
@@ -129,11 +132,14 @@ body {
 header {
   z-index: 100;
   height: 5vh;
-  padding: 0 5vw;
+  padding: 0 5vw 0.3vh;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   background: theme(header-bg); /* font-family: 'Courier New', monospace; */
+  box-shadow: theme(header-shadow);
+}
+.header__splash {
   text-decoration: underline;
   font-style: italic;
   font-weight: bold;
@@ -141,7 +147,6 @@ header {
   color: theme(header-text);
   text-shadow: theme(header-text-shadow);
   user-select: none;
-  box-shadow: theme(header-shadow);
 }
 // #endregion
 // --------
@@ -155,7 +160,7 @@ header {
     'cal-head'
     'cal-body';
 }
-.calendar-body {
+.calendar__body {
   grid-area: cal-body;
   height: 80vh;
   border-radius: 0.5rem;
@@ -164,25 +169,31 @@ header {
 // --------
 // CalendarHead
 // #region
-.calendar-head {
+.calendar__head {
   grid-area: cal-head;
   height: 8vh;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  font-size: 5vh;
+  align-items: center;
+  justify-content: center;
   color: theme(calendar-head-text);
   text-shadow: theme(calendar-head-text-shadow);
 }
-.calendar-head * {
+.calendar__head * {
   color: inherit;
   text-shadow: inherit;
 }
-.calendar-head > span {
-  margin-right: 2vw;
+.calendar__head__title {
+  font-size: 2vw;
   width: 27vw;
+  text-align: center;
+  &::before {
+    content: open-quote;
+  }
+  &::after {
+    content: close-quote;
+  }
 }
-.calendar-head > div > button {
+.calendar__head__button {
   height: 3vh;
   border: none;
   outline: none;
@@ -192,7 +203,7 @@ header {
   cursor: pointer;
   transition: 0.25s;
 }
-.calendar-head > div > button:hover {
+.calendar__head__button:hover {
   color: theme(calendar-head-btn-hover-text);
   text-shadow: theme(calendar-head-btn-hover-text-shadow);
 }
@@ -222,25 +233,17 @@ header {
   // box-shadow: theme(tile-shadow);
   // background: theme(tile-bg);
   border-radius: theme(tile-roundness);
-  outline: 0.2vh dashed rgba(134, 134, 134, 0.3);
+  outline: 0.2vh solid rgba(134, 134, 134, 0.3);
   transition: 0.15s;
   // border-collapse: collapse;
 }
-.tile-other-month {
+.tile--other-month {
   opacity: 0.5;
   &:hover {
     opacity: 1;
   }
 }
-.day {
-  z-index: 50;
-  height: 100%;
-  margin: 0;
-  margin-top: -12.2vh;
-  padding: 3%;
-  overflow: auto;
-}
-.day-label {
+.tile__label {
   position: relative;
   z-index: 100;
   height: 100%;
@@ -259,12 +262,21 @@ header {
 }
 .tile:hover {
   background: rgba(0, 0, 0, 0.05);
-  .day-label {
+  .tile__label {
     z-index: -1;
-    opacity: 0;
+    opacity: 0.2;
   }
 }
-.todo.minified {
+.tile__content {
+  z-index: 50;
+  height: 100%;
+  margin: 0;
+  margin-top: -12.2vh;
+  padding: 3%;
+  font-size: 1.5vh;
+  overflow: auto;
+}
+.todo--minified {
   padding: 0.2rem;
 }
 .todo::before {
