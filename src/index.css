@@ -125,6 +125,7 @@ header {
 
 .calendar-head > span {
   margin-right: 2vw;
+  width: 27vw;
 }
 
 .calendar-head > div > button {
@@ -156,9 +157,6 @@ header {
       grid-template-columns: repeat(7, 1fr);
   -ms-grid-rows: (1fr)[6];
       grid-template-rows: repeat(6, 1fr);
-  width: 90vw;
-  height: 80vh;
-  grid-gap: 0.3rem;
   padding: 0.3rem;
 }
 
@@ -167,18 +165,26 @@ header {
   height: 13vh;
   padding: 0;
   color: #ffffff;
-  -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
-          box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
-  background: rgba(0, 0, 0, 0.274);
   border-radius: 0;
-  border: 0.4vh solid transparent;
+  outline: 0.2vh dashed rgba(134, 134, 134, 0.3);
+  -webkit-transition: 0.15s;
+  transition: 0.15s;
+}
+
+.tile-other-month {
+  opacity: 0.5;
+}
+
+.tile-other-month:hover {
+  opacity: 1;
 }
 
 .day {
   z-index: 50;
   height: 100%;
+  margin: 0;
   margin-top: -12.2vh;
-  padding: 4%;
+  padding: 3%;
   overflow: auto;
 }
 
@@ -189,17 +195,18 @@ header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  padding: 0 1vw;
   color: #fff;
   text-shadow: 2px 2px 0px black;
-  font-size: 2em;
+  font-size: 5vh;
   font-weight: bold;
-  background: rgba(255, 146, 79, 0.706);
+  background: transparent;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -210,20 +217,12 @@ header {
 }
 
 .tile:hover {
-  border-color: rgba(255, 146, 79, 0.706);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .tile:hover .day-label {
   z-index: -1;
   opacity: 0;
-}
-
-.tile:hover.other-month {
-  border-color: rgba(238, 238, 238, 0.466);
-}
-
-.other-month .day-label {
-  background: rgba(238, 238, 238, 0.466);
 }
 
 .todo.minified {

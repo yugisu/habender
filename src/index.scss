@@ -25,7 +25,7 @@ $theme-light: (
   tile-bg: #fff,
   tile-text: #000,
   tile-label-bg: rgba(250, 250, 210, 0.8),
-  tile-label-bg-other-month: rgba(238, 238, 238, 0.8),
+  tile-label-bg-tile-other-month: rgba(238, 238, 238, 0.8),
   tile-label-text: rgb(87, 99, 110),
   tile-label-text-shadow: 2px 2px 0px #fff,
   tile-roundness: 0,
@@ -55,8 +55,8 @@ $theme-dark: (
   ),
   tile-bg: rgba(0, 0, 0, 0.274),
   tile-text: #ffffff,
-  tile-label-bg: rgba(255, 146, 79, 0.706),
-  tile-label-bg-other-month: rgba(238, 238, 238, 0.466),
+  tile-label-bg: rgba(255, 146, 79, 0.7),
+  tile-label-bg-tile-other-month: rgba(238, 238, 238, 0.466),
   tile-label-text: #fff,
   tile-label-text-shadow: 2px 2px 0px rgb(0, 0, 0),
   tile-roundness: 0,
@@ -180,6 +180,7 @@ header {
 }
 .calendar-head > span {
   margin-right: 2vw;
+  width: 27vw;
 }
 .calendar-head > div > button {
   height: 3vh;
@@ -204,9 +205,9 @@ header {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  width: 90vw;
-  height: 80vh;
-  grid-gap: 0.3rem;
+  // width: 90vw;
+  // height: 80vh;
+  // grid-gap: 0.3rem;
   padding: 0.3rem;
 }
 // #endregion
@@ -218,17 +219,25 @@ header {
   height: 13vh;
   padding: 0;
   color: theme(tile-text);
-  box-shadow: theme(tile-shadow);
-  background: theme(tile-bg);
+  // box-shadow: theme(tile-shadow);
+  // background: theme(tile-bg);
   border-radius: theme(tile-roundness);
-  border: 0.4vh solid transparent;
-  // border: 0.3rem solid transparent;
+  outline: 0.2vh dashed rgba(134, 134, 134, 0.3);
+  transition: 0.15s;
+  // border-collapse: collapse;
+}
+.tile-other-month {
+  opacity: 0.5;
+  &:hover {
+    opacity: 1;
+  }
 }
 .day {
   z-index: 50;
   height: 100%;
+  margin: 0;
   margin-top: -12.2vh;
-  padding: 4%;
+  padding: 3%;
   overflow: auto;
 }
 .day-label {
@@ -236,29 +245,24 @@ header {
   z-index: 100;
   height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0 1vw;
   color: theme(tile-label-text);
   text-shadow: theme(tile-label-text-shadow);
-  font-size: 2em;
+  font-size: 5vh;
   font-weight: bold;
-  background: theme(tile-label-bg);
+  background: transparent;
   user-select: none;
   transition: 0.15s;
   border-radius: theme(tile-roundness);
 }
 .tile:hover {
-  border-color: theme(tile-label-bg);
+  background: rgba(0, 0, 0, 0.05);
   .day-label {
     z-index: -1;
     opacity: 0;
   }
-  &.other-month {
-    border-color: theme(tile-label-bg-other-month);
-  }
-}
-.other-month .day-label {
-  background: theme(tile-label-bg-other-month);
 }
 .todo.minified {
   padding: 0.2rem;

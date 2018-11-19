@@ -4,7 +4,7 @@ const CalendarHead = ({ label, onMonthChange }) => {
   return (
     <div className="calendar-head">
       <span>{label}</span>
-      <div>
+      <div className="calendar-head-btns">
         {['prev', 'next'].map((el, idx) => {
           return (
             <button
