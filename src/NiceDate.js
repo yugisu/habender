@@ -1,5 +1,6 @@
 const months = [
   'January',
+  'February',
   'March',
   'April',
   'May',
@@ -15,14 +16,9 @@ const months = [
 class NiceDate {
   constructor(givendateObj = Date(), daysToAdd = 0) {
     this.dateObj = new Date(givendateObj);
-
     this.dateObj.setDate(this.dateObj.getDate() + daysToAdd);
 
-    this.date = this.dateObj.getDate();
-    this.day = this.dateObj.getDay();
-    this.month = this.dateObj.getMonth() + 1;
-    this.monthName = months[this.month - 1];
-    this.year = this.dateObj.getFullYear();
+    this.refresh();
   }
 
   show() {
@@ -33,7 +29,7 @@ class NiceDate {
     this.date = this.dateObj.getDate();
     this.day = this.dateObj.getDay();
     this.month = this.dateObj.getMonth() + 1;
-    this.monthName = months[this.dateObj.getMonth() - 1];
+    this.monthName = months[this.month - 1];
     this.year = this.dateObj.getFullYear();
   }
 
