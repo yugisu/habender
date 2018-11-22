@@ -18,9 +18,9 @@ class Calendar extends Component {
       Calendar.newDay(this.today, [
         'Feed a cat',
         'Cook some dinner',
-        'Make some damn good coffee for D.',
+        'Make some tea for my darling',
       ]),
-      Calendar.newDay(NiceDate.newDate(this.today, -33), [
+      Calendar.newDay(NiceDate.newDate(this.today, -22), [
         'Drink some cola',
         'Finish that goddamn stoopid todo app',
       ]),
@@ -49,8 +49,12 @@ class Calendar extends Component {
     const { openedMonth, todos } = this.state;
 
     // const prevMonthTodos = todos.filter((el) => el.date.month === openedMonth.month - 1);
-    const curMonthTodos = todos.filter(
-      (el) => el.date.month === openedMonth.month,
+    const currentTodos = todos.filter((el) =>
+      [
+        openedMonth.month - 1,
+        openedMonth.month,
+        openedMonth.month + 1,
+      ].includes(el.date.month),
     );
     // const nextMonthTodos = todos.filter((el) => el.date.month === openedMonth.month + 1);
 
@@ -62,7 +66,7 @@ class Calendar extends Component {
         />
 
         <div className="calendar__body">
-          <Month monthObj={openedMonth} todos={curMonthTodos} />
+          <Month monthObj={openedMonth} todos={currentTodos} />
         </div>
       </div>
     );

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Todo from '../Todo';
+
 const CalendarTile = ({ dayObj, activities, isFromOtherMonth }) => {
   const isEmpty = activities.length === 0;
 
@@ -11,15 +13,13 @@ const CalendarTile = ({ dayObj, activities, isFromOtherMonth }) => {
         (!isEmpty ? ' tile--not-empty' : '')
       }>
       <div className="tile__label">
-        <span>{dayObj.date}</span>
+        <div className="tile__label__name">{dayObj.date}</div>
       </div>
-      <ul className="tile__content">
+      <div className="tile__content">
         {activities.map((el) => (
-          <li className="todo todo--minified" key={`todo-${el.id}`}>
-            {el.name}
-          </li>
+          <Todo todoObj={el} key={`todo-${el.id}`} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

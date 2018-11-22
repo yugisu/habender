@@ -94,6 +94,9 @@ body {
   margin: 0;
   padding: 0;
 }
+button {
+  outline: none;
+}
 ::selection {
   background: theme(selection-color);
 }
@@ -235,51 +238,122 @@ header {
   border-radius: theme(tile-roundness);
   outline: 0.2vh solid rgba(134, 134, 134, 0.3);
   transition: 0.15s;
-  // border-collapse: collapse;
-}
-.tile--other-month {
-  opacity: 0.5;
-  &:hover {
+  &__label {
+    position: relative;
+    z-index: 100;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 0 1vw;
+    background: transparent;
+    user-select: none;
+    transition: 0.15s;
+    border-radius: theme(tile-roundness);
+    &__name {
+      display: flex;
+      align-items: center;
+      color: theme(tile-label-text);
+      text-shadow: theme(tile-label-text-shadow);
+      font-size: 5vh;
+      font-weight: bold;
+    }
+  }
+  &__content {
+    z-index: 50;
+    height: 100%;
+    margin: 0;
+    transform: translate(0, -100%);
+    padding: 0.5vh;
+    font-size: 1.5vh;
+    overflow: auto;
     opacity: 1;
+    transition: opacity 0.15s;
+    &:not(:hover) {
+      opacity: 0.6;
+    }
+  }
+  &--other-month {
+    opacity: 0.5;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  &--not-empty .tile__label__name::before {
+    content: '';
+    display: block;
+    width: 1vh;
+    height: 1vh;
+    margin-right: 0.3vh;
+    box-shadow: theme(tile-label-text-shadow);
+    border-radius: 50%;
+    background: theme(pri);
+  }
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+    .tile__label {
+      z-index: -1;
+      opacity: 0.2;
+    }
   }
 }
-.tile__label {
-  position: relative;
-  z-index: 100;
+// #endregion
+// Todo
+// #region
+.todo {
+  $todo-bor-rad: 1vh;
+  overflow: hidden;
   height: 100%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
-  padding: 0 1vw;
-  color: theme(tile-label-text);
-  text-shadow: theme(tile-label-text-shadow);
-  font-size: 5vh;
-  font-weight: bold;
-  background: transparent;
-  user-select: none;
+  background: rgba(134, 134, 134, 0.295);
+  box-shadow: 0 0.2vh 0.2vh rgba(0, 0, 0, 0.7);
   transition: 0.15s;
-  border-radius: theme(tile-roundness);
-}
-.tile:hover {
-  background: rgba(0, 0, 0, 0.05);
-  .tile__label {
-    z-index: -1;
-    opacity: 0.2;
+  &__head {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 2.5vw;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0.2vh 0.2vh rgba(0, 0, 0, 0.7);
+    transition: 0.15s;
+    &:hover {
+      background: lighten(rgba(0, 0, 0, 0.4), 10%);
+    }
+    // TODO: REMAKE .todo--minified and .todo into .todo and .todo--expanded
+    &__name {
+      display: inline-block;
+      line-height: 3vh;
+      margin: 0.6vh 0.2vw 0.3vh 0.6vw;
+    }
+    &__btn-expand {
+      height: 1.5vw;
+      width: 1.5vw;
+      border-radius: 50%;
+      margin: .6vh auto;
+      background: transparent;
+      line-height: 1.5vw;
+      text-align: center;
+      padding: 0;
+      border: none;
+      color: #fff;
+      box-shadow: 0 0 10vh #000;
+      transform: rotate(180deg);
+      transition: transform 0.15s;
+    }
   }
-}
-.tile__content {
-  z-index: 50;
-  height: 100%;
-  margin: 0;
-  margin-top: -12.2vh;
-  padding: 3%;
-  font-size: 1.5vh;
-  overflow: auto;
-}
-.todo--minified {
-  padding: 0.2rem;
-}
-.todo::before {
-  content: '> ';
+  &--minified {
+    height: 4vh;
+    border-radius: 0;
+    margin: 0;
+    .todo__head {
+      height: 100%;
+      &__btn-expand {
+        align-self: auto;
+        transform: rotate(0deg);
+      }
+    }
+    .todo__content {
+      display: none;
+    }
+  }
 }
 // #endregion

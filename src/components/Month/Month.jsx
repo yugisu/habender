@@ -7,14 +7,12 @@ const Month = ({ monthObj, todos }) => {
   const monthTiles = [
     ...Array(6).fill([...Array(7).keys()].map((elem) => elem + 1)),
   ].map((week, idxW) =>
-    week.map((day, idxD) => {
+    week.map((day) => {
       const tetha = NiceDate.newDate(monthObj);
       tetha.addDays(day - monthObj.day + 7 * idxW);
 
       const isFromOtherMonth = tetha.month !== monthObj.month;
-      const dayInTodos = todos.find(
-        (el) => !isFromOtherMonth && el.date.date === tetha.date,
-      );
+      const dayInTodos = todos.find((el) => el.date.show() === tetha.show());
       let activities = [];
       if (dayInTodos) {
         activities = dayInTodos.activities;
