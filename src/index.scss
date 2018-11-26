@@ -83,12 +83,12 @@ $current-theme: $theme-dark;
 *::before,
 *::after {
   box-sizing: border-box;
+  font-family: 'Century Gothic', sans-serif;
   color: theme(text);
   text-shadow: theme(text-shadow);
 }
 html {
   font-size: 62.5%;
-  font-family: 'Century Gothic', sans-serif;
   color: theme(text);
   text-shadow: theme(text-shadow);
 }

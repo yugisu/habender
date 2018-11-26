@@ -3,13 +3,13 @@
 *::after {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  font-family: 'Century Gothic', sans-serif;
   color: #fff;
   text-shadow: 2px 2px 0px black;
 }
 
 html {
   font-size: 62.5%;
-  font-family: 'Century Gothic', sans-serif;
   color: #fff;
   text-shadow: 2px 2px 0px black;
 }
