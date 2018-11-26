@@ -17,8 +17,9 @@ const CalendarHeadButton = ({ name, onMonthChange }) => {
     <button
       onClick={() => onMonthChange(name)}
       key={`calendar_btn-${name}`}
-      className={`calendar__head__button calendar__head__button--${name}`}>
-      {name}
+      className={`calendar__head__button calendar__head__button--${name} btn--round`}
+    >
+      v
     </button>
   );
 };

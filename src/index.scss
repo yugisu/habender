@@ -83,6 +83,8 @@ $current-theme: $theme-dark;
 *::before,
 *::after {
   box-sizing: border-box;
+  color: theme(text);
+  text-shadow: theme(text-shadow);
 }
 html {
   font-size: 62.5%;
@@ -94,8 +96,24 @@ body {
   margin: 0;
   padding: 0;
 }
-button {
+button,
+input {
   outline: none;
+  background: transparent;
+  border: none;
+}
+.btn--round {
+  width: 1.5vw;
+  height: 1.5vw;
+  line-height: 1.5vw;
+  border-radius: 50%;
+  background: transparent;
+  text-align: center;
+  font-family: monospace;
+  padding: 0;
+  border: none;
+  color: #fff;
+  user-select: none;
 }
 ::selection {
   background: theme(selection-color);
@@ -180,35 +198,42 @@ header {
   justify-content: center;
   color: theme(calendar-head-text);
   text-shadow: theme(calendar-head-text-shadow);
-}
-.calendar__head * {
-  color: inherit;
-  text-shadow: inherit;
-}
-.calendar__head__title {
-  font-size: 2.5vw;
-  width: 27vw;
-  text-align: center;
-  &::before {
-    content: open-quote;
+  * {
+    color: inherit;
+    text-shadow: inherit;
   }
-  &::after {
-    content: close-quote;
+  &__title {
+    font-size: 2.5vw;
+    width: 25vw;
+    text-align: center;
+    &::before {
+      content: open-quote;
+    }
+    &::after {
+      content: close-quote;
+    }
   }
-}
-.calendar__head__button {
-  height: 3vh;
-  border: none;
-  outline: none;
-  background: transparent;
-  font-size: 3vh;
-  user-select: none;
-  cursor: pointer;
-  transition: 0.25s;
-}
-.calendar__head__button:hover {
-  color: theme(calendar-head-btn-hover-text);
-  text-shadow: theme(calendar-head-btn-hover-text-shadow);
+  &__button {
+    height: 3vh;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 3vh;
+    user-select: none;
+    text-shadow: none;
+    cursor: pointer;
+    transition: 0.25s;
+    &:hover {
+      color: theme(calendar-head-btn-hover-text);
+      text-shadow: theme(calendar-head-btn-hover-text-shadow);
+    }
+    &--prev {
+      transform: rotate(90deg);
+    }
+    &--next {
+      transform: rotate(-90deg);
+    }
+  }
 }
 // #endregion
 // --------
@@ -233,6 +258,7 @@ header {
   height: 13vh;
   padding: 0;
   color: theme(tile-text);
+  overflow: hidden;
   // box-shadow: theme(tile-shadow);
   // background: theme(tile-bg);
   border-radius: theme(tile-roundness);
@@ -254,7 +280,7 @@ header {
       display: flex;
       align-items: center;
       color: theme(tile-label-text);
-      text-shadow: theme(tile-label-text-shadow);
+      text-shadow: theme(tile-label-text-shadow), 0 0 10vh #000;
       font-size: 5vh;
       font-weight: bold;
     }
@@ -268,7 +294,7 @@ header {
     font-size: 1.5vh;
     overflow: auto;
     opacity: 1;
-    transition: opacity 0.15s;
+    transition: 0.15s;
     &:not(:hover) {
       opacity: 0.6;
     }
@@ -309,8 +335,11 @@ header {
   transition: 0.15s;
   &__head {
     width: 100%;
-    display: grid;
-    grid-template-columns: auto 2.5vw;
+    display: flex;
+    flex: 0 0 row;
+    flex-wrap: nowrap;
+    align-items: center;
+    grid-template: 100% / 1vw auto 2.5vw;
     overflow: hidden;
     background: rgba(0, 0, 0, 0.4);
     box-shadow: 0 0.2vh 0.2vh rgba(0, 0, 0, 0.7);
@@ -319,33 +348,34 @@ header {
       background: lighten(rgba(0, 0, 0, 0.4), 10%);
     }
     // TODO: REMAKE .todo--minified and .todo into .todo and .todo--expanded
+    &__done {
+    }
     &__name {
-      display: inline-block;
-      line-height: 3vh;
-      margin: 0.6vh 0.2vw 0.3vh 0.6vw;
+      height: 4vh;
+      width: 65%;
     }
     &__btn-expand {
-      height: 1.5vw;
       width: 1.5vw;
-      border-radius: 50%;
-      margin: .6vh auto;
-      background: transparent;
+      height: 1.5vw;
       line-height: 1.5vw;
-      text-align: center;
-      padding: 0;
-      border: none;
-      color: #fff;
+      text-shadow: none;
+      margin: 0.6vh auto;
       box-shadow: 0 0 10vh #000;
       transform: rotate(180deg);
       transition: transform 0.15s;
     }
+  }
+  &__content {
+    padding: 5%;
+    transition: 0.15s;
+    height: 100%;
   }
   &--minified {
     height: 4vh;
     border-radius: 0;
     margin: 0;
     .todo__head {
-      height: 100%;
+      user-select: none;
       &__btn-expand {
         align-self: auto;
         transform: rotate(0deg);
@@ -353,6 +383,11 @@ header {
     }
     .todo__content {
       display: none;
+    }
+  }
+  &--done {
+    .todo__head {
+      background: darken(theme(sec), 60%);
     }
   }
 }

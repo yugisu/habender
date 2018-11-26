@@ -18,13 +18,25 @@ class Calendar extends Component {
       Calendar.newDay(this.today, [
         'Feed a cat',
         'Cook some dinner',
-        'Make some tea for my darling',
+        'Make some tea for my darling ♥',
       ]),
       Calendar.newDay(NiceDate.newDate(this.today, -22), [
         'Drink some cola',
         'Finish that goddamn stoopid todo app',
       ]),
     ],
+  };
+
+  findTodo = (id, stateObj = this.state) => {
+    const todos = stateObj.todos;
+    for (const date of todos) {
+      for (const todo of date) {
+        if (todo.id === id) {
+          return todo;
+        }
+      }
+    }
+    return null;
   };
 
   onMonthChange = (command) => {
@@ -34,10 +46,25 @@ class Calendar extends Component {
     }));
   };
 
-  static newActivity = (name = 'New TODO') => ({
+  applyChangeInTodo = (todoId, changes) => {
+    this.setState((state) => {
+      const todos = state.todos;
+      for (const date of todos) {
+        for (const todo of date.activities) {
+          if (todo.id === todoId) {
+            Object.assign(todo, changes);
+          }
+        }
+      }
+      return state;
+    });
+  };
+
+  static newActivity = (name = 'New TODO', desc = 'A todo desc') => ({
     id: giveId(),
     done: false,
     name: name,
+    desc: desc,
   });
 
   static newDay = (date, activities = []) => ({
@@ -66,7 +93,11 @@ class Calendar extends Component {
         />
 
         <div className="calendar__body">
-          <Month monthObj={openedMonth} todos={currentTodos} />
+          <Month
+            monthObj={openedMonth}
+            todos={currentTodos}
+            onTodoChange={this.applyChangeInTodo}
+          />
         </div>
       </div>
     );

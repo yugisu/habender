@@ -3,7 +3,7 @@ import React from 'react';
 import NiceDate from '../../NiceDate';
 import CalendarTile from '../CalendarTile';
 
-const Month = ({ monthObj, todos }) => {
+const Month = ({ monthObj, todos, onTodoChange }) => {
   const monthTiles = [
     ...Array(6).fill([...Array(7).keys()].map((elem) => elem + 1)),
   ].map((week, idxW) =>
@@ -23,6 +23,7 @@ const Month = ({ monthObj, todos }) => {
           activities={activities}
           isFromOtherMonth={isFromOtherMonth}
           key={tetha.show()}
+          onTodoChange={onTodoChange}
         />
       );
     }),

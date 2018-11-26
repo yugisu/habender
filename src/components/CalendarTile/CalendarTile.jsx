@@ -2,8 +2,16 @@ import React from 'react';
 
 import Todo from '../Todo';
 
-const CalendarTile = ({ dayObj, activities, isFromOtherMonth }) => {
+const CalendarTile = ({
+  dayObj,
+  activities,
+  isFromOtherMonth,
+  onTodoChange,
+}) => {
   const isEmpty = activities.length === 0;
+
+  // TODO: IMPLEMENT HIDDEN CONTENT
+  const isHidden = true;
 
   return (
     <div
@@ -11,13 +19,20 @@ const CalendarTile = ({ dayObj, activities, isFromOtherMonth }) => {
         'tile' +
         (isFromOtherMonth ? ' tile--other-month' : '') +
         (!isEmpty ? ' tile--not-empty' : '')
-      }>
+      }
+    >
       <div className="tile__label">
         <div className="tile__label__name">{dayObj.date}</div>
       </div>
-      <div className="tile__content">
-        {activities.map((el) => (
-          <Todo todoObj={el} key={`todo-${el.id}`} />
+      <div
+        className={`tile__content ${isHidden ? 'tile__content--hidden' : ''}`}
+      >
+        {activities.map((todo) => (
+          <Todo
+            todoObj={todo}
+            key={`todo-${todo.id}`}
+            onTodoChange={onTodoChange}
+          />
         ))}
       </div>
     </div>
