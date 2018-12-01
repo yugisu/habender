@@ -1,0 +1,724 @@
+@font-face {
+  font-family: "Century Gothic";
+  src: url(../fonts/GOTHIC.TTF);
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Courier new", monospace;
+}
+
+html {
+  font-size: 10px;
+}
+
+@media only screen and (max-width: 820px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+::-moz-selection {
+  background-color: #ffd800;
+}
+
+::selection {
+  background-color: #ffd800;
+}
+
+input, button {
+  outline: none;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-button {
+  height: 1.25rem;
+  background: #b8b1ad;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+::-webkit-scrollbar-track {
+  background: #b8b1ad;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 1.6rem;
+  background: #b4b2b7;
+}
+
+#root {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+}
+
+#bg {
+  z-index: -10;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  opacity: .2;
+  background: #b4b2b7 url(../abg.png) repeat;
+  -webkit-filter: sepia(1) contrast(0.8);
+          filter: sepia(1) contrast(0.8);
+  background-size: 24rem;
+}
+
+.App {
+  z-index: 10;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 6.4rem auto;
+      grid-template-rows: 6.4rem auto;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  z-index: 100;
+  margin: 0;
+  height: 6.4rem;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  padding: 0 12rem;
+  background: #4A4A48;
+  -webkit-box-shadow: 0 1px 2px rgba(96, 96, 96, 0.712);
+          box-shadow: 0 1px 2px rgba(96, 96, 96, 0.712);
+}
+
+header > span {
+  color: white;
+  text-decoration: underline;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+@media only screen and (max-width: 820px) {
+  header {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    padding: 0;
+  }
+}
+
+main {
+  z-index: 50;
+  height: calc(100% - 6.4rem);
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 4rem;
+  -ms-grid-columns: 45rem auto;
+      grid-template-columns: 45rem auto;
+  -ms-grid-rows: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+  overflow: auto;
+      grid-template-areas: "card1  calendar" "card2  calendar";
+  padding: 2.5rem 12rem;
+}
+
+@media only screen and (max-width: 1200px) {
+  header {
+    padding: 0 2rem;
+  }
+  main {
+    padding: 2rem 2rem;
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+    overflow: auto;
+        grid-template-areas: "card1  card2" "calendar  calendar";
+  }
+  main .date-card {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 820px) {
+  main {
+    padding: 0 2rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    /* grid-gap: $space-between-cards;
+    grid-template: auto auto auto / $date-cards-width;
+
+    grid-template-areas: 
+      "card1"
+      "card2"
+      "calendar"
+      ; */
+  }
+  main .date-card {
+    margin-top: 2rem;
+    width: 100%;
+  }
+}
+
+.Card1 {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: card1;
+}
+
+.Card2 {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: card2;
+}
+
+.Calendar {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 2;
+  grid-area: calendar;
+}
+
+.Card1, .Card2 {
+  height: 30rem;
+  width: 45rem;
+}
+
+.date-card {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 5rem auto;
+      grid-template-rows: 5rem auto;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  border-radius: 1.5rem;
+}
+
+.date-card > .card-header {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  -webkit-box-flex: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+  z-index: 99;
+  margin: 0;
+  background: #b99b80;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 4rem auto 4rem;
+      grid-template-columns: 4rem auto 4rem;
+  -ms-grid-rows: auto;
+      grid-template-rows: auto;
+      grid-template-areas: "but1 name but2";
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: auto;
+      -ms-flex-pack: auto;
+          justify-content: auto;
+  padding: 0;
+  height: 5rem;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+}
+
+.date-card > .card-header > span {
+  color: #fff;
+}
+
+.date-card > .card-header > .new-activity, .date-card > .card-header .prev-month {
+  -ms-grid-column-align: right;
+      justify-self: right;
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: but1;
+}
+
+.date-card > .card-header .prev-month img {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+  margin-left: -.3rem;
+}
+
+.date-card > .card-header > .next-month img {
+  margin-right: -.3rem;
+}
+
+.date-card > .card-header > .next-month {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: but2;
+}
+
+.change-month {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.change-month img {
+  height: 1.2rem;
+  width: 1.2rem;
+  padding: 0;
+  margin: 0;
+}
+
+.new-activity, .change-month {
+  height: 2rem;
+  width: 2rem;
+  padding: 0;
+  border-radius: 50%;
+  font-family: serif;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 2rem;
+  color: #fff;
+  text-align: center;
+  border: none;
+  background: transparent;
+  opacity: .6;
+  -webkit-transition: .25s;
+  transition: .25s;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  -webkit-box-shadow: 0 0 5px rgba(110, 110, 110, 0.3);
+          box-shadow: 0 0 5px rgba(110, 110, 110, 0.3);
+}
+
+.new-activity:hover, .change-month:hover {
+  opacity: .8;
+  -webkit-box-shadow: 0 0 5px rgba(110, 110, 110, 0.5);
+          box-shadow: 0 0 5px rgba(110, 110, 110, 0.5);
+}
+
+.new-activity:active, .change-month:active {
+  -webkit-box-shadow: 0 0 5px rgba(110, 110, 110, 0.8), inset 0 0 5px rgba(110, 110, 110, 0.2);
+          box-shadow: 0 0 5px rgba(110, 110, 110, 0.8), inset 0 0 5px rgba(110, 110, 110, 0.2);
+  color: #809eb9;
+}
+
+.Card1 > .card-header {
+  background: #379ca9;
+}
+
+.Card2 > .card-header {
+  background: #b99b80;
+}
+
+/* TODO: Make a nice scrollbar :> */
+.card-content {
+  padding: 1rem;
+  padding-top: .5rem;
+  overflow-y: auto;
+}
+
+ul.activities {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.activity {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 2rem auto auto 1rem;
+      grid-template-columns: 2rem auto auto 1rem;
+  -ms-grid-rows: 1rem auto auto;
+      grid-template-rows: 1rem auto auto;
+      grid-template-areas: ".     time .    close" "check name name name" ".     desc desc desc";
+  margin: .2rem 0;
+  padding: .2rem 1.5rem;
+  word-wrap: normal;
+  border-left: .2rem solid transparent;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: .5rem;
+  -webkit-transition: .25s;
+  transition: .25s;
+}
+
+.activity * {
+  -webkit-transition: .25s;
+  transition: .25s;
+  color: #525252;
+}
+
+.activity input[type=text], .activity textarea {
+  background: transparent;
+  border: 0;
+  outline: none;
+}
+
+.activity input[type=text]::-webkit-input-placeholder, .activity textarea::-webkit-input-placeholder {
+  color: #b4b4b4;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.activity input[type=text]:-ms-input-placeholder, .activity textarea:-ms-input-placeholder {
+  color: #b4b4b4;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.activity input[type=text]::-ms-input-placeholder, .activity textarea::-ms-input-placeholder {
+  color: #b4b4b4;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.activity input[type=text]::placeholder, .activity textarea::placeholder {
+  color: #b4b4b4;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.activity > .activity-time {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: time;
+  font-size: 1rem;
+  color: #c0c0c0;
+}
+
+.activity > .activity-done {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: check;
+}
+
+.activity > .activity-name {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 3;
+  grid-area: name;
+  font-size: 1.7rem;
+  font-weight: bold;
+}
+
+.activity > .activity-description {
+  -ms-grid-row: 3;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 3;
+  grid-area: desc;
+  padding-left: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.activity > .activity-close {
+  -ms-grid-row: 1;
+  -ms-grid-column: 4;
+  grid-area: close;
+  margin: 0;
+  margin-top: .3rem;
+  height: 2rem;
+  width: 2rem;
+  padding: 0;
+  border-radius: 50%;
+  opacity: .5;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1rem;
+  font-family: sans-serif;
+  font-weight: bold;
+  background: transparent;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  border: none;
+}
+
+.activity > .activity-close:hover {
+  -webkit-box-shadow: 0 0 2px rgba(110, 110, 110, 0.2);
+          box-shadow: 0 0 2px rgba(110, 110, 110, 0.2);
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.01);
+  opacity: .8;
+}
+
+.activity.done {
+  background: #f8f6f3;
+}
+
+.activity.done > .activity-name {
+  text-decoration: line-through;
+}
+
+.activity.done:hover {
+  background: #f8f6f3;
+}
+
+.activity:hover {
+  background: rgba(0, 0, 0, 0.005);
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  border-left: 0.2rem solid rgba(0, 0, 0, 0.5);
+}
+
+@media only screen and (max-width: 820px) {
+  .Calendar {
+    width: calc(100% - 4rem);
+  }
+}
+
+.Calendar .card-content {
+  height: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 2rem 1fr 1fr 1fr 1fr 1fr;
+      grid-template-rows: 2rem 1fr 1fr 1fr 1fr 1fr;
+  grid-row-gap: .4rem;
+}
+
+.Calendar .calendar-days {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  padding: 0;
+  margin: 0;
+}
+
+.Calendar .calendar-days div {
+  width: 100%;
+  color: #525252;
+  font-weight: bold;
+  font-size: 1.4rem;
+  text-align: center;
+  background: #eae1d9;
+  padding: .2rem 0;
+  border-radius: .5rem;
+}
+
+.Calendar .calendar-days div + div {
+  margin-left: .5rem;
+}
+
+.calendar-week {
+  z-index: 50;
+  background: cyan;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  padding: 0;
+  margin: 0;
+}
+
+.calendar-week .calendar-tile {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1.6rem auto;
+      grid-template-rows: 1.6rem auto;
+      grid-template-areas: "tile-header" "tile-content";
+  grid-row-gap: .4rem;
+  overflow: hidden;
+  border-radius: .5rem;
+  background: #fff;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.calendar-week .calendar-tile .tile-header {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: tile-header;
+  font-weight: bold;
+  font-size: .9em;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.02);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  border-radius: .5rem;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-week .calendar-tile .today-tile, .calendar-week .calendar-tile .opened-tile {
+  background: #b99b80;
+  color: white;
+  -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.calendar-week .calendar-tile .today-tile {
+  background: #379ca9;
+}
+
+.calendar-week .calendar-tile .activities {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: tile-content;
+  margin: 0;
+  padding: .2rem;
+  height: 100%;
+  border-radius: .5rem;
+  overflow: hidden;
+}
+
+.calendar-week .calendar-tile .activities > li {
+  display: -ms-grid;
+  display: grid;
+  padding: .2rem;
+  -ms-grid-columns: 2.5rem auto;
+      grid-template-columns: 2.5rem auto;
+      grid-template-areas: "act-time act-name";
+  grid-gap: .2rem;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: .4rem;
+  -webkit-transition: .25s;
+  transition: .25s;
+}
+
+.calendar-week .calendar-tile .activities > li .activity-time {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: act-time;
+  line-height: 1.1rem;
+  font-size: .8rem;
+}
+
+.calendar-week .calendar-tile .activities > li .activity-name {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: act-name;
+  font-size: 1rem;
+}
+
+.calendar-week .calendar-tile .activities > li.done {
+  background: #f8f6f3;
+}
+
+.calendar-week .calendar-tile .activities > li.done > .activity-name {
+  text-decoration: line-through;
+}
+
+.calendar-week .calendar-tile .activities > li + li {
+  margin-top: .2rem;
+}
+
+.calendar-week .calendar-tile:hover {
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.calendar-week .calendar-tile + .calendar-tile {
+  margin-left: .5rem;
+}
+
+@media screen and (max-width: 820px) {
+  .calendar-tile .activities {
+    display: block;
+    content: "Click";
+    border-radius: .5rem;
+    background: #b99b80;
+    height: 1rem;
+    width: 1rem;
+    -ms-flex-item-align: end;
+        align-self: flex-end;
+    justify-self: flex-end;
+  }
+  .calendar-tile .activities * {
+    display: none;
+  }
+}
+
+/* slider */
+input[type=range] {
+  -webkit-appearance: progress-bar;
+  width: 100%;
+  background: transparent;
+  outline: transparent;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #afafaf;
+  height: 16px;
+  width: 16px;
+  border-radius: 8px;
+  background: #ffffff;
+  cursor: pointer;
+  margin-top: -7px;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 2px;
+  cursor: pointer;
+  background: rgba(163, 122, 144, 0.64);
+  border-radius: 2px;
+}
+
+/* /slider */
+/*# sourceMappingURL=style.css.map */

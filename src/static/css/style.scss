@@ -1,0 +1,747 @@
+// --------------------
+
+$colors-first: (
+  primary: #D6F1F5,
+  secondary: #FF934F,
+  accent: #588B8B,
+  lighterDark: #4A4A48,
+  dark: #262322,
+);
+
+$colors-sepia: (
+  primary: #b99b80,
+  secondary: lighten(#b99b80, 10%),
+  lighterSecondary: lighten(#b99b80, 35%),
+  accent: #1E555C,
+  lighterAccent: lighten(#1E555C, 20%),
+  lighterDark: #262322,
+  dark: #0F1108,
+);
+
+$content-horsides-margin: 12rem; // 136px is optimal
+$content-versides-margin: 2.5rem;  // 40px is optimal
+$space-between-cards: 4rem;
+
+$date-cards-width: 45rem;
+$date-cards-height: 30rem;
+
+$width-break: 820px;
+
+@function sepiaColor($name) {
+  @return map-get($map: $colors-sepia, $key: $name);
+}
+
+@function color($name) {
+  @return map-get($map: $colors-first, $key: $name);
+}
+
+// --------------------
+
+@font-face {
+  font-family: "Century Gothic";
+  src: url(../fonts/GOTHIC.TTF);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Courier new", monospace;
+}
+
+html {
+  // Use it to scale the thing
+  font-size: 10px;
+
+  @media only screen and (max-width: $width-break) { 
+    font-size: 8px;
+  }
+}
+
+::selection {
+  background-color: #ffd800;
+}
+
+input, button {
+  outline: none;
+}
+
+// TODO: Make scrollbar look neat!
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-button {
+  height: $content-versides-margin / 2;
+  background: #b8b1ad;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+::-webkit-scrollbar-track {
+  background: #b8b1ad;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  font-size: 1.6rem;
+
+  background: #b4b2b7;
+  
+}
+
+#root {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  top: 0;
+  left: 0;
+}
+
+#bg {
+  z-index: -10;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+
+  opacity: .2;
+
+  background: #b4b2b7 url(../abg.png) repeat;
+  filter: sepia(1) contrast(.8);
+  background-size: 24rem;
+}
+
+.App {
+  z-index: 10;
+
+  // display: flex;
+  // flex-direction: column;
+
+  display: grid;
+  grid-template-rows: 6.4rem auto;
+
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  z-index: 100;
+  margin: 0;
+
+  height: 6.4rem;
+
+  user-select: none;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 $content-horsides-margin;
+
+    background: #4A4A48;
+  box-shadow: 0 1px 2px rgba(96, 96, 96, 0.712);
+
+  > span {  
+    color: white;
+    text-decoration: underline;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 3rem;
+  }
+
+  @media only screen and (max-width: $width-break) {
+    justify-content: center;
+    padding: 0;
+  }
+}
+
+main {
+  z-index: 50;
+
+  height: calc(100% - 6.4rem);
+
+  display: grid;
+
+  grid-gap: $space-between-cards;
+
+  grid-template-columns: $date-cards-width auto;
+  grid-template-rows: 1fr 1fr;
+
+  overflow: auto;
+
+  grid-template-areas: 
+      "card1  calendar"
+      "card2  calendar"
+      ;
+
+  padding: $content-versides-margin $content-horsides-margin;
+}
+
+@media only screen and (max-width: 1200px) { 
+  header {
+    padding: 0 2rem;
+  }
+
+  main {
+    $space-between-cards: $space-between-cards / 2;
+
+    padding: $space-between-cards 2rem;
+
+    grid-template-columns: 1fr 1fr;
+  
+    overflow: auto;
+  
+    grid-template-areas: 
+        "card1  card2"
+        "calendar  calendar"
+        ;
+
+    .date-card {
+      width: 100%;
+    }
+
+  }
+}
+
+@media only screen and (max-width: $width-break) { 
+  main {
+    $space-between-cards: $space-between-cards / 2;
+
+    padding: 0 2rem;
+
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+
+    .date-card {
+      margin-top: $space-between-cards;
+      width: 100%;
+    }
+
+    /* grid-gap: $space-between-cards;
+    grid-template: auto auto auto / $date-cards-width;
+
+    grid-template-areas: 
+      "card1"
+      "card2"
+      "calendar"
+      ; */
+
+  }
+}
+
+.Card1 {
+  grid-area: card1;
+}
+
+.Card2 {
+  grid-area: card2;
+}
+
+.Calendar {
+  grid-area: calendar;
+}
+
+.Card1, .Card2 {
+  height: $date-cards-height; 
+  width: $date-cards-width;
+}
+
+.date-card {
+  // display: flex;
+  // flex-direction: column;
+
+  // TODO: MAKE NICE AND CLEAR LAYOUT
+  // TODO: USE VH AND VW
+
+  display: grid;
+
+  grid-template-rows: 5rem auto;
+
+  overflow: hidden;
+
+  margin: 0;
+  padding: 0;
+
+  background: #fff;
+
+  box-shadow: 0 3px 6px rgba(0, 0, 0, .15);
+  border-radius: 1.5rem;
+}
+
+.date-card > .card-header {
+  flex-shrink: 0;
+  flex-grow: 0;
+
+  z-index: 99;
+
+  margin: 0;
+
+  background: sepiaColor(primary);
+
+  display: grid;
+  grid-template-columns: 4rem auto 4rem;
+  grid-template-rows: auto;
+  grid-template-areas: "but1 name but2";
+  align-items: center;
+  justify-content: auto;
+
+  padding: 0;
+
+  height: 5rem;
+  width: 100%;
+
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+
+  > span {
+    color: #fff;
+  }
+
+  > .new-activity, .prev-month {
+    justify-self: right;
+    grid-area: but1;
+  }
+
+  .prev-month img {
+    transform: rotate(180deg);
+    margin-left: -.3rem;
+  }
+
+  > .next-month img {
+    margin-right: -.3rem;
+  }
+
+  > .next-month {
+    grid-area: but2;
+  }
+}
+
+.change-month {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.change-month img{
+  height: 1.2rem;
+  width: 1.2rem;
+  padding: 0;
+  margin: 0;
+}
+
+.new-activity, .change-month {  
+  height: 2rem;
+  width: 2rem;
+  padding: 0;
+  border-radius: 50%;
+
+  font-family: serif;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 2rem;
+  color: #fff;
+  text-align: center;
+
+  border: none;
+
+  background: transparent;
+
+  opacity: .6;
+
+  transition: .25s;
+
+  user-select: none;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(110, 110, 110, 0.3);
+}
+
+.new-activity:hover, .change-month:hover {
+  opacity: .8;
+  box-shadow: 0 0 5px rgba(110, 110, 110, 0.5);
+}
+
+.new-activity:active, .change-month:active {
+  box-shadow: 0 0 5px rgba(110, 110, 110, 0.8), inset 0 0 5px rgba(110, 110, 110, 0.2);
+  color: complement(sepiaColor(primary));
+}
+
+
+.Card1 > .card-header {
+  background: sepiaColor(lighterAccent);
+}
+
+.Card2 > .card-header {
+  background: sepiaColor(primary);
+}
+
+/* TODO: Make a nice scrollbar :> */
+
+.card-content {
+  // height: calc(100% - 5rem);
+  padding: 1rem;
+  padding-top: .5rem;
+
+  overflow-y: auto;
+}
+
+ul.activities {
+  list-style: none;
+
+  padding: 0;
+  margin: 0;
+}
+
+.activity {
+  display: grid;
+
+  grid-template-columns: 2rem auto auto 1rem;
+  grid-template-rows: 1rem auto auto;
+
+  grid-template-areas: 
+      ".     time .    close"
+      "check name name name"
+      ".     desc desc desc";
+
+  margin: .2rem 0;
+  padding: .2rem 1.5rem;
+
+  word-wrap: normal;
+
+  border-left: .2rem solid transparent;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: .5rem;
+  transition: .25s;
+
+  * {
+    transition: .25s; 
+    color: #525252;
+  }
+
+  input[type=text], textarea {
+    background: transparent;
+    border: 0;
+    outline: none;
+
+  }
+  input[type=text]::placeholder, textarea::placeholder {
+    color: rgb(180, 180, 180);
+
+    word-wrap: break-word;
+    word-break: break-all;
+  }
+
+  > .activity-time {
+    grid-area: time;
+
+    font-size: 1rem;
+    color: #c0c0c0;
+  }
+
+  > .activity-done {
+    grid-area: check;
+  }
+
+  > .activity-name {
+    grid-area: name;
+
+    font-size: 1.7rem;
+    font-weight: bold;
+  }
+
+  > .activity-description {
+    grid-area: desc;
+
+    padding-left: 1.5rem;
+    font-size: 1.3rem;
+  }
+
+  > .activity-close {
+    grid-area: close;
+    margin: 0;
+    margin-top: .3rem;
+
+    
+    height: 2rem;
+    width: 2rem;
+    padding: 0;
+    border-radius: 50%;
+    
+    opacity: .5;
+    
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1rem;
+    font-family: sans-serif;
+    font-weight: bold;
+    background: transparent;
+    
+    user-select: none;
+    cursor: pointer;
+    border: none;
+  }
+
+  > .activity-close:hover {
+    box-shadow: 0 0 2px rgba(110, 110, 110, 0.2);
+    text-shadow: 0 0 2px rgba(0, 0, 0, 0.01);
+    opacity: .8;
+  }
+}
+
+.activity.done {
+  background: sepiaColor(lighterSecondary);
+
+  > .activity-name {
+    text-decoration: line-through;
+  }
+}
+
+.activity.done:hover {
+  background: sepiaColor(lighterSecondary);
+}
+
+.activity:hover {
+  background: rgba(0, 0, 0, .005);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+
+  border-left: .2rem solid rgba(0, 0, 0, .5);
+}
+
+.Calendar {
+  @media only screen and (max-width: $width-break) { 
+    width: calc(100% - 4rem);
+  }
+
+  .card-content {
+    height: 100%; 
+
+    display: grid;
+    grid-template-rows: 2rem 1fr 1fr 1fr 1fr 1fr;
+    grid-row-gap: .4rem;
+  }
+
+  .calendar-days {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    padding: 0;
+    margin: 0;
+
+    div {
+      width: 100%;
+      // height: 2rem;
+
+      color: #525252;
+      font-weight: bold;
+      font-size: 1.4rem;
+      text-align: center;
+
+      background: lighten(sepiaColor(secondary), 17%);
+
+      padding: .2rem 0;
+
+      // vazhno
+      // box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+
+      // box-shadow: 0 2px 2px rgba(0, 0, 0, 0.178);
+      border-radius: .5rem;
+    }
+
+    div + div {
+      margin-left: .5rem;
+    }
+  }
+}
+
+.calendar-week {
+  z-index: 50;
+
+  background: cyan;
+
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  
+  padding: 0;
+  margin: 0;
+  
+  .calendar-tile {
+    width: 100%;
+
+    margin: 0;
+    padding: 0;
+    
+    display: grid;
+    
+    grid-template-rows: 1.6rem auto;
+    grid-template-areas: 
+      "tile-header"
+      "tile-content";
+    
+    grid-row-gap: .4rem;
+
+    overflow: hidden;
+    
+    border-radius: .5rem;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    
+    cursor: pointer;
+
+    .tile-header {
+      grid-area: tile-header;
+      
+      font-weight: bold;
+      font-size: .9em;
+      text-align: center;
+      
+      background: rgba(0, 0, 0, 0.02);
+
+      user-select: none;
+
+      border-radius: .5rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .today-tile, .opened-tile {
+      background: sepiaColor(primary);
+      color: white;
+      box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+    }
+    
+    .today-tile {
+      background: sepiaColor(lighterAccent);
+    }
+
+    .activities {
+      grid-area: tile-content;
+      // margin: .2rem;
+      margin: 0;
+      padding: .2rem;
+
+      height: 100%;
+
+      // box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      border-radius: .5rem;
+      overflow: hidden;
+
+      > li { 
+        display: grid;
+        
+        padding: .2rem;
+
+        grid-template-columns: 2.5rem auto;
+        grid-template-areas: 
+          "act-time act-name";
+        grid-gap: .2rem;
+        
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        border-radius: .4rem;
+        transition: .25s;
+      
+        .activity-time {
+          grid-area: act-time;
+
+          line-height: 1.1rem;
+          font-size: .8rem;
+        }
+
+        .activity-name {
+          grid-area: act-name;
+
+          font-size: 1rem;
+        }
+      }
+
+      > li.done {
+        background: sepiaColor(lighterSecondary);
+      
+        > .activity-name {
+          text-decoration: line-through;
+        } 
+      }
+    }
+
+    .activities > li + li {
+      margin-top: .2rem;
+    }
+  }
+
+  .calendar-tile:hover {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+
+  }
+
+  .calendar-tile + .calendar-tile {
+    margin-left: .5rem;
+  }
+}
+
+@media screen and (max-width: $width-break) {   
+  .calendar-tile {
+
+    .activities {
+      display: block;
+      content: "Click";
+      border-radius: .5rem;
+      background: sepiaColor(primary);
+      height: 1rem;
+      width: 1rem;
+
+      align-self: flex-end;
+      justify-self: flex-end;
+    }
+
+    .activities * {
+      display: none;
+    }
+  }
+}
+
+
+
+/* slider */
+input[type=range] {
+    -webkit-appearance: progress-bar;
+    width: 100%;
+    background: transparent;
+    outline: transparent;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: 1px solid #afafaf;
+    height: 16px;
+    width: 16px;
+    border-radius: 8px;
+    background: #ffffff;
+    cursor: pointer;
+    margin-top: -7px;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 2px;
+    cursor: pointer;
+    background: rgba(163, 122, 144, 0.64);
+    border-radius: 2px;
+}
+/* /slider */
