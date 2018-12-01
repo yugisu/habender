@@ -314,6 +314,10 @@ header {
   transition: 0.15s;
 }
 
+.todo * {
+  font-size: 1.2rem;
+}
+
 .todo__head {
   width: 100%;
   display: -webkit-box;

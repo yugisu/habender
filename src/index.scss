@@ -333,6 +333,9 @@ header {
   background: rgba(134, 134, 134, 0.295);
   box-shadow: 0 0.2vh 0.2vh rgba(0, 0, 0, 0.7);
   transition: 0.15s;
+  * {
+    font-size: 1.2rem;
+  }
   &__head {
     width: 100%;
     display: flex;
@@ -348,8 +351,6 @@ header {
       background: lighten(rgba(0, 0, 0, 0.4), 10%);
     }
     // TODO: REMAKE .todo--minified and .todo into .todo and .todo--expanded
-    &__done {
-    }
     &__name {
       height: 4vh;
       width: 65%;

@@ -50,6 +50,7 @@ export default class Todo extends Component {
             className="todo__head__name"
             onChange={this.handleTodoChange('name')}
             value={name}
+            disabled
           />
           {/* <div className="todo__head__name">{name}</div> */}
           <button
