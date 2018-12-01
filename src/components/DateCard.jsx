@@ -14,29 +14,29 @@ class DateCard extends Component {
 
   render() {
     return (
-      <div className={`date-card ${"Card"+this.props.cardNumber}`}>
-
+      <div className={`date-card ${'Card' + this.props.cardNumber}`}>
         <div className="card-header">
-          <button 
-            className="new-activity" 
+          <button
+            className="new-activity"
             title="New activity"
             onClick={this.handleNewActivity}
-          > + </button>
+          >
+            +
+          </button>
           <span>{this.props.cardName}</span>
         </div>
 
         <div className="card-content">
           <ul className="activities">
             {this.props.activities.map((activity, idx) => (
-                <Activity
-                  key={`${this.cardName}-${idx}`}
-
-                  date={this.props.dateObj.getDateForComparison()}
-                  activity={activity}
-                  applyChange={this.props.applyChange}
-                  handleDelete={this.props.deleteActivity}
-                />
-              ))}
+              <Activity
+                key={`${this.cardName}-${idx}`}
+                date={this.props.dateObj.getDateForComparison()}
+                activity={activity}
+                applyChange={this.props.applyChange}
+                handleDelete={this.props.deleteActivity}
+              />
+            ))}
           </ul>
         </div>
       </div>

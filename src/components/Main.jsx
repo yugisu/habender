@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Calendar from "./Calendar"; 
+import Calendar from './Calendar';
 import DateCard from './DateCard';
 
 import OptDate from './OptDate';
@@ -15,13 +15,15 @@ function idGiver(max) {
   const MAX_ID = max;
   const genny = (function*() {
     let id = 0;
-    while (id <= MAX_ID) { yield id++; }
+    while (id <= MAX_ID) {
+      yield id++;
+    }
   })();
 
-  return function() { 
+  return function() {
     const gennyRes = genny.next();
-    return (gennyRes.done) ? null : gennyRes.value;
-  }
+    return gennyRes.done ? null : gennyRes.value;
+  };
 }
 
 //TODO: MAKE PAGE LOOK GOOD
@@ -36,7 +38,7 @@ class Main extends Component {
     super(props);
 
     const today = new OptDate();
-    const tomorrow = new OptDate({daysAhead: 1});
+    const tomorrow = new OptDate({ daysAhead: 1 });
 
     this.MAX_ID = 1000;
 
@@ -46,9 +48,9 @@ class Main extends Component {
 
       currentCards: [
         {
-          name: "Today: " + today.getDateForComparison(), 
+          name: 'Today: ' + today.getDateForComparison(),
           date: today,
-        }, 
+        },
         {
           name: tomorrow.getDateForComparison(),
           date: tomorrow,
@@ -62,25 +64,25 @@ class Main extends Component {
             {
               id: giveId(),
               done: true,
-              time: "17:00",
-              name: "Feed a cat",
-              description: "Give this fat bastard some tuna <3",
+              time: '17:00',
+              name: 'Feed a cat',
+              description: 'Give this fat bastard some tuna <3',
             },
             {
               id: giveId(),
               done: false,
-              time: "19:00",
-              name: "Cook some dinner",
-              description: "Coke + cereal - what could be more tasty?"
+              time: '19:00',
+              name: 'Cook some dinner',
+              description: 'Coke + cereal - what could be more tasty?',
             },
             {
               id: giveId(),
               done: false,
-              time: "19:00",
-              name: "Make some damn good coffee for D.",
-              description: "Don't forget about cinnamon",
-            }
-          ]
+              time: '19:00',
+              name: 'Make some damn good coffee for D.',
+              description: 'Don\'t forget about cinnamon',
+            },
+          ],
         },
         {
           date: tomorrow.getDateForComparison(),
@@ -88,28 +90,28 @@ class Main extends Component {
             {
               id: giveId(),
               done: false,
-              time: "12:00",
-              name: "Feed a cat",
-              description: "Feed this fat bastard with some tuna <3",
+              time: '12:00',
+              name: 'Feed a cat',
+              description: 'Feed this fat bastard with some tuna <3',
             },
             {
               id: giveId(),
               done: false,
-              time: "17:00",
-              name: "Cook some dinner",
-              description: "Healthy food, huh?"
+              time: '17:00',
+              name: 'Cook some dinner',
+              description: 'Healthy food, huh?',
             },
             {
               id: giveId(),
               done: false,
-              time: "19:00",
-              name: "Make a cup of tea for D.",
-              description: "Cup should be big!",
-            }
-          ]
+              time: '19:00',
+              name: 'Make a cup of tea for D.',
+              description: 'Cup should be big!',
+            },
+          ],
         },
       ],
-    }
+    };
 
     this.onNewActivity = this.onNewActivity.bind(this);
     this.handleInputInActivity = this.handleInputInActivity.bind(this);
@@ -117,11 +119,10 @@ class Main extends Component {
     this.changeOpenedCard = this.changeOpenedCard.bind(this);
   }
 
-  findDate (givenDate, stateObj=this.state) {
-
+  findDate(givenDate, stateObj = this.state) {
     // Date should be an OptDate object
     let date = givenDate;
-    if (givenDate instanceof Date) { 
+    if (givenDate instanceof Date) {
       date = new OptDate({}, givenDate);
     } else if (typeof givenDate === 'string') {
       date = new OptDate({}, new Date(givenDate));
@@ -134,22 +135,24 @@ class Main extends Component {
       }
     }
 
-    // If no such date found, returns null 
+    // If no such date found, returns null
     // (I know, that's undefined is by default, but still)
     return null;
   }
 
-  handleInputInActivity (obj) {
+  handleInputInActivity(obj) {
     this.setState((state, props) => {
       let newState = Object.assign({}, state);
 
       for (const elem1 of newState.planner) {
-        if (obj.date === elem1.date) { 
+        if (obj.date === elem1.date) {
           for (const elem2 of elem1.activities) {
             if (obj.id === elem2.id) {
               let val = obj.value;
               // eslint-disable-next-line
-              if (val === 'true' || val === 'false') { val = val == 'true' }
+              if (val === 'true' || val === 'false') {
+                val = val == 'true';
+              }
               elem2[obj.key] = val;
               break;
             }
@@ -158,22 +161,21 @@ class Main extends Component {
         }
       }
       return newState;
-    })
+    });
   }
 
-  onNewActivity (dateObj) {
-
+  onNewActivity(dateObj) {
     const newAct = {
       id: giveId(),
       done: false,
-      time: "",
-      name: "",
-      description: "",
-    }
+      time: '',
+      name: '',
+      description: '',
+    };
 
     this.setState((state, props) => {
       const newState = Object.assign({}, state);
-      
+
       const date = this.findDate(dateObj, newState);
       if (date) {
         date.activities.unshift(newAct);
@@ -181,13 +183,13 @@ class Main extends Component {
         newState.planner.push({
           date: dateObj.getDateForComparison(),
           activities: [newAct],
-        })
+        });
       }
-      
+
       return newState;
     });
 
-    // const newActivityId = giveId(); 
+    // const newActivityId = giveId();
 
     // this.setState((state, props) => {
     //   const newState = Object.assign({}, state);
@@ -204,45 +206,42 @@ class Main extends Component {
     //   });
     //   return newState;
     // })
-
   }
 
-  changeOpenedCard (obj) {
+  changeOpenedCard(obj) {
     this.setState((state, props) => {
       state.currentCards[1] = obj;
       return state;
-    })
+    });
   }
 
-  deleteActivity (id) {
+  deleteActivity(id) {
     this.setState((state, props) => {
       const newState = Object.assign({}, state);
 
       for (const elem1 of newState.planner) {
         for (const elem2 of elem1.activities) {
           // eslint-disable-next-line
-          if (elem2.id == id) { 
-            elem1.activities.splice(elem1.activities.indexOf(elem2), 1); 
+          if (elem2.id == id) {
+            elem1.activities.splice(elem1.activities.indexOf(elem2), 1);
           }
         }
       }
       return newState;
-    })
+    });
   }
 
   render() {
-    
     return (
       <main>
         {this.state.currentCards.map((elem, idx) => {
-          const dateFromState = (this.findDate(elem.date));
-          
-          const activs = (dateFromState) ? 
-            dateFromState.activities : [];
+          const dateFromState = this.findDate(elem.date);
+
+          const activs = dateFromState ? dateFromState.activities : [];
 
           return (
-            <DateCard 
-              key={'Card' + (idx+1)}
+            <DateCard
+              key={'Card' + (idx + 1)}
               cardName={elem.name}
               cardNumber={idx + 1}
               dateObj={elem.date}
@@ -251,8 +250,7 @@ class Main extends Component {
               applyChange={this.handleInputInActivity}
               deleteActivity={this.deleteActivity}
             />
-
-          )
+          );
         })}
 
         <Calendar
@@ -261,8 +259,7 @@ class Main extends Component {
           openedCard={this.state.currentCards[1]}
           handleClickOnTile={this.changeOpenedCard}
         />
-
-    </main>
+      </main>
     );
   }
 }
