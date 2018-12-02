@@ -15,7 +15,7 @@ class Activity extends Component {
   handleChange(e) {
     const key = classNameToKey(e.target.className);
 
-    this.props.applyChange(
+    this.props.onActivityInput(
       {
         date: this.props.date,
         id: this.props.activity.id,

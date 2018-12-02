@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import OptDate from './OptDate';
+import NiceDate from '../NiceDate';
 
 class CalendarTile extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class CalendarTile extends Component {
     console.log(
       'tile',
       this.props.weekNumber + '_' + this.props.dayNumber,
-      'updated!',
+      'updated!'
     );
 
     console.log(
@@ -24,7 +24,7 @@ class CalendarTile extends Component {
       this.props.currentActivities,
       props.currentActivities,
       this.props.isInCard !== props.isInCard,
-      this.props.isToday !== props.isToday,
+      this.props.isToday !== props.isToday
     );
 
     return (
@@ -39,7 +39,7 @@ class CalendarTile extends Component {
   }
 
   render() {
-    const date = new OptDate({}, this.props.dateObj);
+    const date = new NiceDate({}, this.props.dateObj);
 
     return (
       <div

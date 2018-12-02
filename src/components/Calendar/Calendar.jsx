@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import CalendarDays from './CalendarDays';
-import CalendarWeek from './CalendarWeek';
+import CalendarDays from '../CalendarDays';
+import CalendarWeek from '../CalendarWeek';
 
 class Calendar extends Component {
   render() {
     const firstDayOfMonth = new Date(
-      `01.${this.props.dateObj.month}.${this.props.dateObj.year}`,
+      `01.${this.props.dateObj.month}.${this.props.dateObj.year}`
     );
 
     const calendarDateObjects = [
@@ -13,14 +13,14 @@ class Calendar extends Component {
     ].map((week, idxW) =>
       week.map((day, idxD) => {
         const tetha = new Date(
-          `01.${this.props.dateObj.month}.${this.props.dateObj.year}`,
+          `01.${this.props.dateObj.month}.${this.props.dateObj.year}`
         );
         tetha.setDate(
-          tetha.getDate() + (day - firstDayOfMonth.getDay()) + 7 * idxW,
+          tetha.getDate() + (day - firstDayOfMonth.getDay()) + 7 * idxW
         );
 
         return tetha;
-      }),
+      })
     );
 
     return (

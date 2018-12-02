@@ -1,6 +1,6 @@
 import React, { /* Component, */ PureComponent } from 'react';
-import Header from './Header';
-import Main from './Main';
+import Header from '../Header';
+import Main from '../Main';
 
 class App extends PureComponent {
   render() {

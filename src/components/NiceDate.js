@@ -1,11 +1,22 @@
-const months = ["January", "March", "April", "May", "June", "July", 
-               "August", "September", "October", "November", "December"];
+const months = [
+  'January',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 
-class OptDate {
-  constructor(props={daysAhead: 0}, dateObject=Date()) {
+class NiceDate {
+  constructor(props = { daysAhead: 0 }, dateObject = Date()) {
     this.objectDate = new Date(dateObject);
-    
-    if (props.daysAhead) { 
+
+    if (props.daysAhead) {
       this.objectDate.setDate(this.objectDate.getDate() + props.daysAhead);
     }
 
@@ -29,4 +40,4 @@ class OptDate {
   }
 }
 
-export default OptDate
+export default NiceDate;

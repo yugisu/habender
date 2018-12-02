@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Activity from './Activity';
+import Activity from '../Activity/';
 
 class DateCard extends Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class DateCard extends Component {
                 key={`${this.cardName}-${idx}`}
                 date={this.props.dateObj.getDateForComparison()}
                 activity={activity}
-                applyChange={this.props.applyChange}
+                onActivityInput={this.props.onActivityInput}
                 handleDelete={this.props.deleteActivity}
               />
             ))}

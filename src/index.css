@@ -622,7 +622,8 @@ ul.activities {
   padding: 0.2rem;
   height: 100px;
   border-radius: 0.5rem;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .calendar-week .calendar-tile .activities > li {
