@@ -10,7 +10,7 @@ class DateCard extends Component {
 
   handleNewActivity(e) {
     this.props.onActivityUpdate({
-      date: this.props.date.getDateForComparison(),
+      date: this.props.date.show(),
       activities: [],
     });
   }

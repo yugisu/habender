@@ -26,7 +26,7 @@ class NiceDate {
     this.year = this.objectDate.getFullYear();
   }
 
-  getDateForComparison() {
+  show() {
     return `${this.month}, ${this.date} @${this.year}`;
   }
 

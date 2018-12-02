@@ -14,7 +14,7 @@ class CalendarWeek extends Component {
 
     this.props.handleClickOnTile({
       date: optDateFromDateStr,
-      name: optDateFromDateStr.getDateForComparison(),
+      name: optDateFromDateStr.show(),
     });
   }
 
@@ -28,14 +28,14 @@ class CalendarWeek extends Component {
           let currentActivities = [];
 
           const isToday =
-            this.props.today.getDateForComparison() ===
-            new NiceDate({}, day).getDateForComparison();
+            this.props.today.show() ===
+            new NiceDate({}, day).show();
           const isInCard =
             this.props.openedCard.name ===
-            new NiceDate({}, day).getDateForComparison();
+            new NiceDate({}, day).show();
 
           for (let dayB of activities) {
-            if (dayB.date === new NiceDate({}, day).getDateForComparison()) {
+            if (dayB.date === new NiceDate({}, day).show()) {
               currentActivities = dayB.activities;
             }
           }

@@ -31,7 +31,7 @@ class DateCard extends Component {
             {this.props.activities.map((activity, idx) => (
               <Activity
                 key={`${this.cardName}-${idx}`}
-                date={this.props.dateObj.getDateForComparison()}
+                date={this.props.dateObj.show()}
                 activity={activity}
                 onActivityInput={this.props.onActivityInput}
                 handleDelete={this.props.deleteActivity}

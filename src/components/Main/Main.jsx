@@ -26,11 +26,11 @@ class Main extends Component {
     // TODO: think about usage of 'this.today' in cards, get rid of 'tomorrow' state
     currentCards: [
       {
-        name: 'Today: ' + this.today.getDateForComparison(),
+        name: 'Today: ' + this.today.show(),
         date: this.today,
       },
       {
-        name: this.tomorrow.getDateForComparison(),
+        name: this.tomorrow.show(),
         date: this.tomorrow,
       },
     ],
@@ -38,7 +38,7 @@ class Main extends Component {
     //TODO: take planner & NiceDate from new-ui version
     planner: [
       {
-        date: this.today.getDateForComparison(),
+        date: this.today.show(),
         activities: [
           {
             id: giveId(),
@@ -64,7 +64,7 @@ class Main extends Component {
         ],
       },
       {
-        date: this.tomorrow.getDateForComparison(),
+        date: this.tomorrow.show(),
         activities: [
           {
             id: giveId(),
@@ -102,7 +102,7 @@ class Main extends Component {
     }
 
     for (const day of stateObj.planner) {
-      if (date.getDateForComparison() === day.date) {
+      if (date.show() === day.date) {
         return day;
       }
     }
@@ -149,7 +149,7 @@ class Main extends Component {
         date.activities.unshift(newAct);
       } else {
         newState.planner.push({
-          date: dateObj.getDateForComparison(),
+          date: dateObj.show(),
           activities: [newAct],
         });
       }
