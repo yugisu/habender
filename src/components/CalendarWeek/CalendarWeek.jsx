@@ -2,37 +2,26 @@ import React, { Component } from 'react';
 import CalendarTile from '../CalendarTile';
 import NiceDate from '../NiceDate';
 
+// TODO: get rid of this shitty component
+
 class CalendarWeek extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handleClickOnTile = this.handleClickOnTile.bind(this);
-  }
-
-  handleClickOnTile(dateStr) {
-    const optDateFromDateStr = new NiceDate({}, new Date(dateStr));
-
-    this.props.handleClickOnTile({
-      date: optDateFromDateStr,
-      name: optDateFromDateStr.show(),
-    });
-  }
-
   render() {
-    const activities = this.props.activities;
-    let isCurrentWeek;
+    const {
+      activities,
+      week,
+      today,
+      openedCard,
+      weekNumber,
+      onTileClick,
+    } = this.props;
 
     return (
       <div className="calendar-week">
-        {this.props.week.map((day, idxD) => {
+        {week.map((day, idxD) => {
           let currentActivities = [];
 
-          const isToday =
-            this.props.today.show() ===
-            new NiceDate({}, day).show();
-          const isInCard =
-            this.props.openedCard.name ===
-            new NiceDate({}, day).show();
+          const isToday = today.show() === new NiceDate({}, day).show();
+          const isInCard = openedCard.name === new NiceDate({}, day).show();
 
           for (let dayB of activities) {
             if (dayB.date === new NiceDate({}, day).show()) {
@@ -45,9 +34,9 @@ class CalendarWeek extends Component {
               dateObj={day}
               key={idxD + 1}
               dayNumber={idxD + 1}
-              weekNumber={this.props.weekNumber}
+              weekNumber={weekNumber}
               currentActivities={currentActivities}
-              handleClick={this.handleClickOnTile}
+              onTileClick={onTileClick}
               isToday={isToday}
               isInCard={isInCard}
             />

@@ -1,24 +1,23 @@
 import React from 'react';
 
+// TODO: bind these days to real days in calendar i.e. make defined style for week days
 const CalendarDays = () => {
+  const weekDays = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+  ];
   return (
     <div className="calendar-days">
-      <div>Mon</div>
-      <div>Tue</div>
-      <div>Wed</div>
-      <div>Thu</div>
-      <div>Fri</div>
-      <div>Sat</div>
-      <div>Sun</div>
-      {/* <div>Monday</div>
-      <div>Tuesday</div>
-      <div>Wednesday</div>
-      <div>Thursday</div>
-      <div>Friday</div>
-      <div>Saturday</div>
-      <div>Sunday</div> */}
+      {weekDays.map((day) => (
+        <div>{day.slice(0, 3)}</div>
+      ))}
     </div>
   );
-}; 
+};
 
 export default CalendarDays;

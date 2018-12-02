@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import NiceDate from '../NiceDate';
 
+// TODO: borrow tile from tile-ui, rework that
+
 class CalendarTile extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handleClick = this.handleClick.bind(this);
-  }
-
   shouldComponentUpdate(props, state) {
     //TODO: DO SOMETHING WITH AUTOUPDATING
 
@@ -34,41 +30,41 @@ class CalendarTile extends Component {
     );
   }
 
-  handleClick(e) {
-    this.props.handleClick(this.props.dateObj);
-  }
-
   render() {
+    const {
+      dateObj,
+      dayNumber,
+      weekNumber,
+      isInCard,
+      isToday,
+      currentActivities,
+      onTileClick,
+    } = this.props;
     const date = new NiceDate({}, this.props.dateObj);
 
     return (
       <div
         className={'calendar-tile'}
-        id={this.props.weekNumber + '_' + this.props.dayNumber}
-        onClick={this.handleClick}
+        id={weekNumber + '_' + dayNumber}
+        onClick={() => onTileClick(new NiceDate({}, dateObj))}
       >
         <div
-          className={`tile-header ${this.props.isToday ? 'today-tile' : ''} ${
-            this.props.isInCard ? 'opened-tile' : ''
+          className={`tile-header ${isToday ? 'today-tile' : ''} ${
+            isInCard ? 'opened-tile' : ''
           }`}
         >
           <span>{date.date}</span>
           <span />
         </div>
         <ul className="activities">
-          {(this.props.currentActivities
-            ? this.props.currentActivities
-            : []
-          ).map((elem, idx) => {
+          {(currentActivities ? currentActivities : []).map((elem, idx) => {
             return (
               <li className={elem.done ? 'done' : 'not-done'} key={idx + 1}>
                 <div className="activity-time">
-                  {' '}
-                  {elem.time ? elem.time : 'never'}{' '}
+                  {elem.time ? elem.time : 'never'}
                 </div>
                 <div className="activity-name">
-                  {' '}
-                  {elem.name ? elem.name : 'New act'}{' '}
+                  {elem.name ? elem.name : 'New act'}
                 </div>
               </li>
             );

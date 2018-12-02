@@ -9,12 +9,7 @@ import NiceDate from '../NiceDate';
 
 const giveId = ((count = 0) => () => count++)();
 
-//TODO: MAKE PAGE LOOK GOOD
 //TODO: GOOD LOOKING == USUAL PLANNER PAGE > INTERACTIVE TILES (U CLICK - IT EXPANDS)
-
-//TODO: Make <Activity /> suitable for use with <CalendarTile />
-
-//DONE: GET RID OF THAT PERFOMANCE TROUBLES - DONE
 
 class Main extends Component {
   today = new NiceDate();
@@ -176,14 +171,18 @@ class Main extends Component {
     // })
   };
 
-  changeOpenedCard = (obj) => {
+  changeOpenedCard = (dateObj) => {
     this.setState((state) => {
-      state.currentCards[1] = obj;
-      return state;
+      const currentCards = state.currentCards;
+      currentCards[1] = {
+        name: dateObj.show(),
+        date: dateObj,
+      };
+      return { currentCards };
     });
   };
 
-  deleteActivity = (id) => {
+  onDeleteActivity = (id) => {
     this.setState((state, props) => {
       const newState = Object.assign({}, state);
 
@@ -214,7 +213,7 @@ class Main extends Component {
           activities={dateFromState ? dateFromState.activities : []}
           onNewActivity={this.onNewActivity}
           onActivityInput={this.onActivityInput}
-          deleteActivity={this.deleteActivity}
+          onDeleteActivity={this.onDeleteActivity}
         />
       );
     });
@@ -227,7 +226,7 @@ class Main extends Component {
           dateObj={today} // ????
           activities={planner}
           openedCard={currentCards[1]}
-          handleClickOnTile={this.changeOpenedCard}
+          onTileClick={this.changeOpenedCard}
         />
       </main>
     );

@@ -2,39 +2,39 @@ import React, { Component } from 'react';
 import Activity from '../Activity/';
 
 class DateCard extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handleNewActivity = this.handleNewActivity.bind(this);
-  }
-
-  handleNewActivity(e) {
-    this.props.onNewActivity(this.props.dateObj);
-  }
-
   render() {
+    const {
+      onNewActivity,
+      onActivityInput,
+      onDeleteActivity,
+      cardNumber,
+      cardName,
+      activities,
+      dateObj,
+    } = this.props;
+
     return (
-      <div className={`date-card ${'Card' + this.props.cardNumber}`}>
+      <div className={`date-card ${'Card' + cardNumber}`}>
         <div className="card-header">
           <button
             className="new-activity"
             title="New activity"
-            onClick={this.handleNewActivity}
+            onClick={() => onNewActivity(dateObj)}
           >
             +
           </button>
-          <span>{this.props.cardName}</span>
+          <span>{cardName}</span>
         </div>
 
         <div className="card-content">
           <ul className="activities">
-            {this.props.activities.map((activity, idx) => (
+            {activities.map((activity, idx) => (
               <Activity
-                key={`${this.cardName}-${idx}`}
-                date={this.props.dateObj.show()}
+                key={`${cardName}-${idx}`}
+                date={dateObj.show()}
                 activity={activity}
-                onActivityInput={this.props.onActivityInput}
-                handleDelete={this.props.deleteActivity}
+                onActivityInput={onActivityInput}
+                onDeleteActivity={onDeleteActivity}
               />
             ))}
           </ul>

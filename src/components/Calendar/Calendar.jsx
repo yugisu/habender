@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import CalendarDays from '../CalendarDays';
 import CalendarWeek from '../CalendarWeek';
 
+// TODO: borrow Calendar component from tile-ui
+
 class Calendar extends Component {
   render() {
     const firstDayOfMonth = new Date(
@@ -11,7 +13,7 @@ class Calendar extends Component {
     const calendarDateObjects = [
       ...Array(5).fill([...Array(7).keys()].map((elem) => elem + 1)),
     ].map((week, idxW) =>
-      week.map((day, idxD) => {
+      week.map((day) => {
         const tetha = new Date(
           `01.${this.props.dateObj.month}.${this.props.dateObj.year}`
         );
@@ -58,7 +60,7 @@ class Calendar extends Component {
               today={this.props.dateObj}
               activities={this.props.activities}
               openedCard={this.props.openedCard}
-              handleClickOnTile={this.props.handleClickOnTile}
+              onTileClick={this.props.onTileClick}
             />
           ))}
         </div>

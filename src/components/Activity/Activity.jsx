@@ -1,29 +1,29 @@
 import React, { Component } from 'react';
 
+//TODO: Make <Activity /> suitable for use with <CalendarTile />
+
 class Activity extends Component {
   constructor(props) {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
+    this.onDeleteActivity = this.onDeleteActivity.bind(this);
   }
 
-  handleDelete(e) {
-    this.props.handleDelete(this.props.activity.id);
+  onDeleteActivity(e) {
+    this.props.onDeleteActivity(this.props.activity.id);
   }
 
   handleChange(e) {
     const key = classNameToKey(e.target.className);
 
-    this.props.onActivityInput(
-      {
-        date: this.props.date,
-        id: this.props.activity.id,
-        
-        key: key,
-        value: e.target.value,
-      }
-    )
+    this.props.onActivityInput({
+      date: this.props.date,
+      id: this.props.activity.id,
+
+      key: key,
+      value: e.target.value,
+    });
   }
 
   render() {
@@ -31,7 +31,7 @@ class Activity extends Component {
 
     return (
       <li
-        className={`activity ${(this.props.activity.done) ? "done" : ""}`}
+        className={`activity ${this.props.activity.done ? 'done' : ''}`}
         id={`activity${this.props.activity.id}`}
       >
         <input
@@ -41,31 +41,35 @@ class Activity extends Component {
           checked={this.props.activity.done}
           onChange={this.handleChange}
         />
-        <input 
-          className="activity-time" 
+        <input
+          className="activity-time"
           type="text"
-          value={this.props.activity.time} 
+          value={this.props.activity.time}
           onChange={this.handleChange}
           placeholder="Time"
         />
         <input
-          className="activity-name" 
+          className="activity-name"
           type="text"
-          value={this.props.activity.name} 
+          value={this.props.activity.name}
           onChange={this.handleChange}
           placeholder="Name your activity"
         />
-        <input 
+        <input
           className="activity-description"
           type="text"
-          value={(this.props.activity.description) ? `${this.props.activity.description}` : ''}
+          value={
+            this.props.activity.description
+              ? `${this.props.activity.description}`
+              : ''
+          }
           onChange={this.handleChange}
           placeholder="Describe your activity"
         />
-        <button 
-          className="activity-close"
-          onClick={this.handleDelete}
-        > x </button>
+        <button className="activity-close" onClick={this.onDeleteActivity}>
+          {' '}
+          x{' '}
+        </button>
       </li>
     );
   }
@@ -73,18 +77,20 @@ class Activity extends Component {
 
 function checkCreator(start) {
   let check = !start;
-  const gen = (function* () {
+  const gen = (function*() {
     for (;;) {
       check = !check;
-      yield (check+'' === 'true') ? true : false;
+      yield check + '' === 'true' ? true : false;
     }
   })();
-  
-  return function () { return gen.next().value };
+
+  return function() {
+    return gen.next().value;
+  };
 }
 
 function classNameToKey(name) {
   return name.slice(9);
 }
 
-export default Activity
+export default Activity;
