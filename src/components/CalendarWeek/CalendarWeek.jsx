@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CalendarTile from '../CalendarTile';
-import NiceDate from '../NiceDate';
+import NiceDate from '../../NiceDate';
 
 // TODO: get rid of this shitty component
 

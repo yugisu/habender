@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NiceDate from '../NiceDate';
+import NiceDate from '../../NiceDate';
 
 // TODO: borrow tile from tile-ui, rework that
 

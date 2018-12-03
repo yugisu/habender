@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Calendar from '../Calendar';
 import DateCard from '../DateCard';
 
-import NiceDate from '../NiceDate';
+import NiceDate from '../../NiceDate';
 
 // const {whyDidYouUpdate} = require('../../node_modules/why-did-you-update')
 // whyDidYouUpdate(React)
@@ -104,7 +104,7 @@ class Main extends Component {
   };
 
   onActivityInput = (obj) => {
-    this.setState((state, props) => {
+    this.setState((state) => {
       let newState = Object.assign({}, state);
 
       for (const elem1 of newState.planner) {
@@ -136,7 +136,7 @@ class Main extends Component {
       description: '',
     };
 
-    this.setState((state, props) => {
+    this.setState((state) => {
       const newState = Object.assign({}, state);
 
       const date = this._findDate(dateObj, newState);
@@ -183,7 +183,7 @@ class Main extends Component {
   };
 
   onDeleteActivity = (id) => {
-    this.setState((state, props) => {
+    this.setState((state) => {
       const newState = Object.assign({}, state);
 
       for (const elem1 of newState.planner) {
