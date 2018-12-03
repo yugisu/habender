@@ -19,6 +19,7 @@ class Main extends Component {
     today: this.today,
 
     // TODO: think about usage of 'this.today' in cards, get rid of 'tomorrow' state
+    // TODO: give cards only NiceDate obj, without NiceDate.show() thingy
     currentCards: [
       {
         name: 'Today: ' + this.today.show(),
@@ -30,7 +31,7 @@ class Main extends Component {
       },
     ],
 
-    //TODO: take planner & NiceDate from new-ui version
+    //TODO: take planner from new-ui version
     planner: [
       {
         date: this.today.show(),
@@ -90,9 +91,7 @@ class Main extends Component {
   _findDate = (givenDate, stateObj = this.state) => {
     // Date should be an NiceDate object
     let date = givenDate;
-    if (givenDate instanceof Date) {
-      date = new NiceDate(givenDate);
-    } else if (typeof givenDate === 'string') {
+    if (givenDate instanceof Date || typeof givenDate === 'string') {
       date = new NiceDate(givenDate);
     }
 
@@ -101,9 +100,24 @@ class Main extends Component {
         return day;
       }
     }
+    return null;
+  };
+
+  _findTodo = (id, stateObj = this.state) => {
+    const planner = stateObj.planner;
+    for (const date of planner) {
+      for (const todo of date.activities) {
+        if (todo.id === id) {
+          // return a copy, not a todo obj from state itself
+          return { ...todo };
+        }
+      }
+    }
+    return null;
   };
 
   onActivityInput = (obj) => {
+    this.setState((state) => {});
     this.setState((state) => {
       let newState = Object.assign({}, state);
 

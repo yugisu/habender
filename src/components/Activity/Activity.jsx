@@ -7,11 +7,6 @@ class Activity extends Component {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
-    this.onDeleteActivity = this.onDeleteActivity.bind(this);
-  }
-
-  onDeleteActivity(e) {
-    this.props.onDeleteActivity(this.props.activity.id);
   }
 
   handleChange(e) {
@@ -27,48 +22,43 @@ class Activity extends Component {
   }
 
   render() {
-    const isChecked = checkCreator(this.props.activity.done);
+    const {
+      activity: { done, id, time, name, description },
+      onDeleteActivity,
+    } = this.props;
 
     return (
-      <li
-        className={`activity ${this.props.activity.done ? 'done' : ''}`}
-        id={`activity${this.props.activity.id}`}
-      >
+      <li className={`activity ${done ? 'done' : ''}`} id={`activity${id}`}>
         <input
           className="activity-done"
           type="checkbox"
-          value={!isChecked()}
-          checked={this.props.activity.done}
+          value={!done}
+          checked={done}
           onChange={this.handleChange}
         />
         <input
           className="activity-time"
           type="text"
-          value={this.props.activity.time}
+          value={time}
           onChange={this.handleChange}
           placeholder="Time"
         />
         <input
           className="activity-name"
           type="text"
-          value={this.props.activity.name}
+          value={name}
           onChange={this.handleChange}
           placeholder="Name your activity"
         />
         <input
           className="activity-description"
           type="text"
-          value={
-            this.props.activity.description
-              ? `${this.props.activity.description}`
-              : ''
-          }
+          value={description ? `${description}` : ''}
           onChange={this.handleChange}
           placeholder="Describe your activity"
         />
-        <button className="activity-close" onClick={this.onDeleteActivity}>
-          {' '}
-          x{' '}
+        <button className="activity-close" onClick={() => onDeleteActivity(id)}>
+          x
         </button>
       </li>
     );
