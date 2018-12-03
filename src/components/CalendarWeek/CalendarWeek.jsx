@@ -20,11 +20,13 @@ class CalendarWeek extends Component {
         {week.map((day, idxD) => {
           let currentActivities = [];
 
-          const isToday = today.show() === new NiceDate({}, day).show();
-          const isInCard = openedCard.name === new NiceDate({}, day).show();
+          // TODO: rework this peace of shi
+
+          const isToday = today.show() === new NiceDate(day).show();
+          const isInCard = openedCard.name === new NiceDate(day).show();
 
           for (let dayB of activities) {
-            if (dayB.date === new NiceDate({}, day).show()) {
+            if (dayB.date === new NiceDate(day).show()) {
               currentActivities = dayB.activities;
             }
           }

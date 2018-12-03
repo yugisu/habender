@@ -47,7 +47,7 @@ class DateCard extends Component {
           <button className="new-activity" title="New activity">
             +
           </button>
-          <span>{`${this.cardName}: ${this.props.date.month}, ${
+          <span>{`${this.cardName}: ${this.props.date.monthName}, ${
             this.props.date.date
           } @${this.props.date.year}`}</span>
         </div>

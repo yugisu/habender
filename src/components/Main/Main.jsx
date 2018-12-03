@@ -13,7 +13,7 @@ const giveId = ((count = 0) => () => count++)();
 
 class Main extends Component {
   today = new NiceDate();
-  tomorrow = new NiceDate({ daysAhead: 1 });
+  tomorrow = NiceDate.newDate(this.today, 1);
 
   state = {
     today: this.today,
@@ -91,9 +91,9 @@ class Main extends Component {
     // Date should be an NiceDate object
     let date = givenDate;
     if (givenDate instanceof Date) {
-      date = new NiceDate({}, givenDate);
+      date = new NiceDate(givenDate);
     } else if (typeof givenDate === 'string') {
-      date = new NiceDate({}, new Date(givenDate));
+      date = new NiceDate(givenDate);
     }
 
     for (const day of stateObj.planner) {

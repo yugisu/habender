@@ -14,22 +14,22 @@ const months = [
 ];
 
 class NiceDate {
-  constructor(givenDate = Date(), daysToAdd = 0) {
-    this.dateObj = new Date(givenDate);
+  constructor(givendateObj = Date(), daysToAdd = 0) {
+    this.dateObj = new Date(givendateObj);
     this.dateObj.setDate(this.dateObj.getDate() + daysToAdd);
 
     this.refresh();
   }
 
   show() {
-    return `${this.monthName}, ${this.date} @${this.year}`;
+    return `${this.monthName}, ${this.date} ${this.year}`;
   }
 
   refresh() {
     this.date = this.dateObj.getDate();
     this.day = this.dateObj.getDay();
-    this.month = this.dateObj.getMonth() + 1;
-    this.monthName = months[this.month - 1];
+    this.monthName = this.dateObj.getMonth() + 1;
+    this.monthName = months[this.monthName - 1];
     this.year = this.dateObj.getFullYear();
   }
 

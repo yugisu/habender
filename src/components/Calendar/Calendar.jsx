@@ -7,7 +7,7 @@ import CalendarWeek from '../CalendarWeek';
 class Calendar extends Component {
   render() {
     const firstDayOfMonth = new Date(
-      `01.${this.props.dateObj.month}.${this.props.dateObj.year}`
+      `01.${this.props.dateObj.monthName}.${this.props.dateObj.year}`
     );
 
     const calendarDateObjects = [
@@ -15,7 +15,7 @@ class Calendar extends Component {
     ].map((week, idxW) =>
       week.map((day) => {
         const tetha = new Date(
-          `01.${this.props.dateObj.month}.${this.props.dateObj.year}`
+          `01.${this.props.dateObj.monthName}.${this.props.dateObj.year}`
         );
         tetha.setDate(
           tetha.getDate() + (day - firstDayOfMonth.getDay()) + 7 * idxW
@@ -37,7 +37,7 @@ class Calendar extends Component {
           </button>
 
           <span>
-            {`${this.props.dateObj.month}, ${this.props.dateObj.year}`}
+            {`${this.props.dateObj.monthName}, ${this.props.dateObj.year}`}
           </span>
 
           <button className="change-month next-month" title="Next month">

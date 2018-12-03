@@ -40,13 +40,13 @@ class CalendarTile extends Component {
       currentActivities,
       onTileClick,
     } = this.props;
-    const date = new NiceDate({}, this.props.dateObj);
+    const date = new NiceDate(this.props.dateObj);
 
     return (
       <div
         className={'calendar-tile'}
         id={weekNumber + '_' + dayNumber}
-        onClick={() => onTileClick(new NiceDate({}, dateObj))}
+        onClick={() => onTileClick(new NiceDate(dateObj))}
       >
         <div
           className={`tile-header ${isToday ? 'today-tile' : ''} ${
