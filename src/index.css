@@ -98,7 +98,7 @@ header {
   /* font-family: 'Courier New', monospace; */
 }
 
-.header__splash {
+.app-header__splash {
   text-decoration: underline;
   font-style: italic;
   font-weight: bold;

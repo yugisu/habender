@@ -2,8 +2,8 @@ import React from 'react';
 
 function Header(props) {
   return (
-    <header>
-      <span className="header__splash"> Habender </span>
+    <header className="app-header">
+      <span className="app-header__splash"> Habender </span>
     </header>
   );
 }
