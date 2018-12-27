@@ -54,7 +54,6 @@ export default class Todo extends Component {
             value={name}
             disabled
           />
-          {/* <div className="todo__head__name">{name}</div> */}
           <button
             className="todo__head__btn-expand btn--round"
             onClick={this.toggleExpanded}
