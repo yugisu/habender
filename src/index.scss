@@ -365,15 +365,14 @@ input {
 
 .todo {
   $todo-bor-rad: 1vh;
+  height: 4vh;
+  margin: 0;
   overflow: hidden;
-  height: 100%;
+  border-radius: 0;
   background: rgba(134, 134, 134, .295);
   box-shadow: 0 .2vh .2vh rgba(0, 0, 0, .7);
   transition: .15s;
-
-  * {
-    font-size: 1.2rem;
-  }
+  font-size: 1.2rem;
 
   &__head {
     width: 100%;
@@ -386,11 +385,7 @@ input {
     background: rgba(0, 0, 0, .4);
     box-shadow: 0 .2vh .2vh rgba(0, 0, 0, .7);
     transition: .15s;
-
-    &:hover {
-      background: lighten(rgba(0, 0, 0, .4), 10%);
-    }
-    // TODO: REMAKE .todo--minified and .todo into .todo and .todo--expanded
+    user-select: none;
 
     &__name {
       height: 4vh;
@@ -398,39 +393,38 @@ input {
     }
 
     &__btn-expand {
+      align-self: auto;
+      transform: rotate(0deg);
       width: 1.5vw;
       height: 1.5vw;
       line-height: 1.5vw;
       text-shadow: none;
       margin: .6vh auto;
       box-shadow: 0 0 10vh #000;
-      transform: rotate(180deg);
       transition: transform .15s;
     }
   }
 
   &__content {
-    padding: 5%;
-    transition: .15s;
-    height: 100%;
+    display: none;
   }
 
-  &--minified {
-    height: 4vh;
-    border-radius: 0;
-    margin: 0;
+  &:hover {
 
     .todo__head {
-      user-select: none;
+      background: lighten(rgba(0, 0, 0, .4), 10%);
+    }
+  }
+
+  &--expanded {
+    height: 100%;
+    user-select: text;
+
+    .todo__head {
 
       &__btn-expand {
-        align-self: auto;
-        transform: rotate(0deg);
+        transform: rotate(180deg);
       }
-    }
-
-    .todo__content {
-      display: none;
     }
   }
 
