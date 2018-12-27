@@ -13,6 +13,10 @@ const CalendarTile = ({
   // TODO: IMPLEMENT HIDDEN CONTENT
   const isHidden = true;
 
+  const todos = activities.map((todo) => (
+    <Todo todoObj={todo} key={`todo-${todo.id}`} onTodoChange={onTodoChange} />
+  ));
+
   return (
     <div
       className={
@@ -27,13 +31,7 @@ const CalendarTile = ({
       <div
         className={`tile__content ${isHidden ? 'tile__content--hidden' : ''}`}
       >
-        {activities.map((todo) => (
-          <Todo
-            todoObj={todo}
-            key={`todo-${todo.id}`}
-            onTodoChange={onTodoChange}
-          />
-        ))}
+        {todos}
       </div>
     </div>
   );

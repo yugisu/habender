@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 
 export default class Todo extends Component {
   state = {
-    minified: true,
+    expanded: false,
   };
 
-  toggleMinified = () => {
+  toggleExpanded = () => {
     this.setState((state) => ({
-      minified: !state.minified,
+      expanded: !state.expanded,
     }));
   };
 
@@ -26,16 +26,18 @@ export default class Todo extends Component {
   };
 
   render() {
-    const { minified } = this.state;
+    const { expanded } = this.state;
     const { todoObj } = this.props;
 
     const { id, done, name, desc } = todoObj;
 
     return (
       <div
-        className={`todo ${minified ? 'todo--minified' : ''} ${
-          done ? 'todo--done' : ''
-        }`}
+        className={
+          'todo' +
+          (expanded ? ' todo--expanded' : '') +
+          (done ? ' todo--done' : '')
+        }
       >
         <div className="todo__head">
           <input
@@ -55,7 +57,7 @@ export default class Todo extends Component {
           {/* <div className="todo__head__name">{name}</div> */}
           <button
             className="todo__head__btn-expand btn--round"
-            onClick={this.toggleMinified}
+            onClick={this.toggleExpanded}
           >
             v
           </button>

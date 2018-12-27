@@ -17,22 +17,22 @@ $theme-light: (
   calendar-head-text: #fff,
   calendar-head-text-shadow: (
     -1px -1px 1px rgb(223, 213, 129),
-    1px 1px 2px rgba(223, 119, 119, 0.7),
+    1px 1px 2px rgba(223, 119, 119, .7),
   ),
   calendar-head-btn-hover-text: #fff,
   calendar-head-btn-hover-text-shadow: (
     -1px -1px 1px rgb(223, 213, 129),
-    1px 1px 3px rgba(223, 119, 119, 0.7),
+    1px 1px 3px rgba(223, 119, 119, .7),
   ),
   tile-bg: #fff,
   tile-text: #000,
-  tile-label-bg: rgba(250, 250, 210, 0.8),
-  tile-label-bg-tile--other-month: rgba(238, 238, 238, 0.8),
+  tile-label-bg: rgba(250, 250, 210, .8),
+  tile-label-bg-tile--other-month: rgba(238, 238, 238, .8),
   tile-label-text: rgb(87, 99, 110),
   tile-label-text-shadow: 2px 2px 0px #fff,
   tile-roundness: 0,
-  tile-shadow: 0 2px 2px rgba(0, 0, 0, 0.05),
-  selection-color: rgba(173, 216, 230, 0.61),
+  tile-shadow: 0 2px 2px rgba(0, 0, 0, .05),
+  selection-color: rgba(173, 216, 230, .61),
 );
 // #endregion
 // - Dark
@@ -44,25 +44,25 @@ $theme-dark: (
   header-bg: darken(#4a4a48, 5%),
   header-text: #fff,
   header-text-shadow: (
-    -1px -1px 1px rgba(255, 166, 0, 0.8),
-    1px 1px 1px rgba(0, 255, 255, 0.8),
+    -1px -1px 1px rgba(255, 166, 0, .8),
+    1px 1px 1px rgba(0, 255, 255, .8),
   ),
   calendar-head-text: #fff,
   calendar-head-text-shadow: 2px 2px 0px rgb(0, 0, 0),
   calendar-head-btn-hover-text: #fff,
   calendar-head-btn-hover-text-shadow: (
     -1px -1px 1px rgb(223, 213, 129),
-    1px 1px 3px rgba(223, 119, 119, 0.7),
+    1px 1px 3px rgba(223, 119, 119, .7),
   ),
-  tile-bg: rgba(0, 0, 0, 0.274),
+  tile-bg: rgba(0, 0, 0, .274),
   tile-text: #ffffff,
-  tile-label-bg: rgba(255, 146, 79, 0.7),
-  tile-label-bg-tile--other-month: rgba(238, 238, 238, 0.466),
+  tile-label-bg: rgba(255, 146, 79, .7),
+  tile-label-bg-tile--other-month: rgba(238, 238, 238, .466),
   tile-label-text: #fff,
   tile-label-text-shadow: 2px 2px 0px rgb(0, 0, 0),
   tile-roundness: 0,
-  tile-shadow: 0 2px 2px rgba(0, 0, 0, 0.25),
-  selection-color: rgba(173, 216, 230, 0.288),
+  tile-shadow: 0 2px 2px rgba(0, 0, 0, .25),
+  selection-color: rgba(173, 216, 230, .288),
   pri: #ff934f,
   sec: #d6f1f5,
   acc: #e54b4b,
@@ -79,6 +79,7 @@ $current-theme: $theme-dark;
 // --------
 // html, body, global, scrollbar
 // #region
+
 *,
 *::before,
 *::after {
@@ -87,21 +88,25 @@ $current-theme: $theme-dark;
   color: theme(text);
   text-shadow: theme(text-shadow);
 }
+
 html {
   font-size: 62.5%;
   color: theme(text);
   text-shadow: theme(text-shadow);
 }
+
 body {
   margin: 0;
   padding: 0;
 }
+
 button,
 input {
   outline: none;
   background: transparent;
   border: none;
 }
+
 .btn--round {
   width: 1.5vw;
   height: 1.5vw;
@@ -115,25 +120,31 @@ input {
   color: #fff;
   user-select: none;
 }
+
 ::selection {
   background: theme(selection-color);
 }
+
 ::-webkit-scrollbar {
   height: 1vh;
-  width: 0.5rem;
+  width: .5rem;
 }
+
 ::-webkit-scrollbar-button {
   width: 0;
   height: 0;
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, .08);
   border-radius: 5px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.12);
+  background: rgba(0, 0, 0, .12);
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
@@ -141,6 +152,7 @@ input {
 // --------
 // App
 // #region
+
 .app {
   background: theme(bg);
   height: 100vh;
@@ -150,15 +162,17 @@ input {
 // --------
 // Header
 // #region
+
 .app-header {
   z-index: 100;
   height: 5vh;
-  padding: 0 5vw 0.3vh;
+  padding: 0 5vw .3vh;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   background: theme(header-bg); /* font-family: 'Courier New', monospace; */
   box-shadow: theme(header-shadow);
+
   &__splash {
     text-decoration: underline;
     font-style: italic;
@@ -173,6 +187,7 @@ input {
 // --------
 // Calendar
 // #region
+
 .calendar {
   display: grid;
   padding: 0 5vw;
@@ -181,15 +196,17 @@ input {
     'cal-head'
     'cal-body';
 }
+
 .calendar__body {
   grid-area: cal-body;
   height: 80vh;
-  border-radius: 0.5rem;
+  border-radius: .5rem;
 }
 // #endregion
 // --------
 // CalendarHead
 // #region
+
 .calendar__head {
   grid-area: cal-head;
   height: 8vh;
@@ -198,21 +215,26 @@ input {
   justify-content: center;
   color: theme(calendar-head-text);
   text-shadow: theme(calendar-head-text-shadow);
+
   * {
     color: inherit;
     text-shadow: inherit;
   }
+
   &__title {
     font-size: 2.5vw;
     width: 25vw;
     text-align: center;
+
     &::before {
       content: open-quote;
     }
+
     &::after {
       content: close-quote;
     }
   }
+
   &__button {
     height: 3vh;
     border: none;
@@ -222,14 +244,17 @@ input {
     user-select: none;
     text-shadow: none;
     cursor: pointer;
-    transition: 0.25s;
+    transition: .25s;
+
     &:hover {
       color: theme(calendar-head-btn-hover-text);
       text-shadow: theme(calendar-head-btn-hover-text-shadow);
     }
+
     &--prev {
       transform: rotate(90deg);
     }
+
     &--next {
       transform: rotate(-90deg);
     }
@@ -239,6 +264,7 @@ input {
 // --------
 // Month
 // #region
+
 .month {
   box-sizing: content-box;
   display: grid;
@@ -247,12 +273,13 @@ input {
   // width: 90vw;
   // height: 80vh;
   // grid-gap: 0.3rem;
-  padding: 0.3rem;
+  padding: .3rem;
 }
 // #endregion
 // --------
 // CalendarTile
 // #region
+
 .tile {
   z-index: 40;
   height: 13vh;
@@ -262,8 +289,9 @@ input {
   // box-shadow: theme(tile-shadow);
   // background: theme(tile-bg);
   border-radius: theme(tile-roundness);
-  outline: 0.2vh solid rgba(134, 134, 134, 0.3);
-  transition: 0.15s;
+  outline: .2vh solid rgba(134, 134, 134, .3);
+  transition: .15s;
+
   &__label {
     position: relative;
     z-index: 100;
@@ -274,8 +302,9 @@ input {
     padding: 0 1vw;
     background: transparent;
     user-select: none;
-    transition: 0.15s;
+    transition: .15s;
     border-radius: theme(tile-roundness);
+
     &__name {
       display: flex;
       align-items: center;
@@ -285,57 +314,69 @@ input {
       font-weight: bold;
     }
   }
+
   &__content {
     z-index: 50;
     height: 100%;
     margin: 0;
     transform: translate(0, -100%);
-    padding: 0.5vh;
+    padding: .5vh;
     font-size: 1.5vh;
     overflow: auto;
     opacity: 1;
-    transition: 0.15s;
+    transition: .15s;
+
     &:not(:hover) {
-      opacity: 0.6;
+      opacity: .6;
     }
   }
+
   &--other-month {
-    opacity: 0.5;
+    opacity: .5;
+
     &:hover {
-      opacity: 0.8;
+      opacity: .8;
     }
   }
+
   &--not-empty .tile__label__name::before {
     content: '';
     display: block;
     width: 1vh;
     height: 1vh;
-    margin-right: 0.3vh;
+    margin-right: .3vh;
     box-shadow: theme(tile-label-text-shadow);
     border-radius: 50%;
     background: theme(pri);
   }
+
   &:hover {
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, .05);
+
     .tile__label {
       z-index: -1;
-      opacity: 0.2;
+      opacity: .2;
     }
   }
 }
 // #endregion
 // Todo
 // #region
+
 .todo {
   $todo-bor-rad: 1vh;
+  height: 4vh;
+  margin: 0;
   overflow: hidden;
-  height: 100%;
-  background: rgba(134, 134, 134, 0.295);
-  box-shadow: 0 0.2vh 0.2vh rgba(0, 0, 0, 0.7);
-  transition: 0.15s;
+  border-radius: 0;
+  background: rgba(134, 134, 134, .295);
+  box-shadow: 0 .2vh .2vh rgba(0, 0, 0, .7);
+  transition: .15s;
+
   * {
     font-size: 1.2rem;
   }
+
   &__head {
     width: 100%;
     display: flex;
@@ -344,49 +385,54 @@ input {
     align-items: center;
     grid-template: 100% / 1vw auto 2.5vw;
     overflow: hidden;
-    background: rgba(0, 0, 0, 0.4);
-    box-shadow: 0 0.2vh 0.2vh rgba(0, 0, 0, 0.7);
-    transition: 0.15s;
-    &:hover {
-      background: lighten(rgba(0, 0, 0, 0.4), 10%);
-    }
-    // TODO: REMAKE .todo--minified and .todo into .todo and .todo--expanded
+    background: rgba(0, 0, 0, .4);
+    box-shadow: 0 .2vh .2vh rgba(0, 0, 0, .7);
+    transition: .15s;
+    user-select: none;
+
     &__name {
       height: 4vh;
       width: 65%;
     }
+
     &__btn-expand {
+      align-self: auto;
+      transform: rotate(0deg);
       width: 1.5vw;
       height: 1.5vw;
       line-height: 1.5vw;
       text-shadow: none;
-      margin: 0.6vh auto;
+      margin: .6vh auto;
       box-shadow: 0 0 10vh #000;
-      transform: rotate(180deg);
-      transition: transform 0.15s;
+      transition: transform .15s;
     }
   }
+
   &__content {
-    padding: 5%;
-    transition: 0.15s;
-    height: 100%;
+    display: none;
   }
-  &--minified {
-    height: 4vh;
-    border-radius: 0;
-    margin: 0;
+
+  &:hover {
+
     .todo__head {
-      user-select: none;
+      background: lighten(rgba(0, 0, 0, .4), 10%);
+    }
+  }
+
+  &--expanded {
+    height: 100%;
+    user-select: text;
+
+    .todo__head {
+
       &__btn-expand {
-        align-self: auto;
-        transform: rotate(0deg);
+        transform: rotate(180deg);
       }
     }
-    .todo__content {
-      display: none;
-    }
   }
+
   &--done {
+
     .todo__head {
       background: darken(theme(sec), 60%);
     }
