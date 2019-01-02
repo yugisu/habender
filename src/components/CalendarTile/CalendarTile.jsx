@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Todo from '../Todo';
 import TodoForm from '../TodoForm';
+import { classNames } from '../../helpers';
 
 class CalendarTile extends Component {
   shouldComponentUpdate() {
@@ -11,7 +12,7 @@ class CalendarTile extends Component {
   withForceUpdate = (func) => (...args) => {
     func(...args);
     this.forceUpdate();
-    // TODO: Deal with this.forcUpdate() -- a bad practice (or not?)
+    // TODO: Deal with this.forceUpdate() -- a bad practice (or not?)
   };
 
   render() {
@@ -37,23 +38,17 @@ class CalendarTile extends Component {
 
     return (
       <div
-        className={
-          'tile' +
-          (isFromOtherMonth ? ' tile--other-month' : '') +
-          (!isEmpty ? ' tile--not-empty' : '')
-        }
+        className={classNames(
+          'tile',
+          { 'tile--other-month': isFromOtherMonth },
+          { 'tile--not-empty': !isEmpty }
+        )}
       >
         {/* TODO: Standardize buttons */}
 
         <TodoForm onNewTodo={this.withForceUpdate(onNewTodo)} dayObj={dayObj} />
 
-        <div
-          className={
-            'tile__content' + (isHidden ? ' tile__content--hidden' : '')
-          }
-        >
-          {todos}
-        </div>
+        <div className="tile__content">{todos}</div>
 
         <div className="tile__label">
           <div className="tile__label__name">{dayObj.date}</div>

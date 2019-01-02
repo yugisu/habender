@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const CalendarHead = ({ label, onMonthChange }) => {
-  return (
-    <div className="calendar__head">
-      <CalendarHeadButton name="prev" {...{ onMonthChange }} />
+class CalendarHead extends Component {
+  shouldComponentUpdate({ label: newLabel }) {
+    return this.props.label !== newLabel;
+  }
 
-      <span className="calendar__head__title">{label}</span>
+  render() {
+    const { label, onMonthChange } = this.props;
+    return (
+      <div className="calendar__head">
+        <CalendarHeadButton name="prev" {...{ onMonthChange }} />
 
-      <CalendarHeadButton name="next" {...{ onMonthChange }} />
-    </div>
-  );
-};
+        <span className="calendar__head__title">{label}</span>
+
+        <CalendarHeadButton name="next" {...{ onMonthChange }} />
+      </div>
+    );
+  }
+}
 
 const CalendarHeadButton = ({ name, onMonthChange }) => {
   return (

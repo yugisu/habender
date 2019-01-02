@@ -1,3 +1,4 @@
+@charset "UTF-8";
 *,
 *::before,
 *::after {
@@ -25,6 +26,10 @@ input {
   border: none;
 }
 
+button {
+  user-select: none;
+}
+
 .btn--round {
   width: 1.5vw;
   height: 1.5vw;
@@ -45,7 +50,7 @@ input {
 
 ::-webkit-scrollbar {
   height: 1vh;
-  width: 0.5rem;
+  width: 0;
 }
 
 ::-webkit-scrollbar-button {
@@ -57,6 +62,7 @@ input {
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, 0.08);
   border-radius: 5px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -75,12 +81,12 @@ input {
 
 .app-header {
   z-index: 100;
-  height: 5vh;
-  padding: 0 5vw 0.3vh;
+  height: 6vh;
+  padding: 0 5vw .3vh;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  background: #3d3d3b;
+  background: rgba(61, 61, 59, 0.527);
   /* font-family: 'Courier New', monospace; */
 }
 
@@ -88,7 +94,7 @@ input {
   text-decoration: underline;
   font-style: italic;
   font-weight: bold;
-  font-size: 3vh;
+  font-size: 3.5vh;
   color: #fff;
   text-shadow: -1px -1px 1px rgba(255, 166, 0, 0.8), 1px 1px 1px rgba(0, 255, 255, 0.8);
   user-select: none;
@@ -104,7 +110,7 @@ input {
 .calendar__body {
   grid-area: cal-body;
   height: 80vh;
-  border-radius: 0.5rem;
+  border-radius: .5rem;
 }
 
 .calendar__head {
@@ -145,7 +151,7 @@ input {
   user-select: none;
   text-shadow: none;
   cursor: pointer;
-  transition: 0.25s;
+  transition: .25s;
 }
 
 .calendar__head__button:hover {
@@ -166,10 +172,11 @@ input {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  padding: 0.3rem;
+  padding: .3rem;
 }
 
 .tile {
+  position: relative;
   z-index: 40;
   height: 13vh;
   padding: 0;
@@ -177,7 +184,7 @@ input {
   overflow: hidden;
   border-radius: 0;
   outline: 0.2vh solid rgba(134, 134, 134, 0.3);
-  transition: 0.15s;
+  transition: .15s;
 }
 
 .tile__label {
@@ -190,8 +197,9 @@ input {
   padding: 0 1vw;
   background: transparent;
   user-select: none;
-  transition: 0.15s;
+  transition: .15s;
   border-radius: 0;
+  transform: translate(0, -100%);
 }
 
 .tile__label__name {
@@ -204,27 +212,23 @@ input {
 }
 
 .tile__content {
+  position: relative;
   z-index: 50;
   height: 100%;
   margin: 0;
-  transform: translate(0, -100%);
-  padding: 0.5vh;
+  padding: .5vh;
+  overflow: hidden overlay;
   font-size: 1.5vh;
-  overflow: auto;
-  opacity: 1;
-  transition: 0.15s;
-}
-
-.tile__content:not(:hover) {
-  opacity: 0.6;
+  opacity: .6;
+  transition: .5s;
 }
 
 .tile--other-month {
-  opacity: 0.5;
+  opacity: .5;
 }
 
 .tile--other-month:hover {
-  opacity: 0.8;
+  opacity: .8;
 }
 
 .tile--not-empty .tile__label__name::before {
@@ -232,7 +236,7 @@ input {
   display: block;
   width: 1vh;
   height: 1vh;
-  margin-right: 0.3vh;
+  margin-right: .3vh;
   box-shadow: 2px 2px 0px black;
   border-radius: 50%;
   background: #ff934f;
@@ -242,19 +246,34 @@ input {
   background: rgba(0, 0, 0, 0.05);
 }
 
+.tile:hover .new-todo-form__button {
+  opacity: .5;
+}
+
+.tile:hover .new-todo-form__button:hover {
+  opacity: 1;
+}
+
+.tile:hover .new-todo-form--active__button {
+  opacity: 1;
+}
+
+.tile:hover .tile__content {
+  opacity: 1;
+}
+
 .tile:hover .tile__label {
   z-index: -1;
-  opacity: 0.2;
+  opacity: .2;
 }
 
 .todo {
-  height: 4vh;
-  margin: 0;
+  display: flex;
   overflow: hidden;
   border-radius: 0;
   background: rgba(134, 134, 134, 0.295);
   box-shadow: 0 0.2vh 0.2vh rgba(0, 0, 0, 0.7);
-  transition: 0.15s;
+  transition: .15s;
 }
 
 .todo * {
@@ -263,21 +282,47 @@ input {
 
 .todo__head {
   width: 100%;
+  padding: 3%;
+  padding-right: 5%;
   display: flex;
   flex: 0 0 row;
   flex-wrap: nowrap;
   align-items: center;
-  grid-template: 100% / 1vw auto 2.5vw;
   overflow: hidden;
   background: rgba(0, 0, 0, 0.4);
   box-shadow: 0 0.2vh 0.2vh rgba(0, 0, 0, 0.7);
-  transition: 0.15s;
+  transition: .15s;
   user-select: none;
 }
 
+.todo__head > * {
+  margin: 0 auto;
+}
+
+.todo__head__done {
+  position: relative;
+  margin-right: 3%;
+  height: 1.5vh;
+  width: 1.5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 2vh rgba(0, 0, 0, 0.3);
+}
+
+.todo__head__done::before {
+  content: '❌';
+  display: block;
+  text-shadow: none;
+  position: absolute;
+  font-size: 1.5vh;
+  line-height: 1.5vh;
+}
+
 .todo__head__name {
-  height: 4vh;
-  width: 65%;
+  width: 100%;
 }
 
 .todo__head__btn-expand {
@@ -287,9 +332,8 @@ input {
   height: 1.5vw;
   line-height: 1.5vw;
   text-shadow: none;
-  margin: 0.6vh auto;
   box-shadow: 0 0 10vh #000;
-  transition: transform 0.15s;
+  transition: transform .15s;
 }
 
 .todo__content {
@@ -305,11 +349,65 @@ input {
   user-select: text;
 }
 
+.todo--expanded .todo__head {
+  height: fit-content;
+}
+
 .todo--expanded .todo__head__btn-expand {
   transform: rotate(180deg);
 }
 
-.todo--done .todo__head {
-  background: #1e6f7b;
+.todo--done .todo__head, .todo--done:hover .todo__head {
+  background: rgba(30, 111, 123, 0.7);
+}
+
+.todo--done .todo__head__done::before, .todo--done:hover .todo__head__done::before {
+  content: '👌';
+}
+
+.new-todo-form {
+  z-index: 1000;
+  position: absolute;
+  display: block;
+  width: 100%;
+  padding: 0;
+  padding-left: 2%;
+  top: 0;
+}
+
+.new-todo-form__input {
+  float: left;
+  width: 60%;
+  height: 100%;
+  background: #fff;
+  border: 2px solid #fff;
+}
+
+.new-todo-form__input[value=''] {
+  outline: 2px solid tomato;
+}
+
+.new-todo-form__button {
+  position: relative;
+  float: right;
+  height: 4vh;
+  width: 4vh;
+  margin: 0;
+  margin-top: -1vh;
+  right: -1vh;
+  padding: .5vh .5vh 0 0;
+  background: #4a4a48;
+  border-radius: 50%;
+  border: solid 0.2vh rgba(134, 134, 134, 0.3);
+  box-shadow: inset 0 0 1.5vh rgba(0, 0, 0, 0.26);
+  font-size: 2vh;
+  color: rgba(134, 134, 134, 0.8);
+  text-shadow: 0 0 1.5vh rgba(0, 0, 0, 0.26);
+  transition: .15s;
+  opacity: 0;
+}
+
+.new-todo-form--active__button {
+  opacity: .5;
 }
 /*# sourceMappingURL=index.css.map */

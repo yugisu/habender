@@ -1,3 +1,4 @@
-import Helper from './functions';
+import AH from './arrayFunctions';
+import { classNames } from './classNames';
 
-export { Helper };
+export { AH, classNames };

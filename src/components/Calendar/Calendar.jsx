@@ -3,7 +3,7 @@ import NiceDate from '../../NiceDate';
 
 import Month from '../Month';
 import CalendarHead from '../CalendarHead';
-import { Helper } from '../../helpers';
+import { AH, classNames } from '../../helpers';
 
 const giveId = ((counter = 0) => () => counter++)();
 
@@ -111,7 +111,7 @@ class Calendar extends Component {
     this.setState(({ todos }) => ({
       todos:
         dayIdx !== -1
-          ? Helper.modifyElement(todos, dayIdx, ({ date, activities }) => ({
+          ? AH.modifyElement(todos, dayIdx, ({ date, activities }) => ({
             date,
             activities: [Calendar.newActivity(nameOfTodo), ...activities],
           }))
@@ -138,7 +138,6 @@ class Calendar extends Component {
       (el) => el.date.month === openedMonth.month
     );
     // const nextMonthTodos = todos.filter((el) => el.date.month === openedMonth.month + 1);
-
     return (
       <div className="calendar">
         <CalendarHead

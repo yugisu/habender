@@ -1,4 +1,4 @@
-export default class Helper {
+export default class AH {
   static insertElement = (arr, idx, el) => [
     ...arr.slice(0, idx),
     el,

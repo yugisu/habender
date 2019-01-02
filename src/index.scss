@@ -36,12 +36,12 @@ $theme-light: (
 );
 // #endregion
 // - Dark
-// #region
+// #region // header-bg: darken(#4a4a48, 5%),
 $theme-dark: (
   bg: #4a4a48,
   text: #fff,
   text-shadow: 2px 2px 0px rgb(0, 0, 0),
-  header-bg: darken(#4a4a48, 5%),
+  header-bg: darken(rgba(74, 74, 72, .527), 5%),
   header-text: #fff,
   header-text-shadow: (
     -1px -1px 1px rgba(255, 166, 0, .8),
@@ -107,6 +107,10 @@ input {
   border: none;
 }
 
+button {
+  user-select: none;
+}
+
 .btn--round {
   width: 1.5vw;
   height: 1.5vw;
@@ -127,7 +131,7 @@ input {
 
 ::-webkit-scrollbar {
   height: 1vh;
-  width: .5rem;
+  width: 0;
 }
 
 ::-webkit-scrollbar-button {
@@ -139,6 +143,7 @@ input {
 ::-webkit-scrollbar-thumb {
   background: rgba(0, 0, 0, .08);
   border-radius: 5px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -165,7 +170,7 @@ input {
 
 .app-header {
   z-index: 100;
-  height: 5vh;
+  height: 6vh;
   padding: 0 5vw .3vh;
   display: flex;
   align-items: center;
@@ -177,7 +182,7 @@ input {
     text-decoration: underline;
     font-style: italic;
     font-weight: bold;
-    font-size: 3vh;
+    font-size: 3.5vh;
     color: theme(header-text);
     text-shadow: theme(header-text-shadow);
     user-select: none;
@@ -281,6 +286,7 @@ input {
 // #region
 
 .tile {
+  position: relative;
   z-index: 40;
   height: 13vh;
   padding: 0;
@@ -304,6 +310,7 @@ input {
     user-select: none;
     transition: .15s;
     border-radius: theme(tile-roundness);
+    transform: translate(0, -100%);
 
     &__name {
       display: flex;
@@ -316,19 +323,15 @@ input {
   }
 
   &__content {
+    position: relative;
     z-index: 50;
     height: 100%;
     margin: 0;
-    transform: translate(0, -100%);
     padding: .5vh;
+    overflow: hidden overlay;
     font-size: 1.5vh;
-    overflow: auto;
-    opacity: 1;
-    transition: .15s;
-
-    &:not(:hover) {
-      opacity: .6;
-    }
+    opacity: .6;
+    transition: .5s;
   }
 
   &--other-month {
@@ -339,19 +342,44 @@ input {
     }
   }
 
-  &--not-empty .tile__label__name::before {
-    content: '';
-    display: block;
-    width: 1vh;
-    height: 1vh;
-    margin-right: .3vh;
-    box-shadow: theme(tile-label-text-shadow);
-    border-radius: 50%;
-    background: theme(pri);
+  &--not-empty {
+
+    .tile__label__name::before {
+      content: '';
+      display: block;
+      width: 1vh;
+      height: 1vh;
+      margin-right: .3vh;
+      box-shadow: theme(tile-label-text-shadow);
+      border-radius: 50%;
+      background: theme(pri);
+    }
   }
 
   &:hover {
     background: rgba(0, 0, 0, .05);
+
+    .new-todo-form {
+
+      &__button {
+        opacity: .5;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+
+      &--active {
+
+        &__button {
+          opacity: 1;
+        }
+      }
+    }
+
+    .tile__content {
+      opacity: 1;
+    }
 
     .tile__label {
       z-index: -1;
@@ -365,31 +393,59 @@ input {
 
 .todo {
   $todo-bor-rad: 1vh;
-  height: 4vh;
-  margin: 0;
+  display: flex;
   overflow: hidden;
   border-radius: 0;
   background: rgba(134, 134, 134, .295);
   box-shadow: 0 .2vh .2vh rgba(0, 0, 0, .7);
   transition: .15s;
-  font-size: 1.2rem;
+
+  * {
+    font-size: 1.2rem;
+  }
 
   &__head {
     width: 100%;
+    padding: 3%;
+    padding-right: 5%;
     display: flex;
     flex: 0 0 row;
     flex-wrap: nowrap;
     align-items: center;
-    grid-template: 100% / 1vw auto 2.5vw;
     overflow: hidden;
     background: rgba(0, 0, 0, .4);
     box-shadow: 0 .2vh .2vh rgba(0, 0, 0, .7);
     transition: .15s;
     user-select: none;
 
+    > * {
+      margin: 0 auto;
+    }
+
+    &__done {
+      position: relative;
+      margin-right: 3%;
+      height: 1.5vh;
+      width: 1.5vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      background: rgba(0, 0, 0, .2);
+      box-shadow: 0 0 2vh rgba(0, 0, 0, .3);
+
+      &::before {
+        content: '❌';
+        display: block;
+        text-shadow: none;
+        position: absolute;
+        font-size: 1.5vh;
+        line-height: 1.5vh;
+      }
+    }
+
     &__name {
-      height: 4vh;
-      width: 65%;
+      width: 100%;
     }
 
     &__btn-expand {
@@ -399,7 +455,7 @@ input {
       height: 1.5vw;
       line-height: 1.5vw;
       text-shadow: none;
-      margin: .6vh auto;
+      // margin: .6vh auto;
       box-shadow: 0 0 10vh #000;
       transition: transform .15s;
     }
@@ -421,6 +477,7 @@ input {
     user-select: text;
 
     .todo__head {
+      height: fit-content;
 
       &__btn-expand {
         transform: rotate(180deg);
@@ -430,8 +487,76 @@ input {
 
   &--done {
 
-    .todo__head {
-      background: darken(theme(sec), 60%);
+    &,
+    &:hover {
+
+      .todo__head {
+        background: transparentize(
+          $color: darken(theme(sec), 60%),
+          $amount: .3
+        );
+        // background: darken(theme(sec), 60%);
+
+        &__done {
+
+          &::before {
+            content: '👌';
+          }
+        }
+      }
+    }
+  }
+}
+// #endregion
+// TodoForm
+// #region
+
+.new-todo-form {
+  z-index: 1000;
+  position: absolute;
+  display: block;
+  width: 100%;
+  // height: fit-content;
+  padding: 0;
+  padding-left: 2%;
+  top: 0;
+
+  &__input {
+    float: left;
+    width: 60%;
+    height: 100%;
+    background: #fff;
+    border: 2px solid #fff;
+
+    &[value=''] {
+      outline: 2px solid tomato;
+    }
+  }
+
+  &__button {
+    position: relative;
+    float: right;
+    height: 4vh;
+    width: 4vh;
+    margin: 0;
+    margin-top: -1vh;
+    right: -1vh;
+    padding: .5vh .5vh 0 0;
+    background: #4a4a48;
+    border-radius: 50%;
+    border: solid .2vh rgba(134, 134, 134, .3);
+    box-shadow: inset 0 0 1.5vh rgba(0, 0, 0, .26);
+    font-size: 2vh;
+    color: rgba(134, 134, 134, .8);
+    text-shadow: 0 0 1.5vh rgba(0, 0, 0, .26);
+    transition: .15s;
+    opacity: 0;
+  }
+
+  &--active {
+
+    &__button {
+      opacity: .5;
     }
   }
 }

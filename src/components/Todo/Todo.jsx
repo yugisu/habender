@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { classNames } from '../../helpers';
 
 export default class Todo extends Component {
   shouldComponentUpdate({ todoObj: { done: newDone, name: newName } }) {
@@ -27,7 +28,7 @@ export default class Todo extends Component {
     const { id, done, name } = todoObj;
 
     return (
-      <div className={'todo' + (done ? ' todo--done' : '')}>
+      <div className={classNames('todo', { 'todo--done': done })}>
         <div className="todo__head">
           <button
             type="checkbox"
