@@ -1,7 +1,5 @@
 import React, { Component, PureComponent } from 'react';
 
-// TODO: Remove desc from Todo
-
 export default class Todo extends Component {
   shouldComponentUpdate({ todoObj: { done: newDone, name: newName } }) {
     const { done, name } = this.props.todoObj;
@@ -24,18 +22,12 @@ export default class Todo extends Component {
   };
 
   render() {
-    const { todoObj, expandable = false } = this.props;
+    const { todoObj } = this.props;
 
-    const { id, done, name, desc } = todoObj;
+    const { id, done, name } = todoObj;
 
     return (
-      <div
-        className={
-          'todo' +
-          // (expandable ? (expanded ? ' todo--expanded' : '') : '') +
-          (done ? ' todo--done' : '')
-        }
-      >
+      <div className={'todo' + (done ? ' todo--done' : '')}>
         <div className="todo__head">
           <button
             type="checkbox"
@@ -52,24 +44,7 @@ export default class Todo extends Component {
             name="name"
             disabled
           />
-          {expandable && (
-            <button
-              className="todo__head__btn-expand btn--round"
-              onClick={this.toggleExpanded}
-            >
-              v
-            </button>
-          )}
         </div>
-        {/* <div className="todo__content">
-          <input
-            type="text"
-            className="todo__content__desc"
-            onChange={this.handleTodoChange()}
-            value={desc}
-            name="desc"
-          />
-        </div> */}
       </div>
     );
   }
