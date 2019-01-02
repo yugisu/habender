@@ -3,14 +3,30 @@ import NiceDate from '../../NiceDate';
 
 import Month from '../Month';
 import CalendarHead from '../CalendarHead';
+import { Helper } from '../../helpers';
 
-const giveId = (function idGenerator() {
-  let counter = 1;
-  return () => counter++;
-})();
+const giveId = ((counter = 0) => () => counter++)();
+
+// FIXME: TODOS ON DAYS FROM OTHER MONTH DO NOT RENDER
 
 class Calendar extends Component {
   today = new NiceDate();
+
+  // reimplement openedMonth logic
+
+  /* 
+  todos: [
+    {
+      date,
+      activities: [
+        todo,
+        todo, 
+        ...
+      ]
+    }
+  ]
+  
+  */
 
   state = {
     openedMonth: new NiceDate(`${this.today.month}.1.${this.today.year}`),
@@ -19,23 +35,29 @@ class Calendar extends Component {
         'Feed a cat',
         'Cook some dinner',
         'Make some tea for my darling ♥',
+        'Make some tea for my darling ♥',
       ]),
-      Calendar.newDay(NiceDate.newDate(this.today, -22), [
+      Calendar.newDay(NiceDate.newDate(this.today, +22), [
         'Drink some cola',
         'Finish that goddamn stoopid todo app',
       ]),
     ],
   };
 
-  findTodo = (id, stateObj = this.state) => {
-    const todos = stateObj.todos;
-    for (const date of todos) {
-      for (const todo of date) {
+  getTodoById = (id, stateObj = this.state) => {
+    const { todos } = stateObj;
+
+    for (let i = 0; i < todos.length; i++) {
+      const { date, activities } = todos[i];
+      for (let j = 0; j < activities.length; j++) {
+        const todo = activities[j];
+
         if (todo.id === id) {
-          return todo;
+          return { todo, date, idxInTodos: i, idxInActivities: j };
         }
       }
     }
+
     return null;
   };
 
@@ -47,24 +69,60 @@ class Calendar extends Component {
   };
 
   applyChangeInTodo = (todoId, changes) => {
-    this.setState((state) => {
-      const todos = state.todos;
-      for (const date of todos) {
-        for (const todo of date.activities) {
-          if (todo.id === todoId) {
-            Object.assign(todo, changes);
-          }
-        }
-      }
-      return state;
-    });
+    // TODO: Test performance on both variants
+
+    // const { idxInTodos, idxInActivities } = this.getTodoById(todoId);
+
+    // this.setState(({ todos, ...others }) => {
+    //   const { date, activities } = todos[idxInTodos];
+
+    //   return {
+    //     ...others,
+    //     todos: [
+    //       ...todos.slice(0, idxInTodos),
+    //       {
+    //         date,
+    //         activities: [
+    //           ...activities.slice(0, idxInActivities),
+    //           { ...activities[idxInActivities], ...changes },
+    //           ...activities.slice(idxInActivities + 1),
+    //         ],
+    //       },
+    //       ...todos.slice(idxInTodos + 1),
+    //     ],
+    //   };
+    // });
+
+    this.setState(({ todos, ...others }) => ({
+      todos: todos.map(({ date, activities }) => ({
+        date,
+        activities: activities.map(
+          (todo) => (todo.id === todoId ? { ...todo, ...changes } : todo)
+        ),
+      })),
+      ...others,
+    }));
   };
 
-  static newActivity = (name = 'New TODO', desc = 'A todo desc') => ({
+  onNewTodo = (dayObj, nameOfTodo) => {
+    const { todos } = this.state;
+    const dayIdx = todos.findIndex(({ date }) => date.show() === dayObj.show());
+
+    this.setState(({ todos }) => ({
+      todos:
+        dayIdx !== -1
+          ? Helper.modifyElement(todos, dayIdx, ({ date, activities }) => ({
+            date,
+            activities: [Calendar.newActivity(nameOfTodo), ...activities],
+          }))
+          : [Calendar.newDay(dayObj, [nameOfTodo]), ...todos],
+    }));
+  };
+
+  static newActivity = (name = 'New TODO') => ({
     id: giveId(),
     done: false,
-    name: name,
-    desc: desc,
+    name,
   });
 
   static newDay = (date, activities = []) => ({
@@ -76,12 +134,8 @@ class Calendar extends Component {
     const { openedMonth, todos } = this.state;
 
     // const prevMonthTodos = todos.filter((el) => el.date.month === openedMonth.month - 1);
-    const currentTodos = todos.filter((el) =>
-      [
-        openedMonth.month - 1,
-        openedMonth.month,
-        openedMonth.month + 1,
-      ].includes(el.date.month),
+    const currentTodos = todos.filter(
+      (el) => el.date.month === openedMonth.month
     );
     // const nextMonthTodos = todos.filter((el) => el.date.month === openedMonth.month + 1);
 
@@ -97,6 +151,7 @@ class Calendar extends Component {
             monthObj={openedMonth}
             todos={currentTodos}
             onTodoChange={this.applyChangeInTodo}
+            onNewTodo={this.onNewTodo}
           />
         </div>
       </div>
