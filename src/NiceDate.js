@@ -22,7 +22,7 @@ class NiceDate {
   }
 
   show() {
-    return `${this.month}, ${this.date} ${this.year}`;
+    return `${this.month}.${this.date}.${this.year}`;
   }
 
   refresh() {
