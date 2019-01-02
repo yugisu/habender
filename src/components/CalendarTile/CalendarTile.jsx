@@ -1,40 +1,62 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import Todo from '../Todo';
+import TodoForm from '../TodoForm';
 
-const CalendarTile = ({
-  dayObj,
-  activities,
-  isFromOtherMonth,
-  onTodoChange,
-}) => {
-  const isEmpty = activities.length === 0;
+class CalendarTile extends Component {
+  withForceUpdate = (func) => (...args) => {
+    func(...args);
 
-  // TODO: IMPLEMENT HIDDEN CONTENT
-  const isHidden = true;
+    // TODO: Deal with this.forceUpdate -- a bad practice
 
-  const todos = activities.map((todo) => (
-    <Todo todoObj={todo} key={`todo-${todo.id}`} onTodoChange={onTodoChange} />
-  ));
+    this.forceUpdate();
+  };
 
-  return (
-    <div
-      className={
-        'tile' +
-        (isFromOtherMonth ? ' tile--other-month' : '') +
-        (!isEmpty ? ' tile--not-empty' : '')
-      }
-    >
-      <div className="tile__label">
-        <div className="tile__label__name">{dayObj.date}</div>
-      </div>
+  render() {
+    const {
+      dayObj,
+      activities,
+      isFromOtherMonth,
+      onTodoChange,
+      onNewTodo,
+    } = this.props;
+
+    const isEmpty = activities.length === 0;
+
+    const isHidden = true;
+
+    const todos = activities.map((todo) => (
+      <Todo
+        todoObj={todo}
+        key={`todo-${todo.id}`}
+        onTodoChange={this.withForceUpdate(onTodoChange)}
+      />
+    ));
+
+    return (
       <div
-        className={`tile__content ${isHidden ? 'tile__content--hidden' : ''}`}
+        className={
+          'tile' +
+          (isFromOtherMonth ? ' tile--other-month' : '') +
+          (!isEmpty ? ' tile--not-empty' : '')
+        }
       >
-        {todos}
+        {/* TODO: Standardize buttons */}
+
+        <TodoForm onNewTodo={this.withForceUpdate(onNewTodo)} dayObj={dayObj} />
+
+        <div
+          className={`tile__content ${isHidden ? 'tile__content--hidden' : ''}`}
+        >
+          {todos}
+        </div>
+
+        <div className="tile__label">
+          <div className="tile__label__name">{dayObj.date}</div>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default CalendarTile;
