@@ -4,12 +4,14 @@ import Todo from '../Todo';
 import TodoForm from '../TodoForm';
 
 class CalendarTile extends Component {
+  shouldComponentUpdate() {
+    return false;
+  }
+
   withForceUpdate = (func) => (...args) => {
     func(...args);
-
-    // TODO: Deal with this.forceUpdate -- a bad practice
-
     this.forceUpdate();
+    // TODO: Deal with this.forcUpdate() -- a bad practice (or not?)
   };
 
   render() {
@@ -46,7 +48,9 @@ class CalendarTile extends Component {
         <TodoForm onNewTodo={this.withForceUpdate(onNewTodo)} dayObj={dayObj} />
 
         <div
-          className={`tile__content ${isHidden ? 'tile__content--hidden' : ''}`}
+          className={
+            'tile__content' + (isHidden ? ' tile__content--hidden' : '')
+          }
         >
           {todos}
         </div>
