@@ -1,4 +1,4 @@
-import React, { Component, PureComponent } from 'react';
+import React, { Component } from 'react';
 
 export default class Todo extends Component {
   shouldComponentUpdate({ todoObj: { done: newDone, name: newName } }) {
