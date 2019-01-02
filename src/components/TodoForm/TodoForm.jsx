@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { classNames } from '../../helpers';
+import Todo from '../Todo';
 
 class TodoForm extends Component {
   state = {
@@ -42,20 +43,13 @@ class TodoForm extends Component {
     return (
       <form
         className={classNames('new-todo-form', {
-          'new-todo-form--active todo': active,
+          'new-todo-form--active': active,
         })}
         onSubmit={active ? this.handleSubmit : this.toggleActive}
       >
-        {active && (
-          <input
-            className={classNames('new-todo-form__input', {
-              todo__head__name: active,
-            })}
-            value={value}
-            onChange={this.handleChange}
-            placeholder="What to todo?"
-          />
-        )}
+        <div className="new-todo-form__body">
+          {active && <Todo onTodoChange={() => {}} isInputActive />}
+        </div>
         <button className="new-todo-form__button">+</button>
       </form>
     );

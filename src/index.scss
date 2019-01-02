@@ -17,22 +17,22 @@ $theme-light: (
   calendar-head-text: #fff,
   calendar-head-text-shadow: (
     -1px -1px 1px rgb(223, 213, 129),
-    1px 1px 2px rgba(223, 119, 119, .7),
+    1px 1px 2px rgba(223, 119, 119, 0.7),
   ),
   calendar-head-btn-hover-text: #fff,
   calendar-head-btn-hover-text-shadow: (
     -1px -1px 1px rgb(223, 213, 129),
-    1px 1px 3px rgba(223, 119, 119, .7),
+    1px 1px 3px rgba(223, 119, 119, 0.7),
   ),
   tile-bg: #fff,
   tile-text: #000,
-  tile-label-bg: rgba(250, 250, 210, .8),
-  tile-label-bg-tile--other-month: rgba(238, 238, 238, .8),
+  tile-label-bg: rgba(250, 250, 210, 0.8),
+  tile-label-bg-tile--other-month: rgba(238, 238, 238, 0.8),
   tile-label-text: rgb(87, 99, 110),
   tile-label-text-shadow: 2px 2px 0px #fff,
   tile-roundness: 0,
-  tile-shadow: 0 2px 2px rgba(0, 0, 0, .05),
-  selection-color: rgba(173, 216, 230, .61),
+  tile-shadow: 0 2px 2px rgba(0, 0, 0, 0.05),
+  selection-color: rgba(173, 216, 230, 0.61),
 );
 // #endregion
 // - Dark
@@ -41,28 +41,28 @@ $theme-dark: (
   bg: #4a4a48,
   text: #fff,
   text-shadow: 2px 2px 0px rgb(0, 0, 0),
-  header-bg: darken(rgba(74, 74, 72, .527), 5%),
+  header-bg: darken(rgba(74, 74, 72, 0.527), 5%),
   header-text: #fff,
   header-text-shadow: (
-    -1px -1px 1px rgba(255, 166, 0, .8),
-    1px 1px 1px rgba(0, 255, 255, .8),
+    -1px -1px 1px rgba(255, 166, 0, 0.8),
+    1px 1px 1px rgba(0, 255, 255, 0.8),
   ),
   calendar-head-text: #fff,
   calendar-head-text-shadow: 2px 2px 0px rgb(0, 0, 0),
   calendar-head-btn-hover-text: #fff,
   calendar-head-btn-hover-text-shadow: (
     -1px -1px 1px rgb(223, 213, 129),
-    1px 1px 3px rgba(223, 119, 119, .7),
+    1px 1px 3px rgba(223, 119, 119, 0.7),
   ),
-  tile-bg: rgba(0, 0, 0, .274),
+  tile-bg: rgba(0, 0, 0, 0.274),
   tile-text: #ffffff,
-  tile-label-bg: rgba(255, 146, 79, .7),
-  tile-label-bg-tile--other-month: rgba(238, 238, 238, .466),
+  tile-label-bg: rgba(255, 146, 79, 0.7),
+  tile-label-bg-tile--other-month: rgba(238, 238, 238, 0.466),
   tile-label-text: #fff,
   tile-label-text-shadow: 2px 2px 0px rgb(0, 0, 0),
   tile-roundness: 0,
-  tile-shadow: 0 2px 2px rgba(0, 0, 0, .25),
-  selection-color: rgba(173, 216, 230, .288),
+  tile-shadow: 0 2px 2px rgba(0, 0, 0, 0.25),
+  selection-color: rgba(173, 216, 230, 0.288),
   pri: #ff934f,
   sec: #d6f1f5,
   acc: #e54b4b,
@@ -141,13 +141,13 @@ button {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, .08);
+  background: rgba(0, 0, 0, 0.08);
   border-radius: 5px;
   width: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, .12);
+  background: rgba(0, 0, 0, 0.12);
 }
 
 ::-webkit-scrollbar-track {
@@ -171,7 +171,7 @@ button {
 .app-header {
   z-index: 100;
   height: 6vh;
-  padding: 0 5vw .3vh;
+  padding: 0 5vw 0.3vh;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -205,7 +205,7 @@ button {
 .calendar__body {
   grid-area: cal-body;
   height: 80vh;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
 }
 // #endregion
 // --------
@@ -249,7 +249,7 @@ button {
     user-select: none;
     text-shadow: none;
     cursor: pointer;
-    transition: .25s;
+    transition: 0.25s;
 
     &:hover {
       color: theme(calendar-head-btn-hover-text);
@@ -278,7 +278,7 @@ button {
   // width: 90vw;
   // height: 80vh;
   // grid-gap: 0.3rem;
-  padding: .3rem;
+  padding: 0.3rem;
 }
 // #endregion
 // --------
@@ -291,24 +291,25 @@ button {
   height: 13vh;
   padding: 0;
   color: theme(tile-text);
-  overflow: hidden;
+  overflow: visible;
   // box-shadow: theme(tile-shadow);
   // background: theme(tile-bg);
   border-radius: theme(tile-roundness);
-  outline: .2vh solid rgba(134, 134, 134, .3);
-  transition: .15s;
+  outline: 0.2vh solid rgba(134, 134, 134, 0.3);
+  transition: 0.15s;
 
   &__label {
     position: relative;
-    z-index: 100;
+    z-index: 50;
     height: 100%;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
     padding: 0 1vw;
+    overflow: hidden;
     background: transparent;
     user-select: none;
-    transition: .15s;
+    transition: 0.15s;
     border-radius: theme(tile-roundness);
     transform: translate(0, -100%);
 
@@ -324,21 +325,22 @@ button {
 
   &__content {
     position: relative;
-    z-index: 50;
+    z-index: 40;
     height: 100%;
     margin: 0;
-    padding: .5vh;
-    overflow: hidden overlay;
+    padding: 0.5vh;
+    // TODO: do smthng w/ that overflow shit
+    overflow: visible overlay;
     font-size: 1.5vh;
-    opacity: .6;
-    transition: .5s;
+    opacity: 0.6;
+    transition: 0.5s;
   }
 
   &--other-month {
-    opacity: .5;
+    opacity: 0.5;
 
     &:hover {
-      opacity: .8;
+      opacity: 0.8;
     }
   }
 
@@ -349,7 +351,7 @@ button {
       display: block;
       width: 1vh;
       height: 1vh;
-      margin-right: .3vh;
+      margin-right: 0.3vh;
       box-shadow: theme(tile-label-text-shadow);
       border-radius: 50%;
       background: theme(pri);
@@ -357,12 +359,12 @@ button {
   }
 
   &:hover {
-    background: rgba(0, 0, 0, .05);
+    background: rgba(0, 0, 0, 0.05);
 
     .new-todo-form {
 
       &__button {
-        opacity: .5;
+        opacity: 0.5;
 
         &:hover {
           opacity: 1;
@@ -371,7 +373,7 @@ button {
 
       &--active {
 
-        &__button {
+        .new-todo-form__button {
           opacity: 1;
         }
       }
@@ -383,7 +385,7 @@ button {
 
     .tile__label {
       z-index: -1;
-      opacity: .2;
+      opacity: 0.2;
     }
   }
 }
@@ -395,10 +397,11 @@ button {
   $todo-bor-rad: 1vh;
   display: flex;
   overflow: hidden;
+  height: 3.5vh;
   border-radius: 0;
-  background: rgba(134, 134, 134, .295);
-  box-shadow: 0 .2vh .2vh rgba(0, 0, 0, .7);
-  transition: .15s;
+  background: rgba(134, 134, 134, 0.295);
+  box-shadow: 0 0.2vh 0.2vh rgba(0, 0, 0, 0.7);
+  transition: 0.15s;
 
   * {
     font-size: 1.2rem;
@@ -413,9 +416,9 @@ button {
     flex-wrap: nowrap;
     align-items: center;
     overflow: hidden;
-    background: rgba(0, 0, 0, .4);
-    box-shadow: 0 .2vh .2vh rgba(0, 0, 0, .7);
-    transition: .15s;
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0.2vh 0.2vh rgba(0, 0, 0, 0.7);
+    transition: 0.15s;
     user-select: none;
 
     > * {
@@ -431,8 +434,8 @@ button {
       align-items: center;
       justify-content: center;
       border-radius: 20px;
-      background: rgba(0, 0, 0, .2);
-      box-shadow: 0 0 2vh rgba(0, 0, 0, .3);
+      background: rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 2vh rgba(0, 0, 0, 0.3);
 
       &::before {
         content: '❌';
@@ -446,6 +449,17 @@ button {
 
     &__name {
       width: 100%;
+      padding: 2%;
+
+      &:not(:disabled) {
+        border-radius: 0.5vh;
+        box-shadow: inset 0 0 2vh rgba(0, 0, 0, 0.4);
+        text-shadow: none;
+
+        &[value=''] {
+          background: rgba(255, 0, 0, 0.24);
+        }
+      }
     }
 
     &__btn-expand {
@@ -457,7 +471,7 @@ button {
       text-shadow: none;
       // margin: .6vh auto;
       box-shadow: 0 0 10vh #000;
-      transition: transform .15s;
+      transition: transform 0.15s;
     }
   }
 
@@ -468,7 +482,7 @@ button {
   &:hover {
 
     .todo__head {
-      background: lighten(rgba(0, 0, 0, .4), 10%);
+      background: lighten(rgba(0, 0, 0, 0.4), 10%);
     }
   }
 
@@ -493,7 +507,7 @@ button {
       .todo__head {
         background: transparentize(
           $color: darken(theme(sec), 60%),
-          $amount: .3
+          $amount: 0.3
         );
         // background: darken(theme(sec), 60%);
 
@@ -512,51 +526,68 @@ button {
 // #region
 
 .new-todo-form {
-  z-index: 1000;
-  position: absolute;
-  display: block;
-  width: 100%;
-  // height: fit-content;
-  padding: 0;
-  padding-left: 2%;
-  top: 0;
+  z-index: 100;
+  position: relative;
+  height: 0;
+  overflow: visible;
+  display: grid;
+  grid-template-columns: auto 2vh;
+  grid-template-areas: 'form-body form-btn';
+  align-items: start;
+  justify-content: end;
+  transition: 0.25s ease-in-out;
 
-  &__input {
-    float: left;
-    width: 60%;
-    height: 100%;
-    background: #fff;
-    border: 2px solid #fff;
+  &__body {
+    grid-area: form-body;
+    height: 0;
 
-    &[value=''] {
-      outline: 2px solid tomato;
+    .todo {
+      height: 0;
     }
+    transition: 0.25s;
   }
+  // TODO: Redesign this button
 
   &__button {
-    position: relative;
-    float: right;
+    grid-area: form-btn;
+    z-index: 100;
+    position: absolute;
     height: 4vh;
     width: 4vh;
-    margin: 0;
-    margin-top: -1vh;
-    right: -1vh;
-    padding: .5vh .5vh 0 0;
+    margin: -2vh -1vh 0 0;
+    padding: 0.5vh 0.5vh 0 0;
     background: #4a4a48;
     border-radius: 50%;
-    border: solid .2vh rgba(134, 134, 134, .3);
-    box-shadow: inset 0 0 1.5vh rgba(0, 0, 0, .26);
+    border: solid 0.2vh rgba(134, 134, 134, 0.3);
+    box-shadow: inset 0 0 1.5vh rgba(0, 0, 0, 0.26);
     font-size: 2vh;
-    color: rgba(134, 134, 134, .8);
-    text-shadow: 0 0 1.5vh rgba(0, 0, 0, .26);
-    transition: .15s;
+    color: rgba(134, 134, 134, 0.8);
+    text-shadow: 0 0 1.5vh rgba(0, 0, 0, 0.26);
+    transition: 0.25s, opacity 0.15s;
     opacity: 0;
   }
 
   &--active {
+    grid-template-columns: 100% 0;
+    margin-bottom: 0;
+    height: 3.5vh;
+    // background: rgba(95, 158, 160, 0.6);
 
-    &__button {
-      opacity: .5;
+    .new-todo-form__body {
+      height: 100%;
+
+      .todo {
+        height: 100%;
+      }
+    }
+
+    .new-todo-form__button {
+      height: 3.5vh;
+      width: 3.5vh;
+      padding: 0;
+      margin: 0vh 0 0 -2vh;
+      background: rgba(95, 158, 160, 0.411);
+      opacity: 1;
     }
   }
 }

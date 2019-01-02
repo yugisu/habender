@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { classNames } from '../../helpers';
 
-export default class Todo extends Component {
+class Todo extends Component {
   shouldComponentUpdate({ todoObj: { done: newDone, name: newName } }) {
     const { done, name } = this.props.todoObj;
 
@@ -23,7 +24,7 @@ export default class Todo extends Component {
   };
 
   render() {
-    const { todoObj } = this.props;
+    const { todoObj, isInputActive } = this.props;
 
     const { id, done, name } = todoObj;
 
@@ -36,6 +37,7 @@ export default class Todo extends Component {
             onClick={this.handleTodoChange()}
             value={!done}
             name="done"
+            disabled={isInputActive}
           />
           <input
             type="text"
@@ -43,10 +45,26 @@ export default class Todo extends Component {
             onChange={this.handleTodoChange()}
             value={name}
             name="name"
-            disabled
+            disabled={!isInputActive}
+            placeholder="What to do?"
           />
         </div>
       </div>
     );
   }
 }
+
+Todo.defaultProps = {
+  todoObj: {
+    done: false,
+    name: '',
+  },
+  isInputActive: false,
+};
+
+Todo.propTypes = {
+  todoObj: PropTypes.any,
+  onTodoChange: PropTypes.func.isRequired,
+};
+
+export default Todo;

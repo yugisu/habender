@@ -82,7 +82,7 @@ button {
 .app-header {
   z-index: 100;
   height: 6vh;
-  padding: 0 5vw .3vh;
+  padding: 0 5vw 0.3vh;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -110,7 +110,7 @@ button {
 .calendar__body {
   grid-area: cal-body;
   height: 80vh;
-  border-radius: .5rem;
+  border-radius: 0.5rem;
 }
 
 .calendar__head {
@@ -151,7 +151,7 @@ button {
   user-select: none;
   text-shadow: none;
   cursor: pointer;
-  transition: .25s;
+  transition: 0.25s;
 }
 
 .calendar__head__button:hover {
@@ -172,7 +172,7 @@ button {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  padding: .3rem;
+  padding: 0.3rem;
 }
 
 .tile {
@@ -181,23 +181,24 @@ button {
   height: 13vh;
   padding: 0;
   color: #ffffff;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 0;
   outline: 0.2vh solid rgba(134, 134, 134, 0.3);
-  transition: .15s;
+  transition: 0.15s;
 }
 
 .tile__label {
   position: relative;
-  z-index: 100;
+  z-index: 50;
   height: 100%;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
   padding: 0 1vw;
+  overflow: hidden;
   background: transparent;
   user-select: none;
-  transition: .15s;
+  transition: 0.15s;
   border-radius: 0;
   transform: translate(0, -100%);
 }
@@ -213,22 +214,22 @@ button {
 
 .tile__content {
   position: relative;
-  z-index: 50;
+  z-index: 40;
   height: 100%;
   margin: 0;
-  padding: .5vh;
-  overflow: hidden overlay;
+  padding: 0.5vh;
+  overflow: visible overlay;
   font-size: 1.5vh;
-  opacity: .6;
-  transition: .5s;
+  opacity: 0.6;
+  transition: 0.5s;
 }
 
 .tile--other-month {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .tile--other-month:hover {
-  opacity: .8;
+  opacity: 0.8;
 }
 
 .tile--not-empty .tile__label__name::before {
@@ -236,7 +237,7 @@ button {
   display: block;
   width: 1vh;
   height: 1vh;
-  margin-right: .3vh;
+  margin-right: 0.3vh;
   box-shadow: 2px 2px 0px black;
   border-radius: 50%;
   background: #ff934f;
@@ -247,14 +248,14 @@ button {
 }
 
 .tile:hover .new-todo-form__button {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .tile:hover .new-todo-form__button:hover {
   opacity: 1;
 }
 
-.tile:hover .new-todo-form--active__button {
+.tile:hover .new-todo-form--active .new-todo-form__button {
   opacity: 1;
 }
 
@@ -264,16 +265,17 @@ button {
 
 .tile:hover .tile__label {
   z-index: -1;
-  opacity: .2;
+  opacity: 0.2;
 }
 
 .todo {
   display: flex;
   overflow: hidden;
+  height: 3.5vh;
   border-radius: 0;
   background: rgba(134, 134, 134, 0.295);
   box-shadow: 0 0.2vh 0.2vh rgba(0, 0, 0, 0.7);
-  transition: .15s;
+  transition: 0.15s;
 }
 
 .todo * {
@@ -291,7 +293,7 @@ button {
   overflow: hidden;
   background: rgba(0, 0, 0, 0.4);
   box-shadow: 0 0.2vh 0.2vh rgba(0, 0, 0, 0.7);
-  transition: .15s;
+  transition: 0.15s;
   user-select: none;
 }
 
@@ -323,6 +325,17 @@ button {
 
 .todo__head__name {
   width: 100%;
+  padding: 2%;
+}
+
+.todo__head__name:not(:disabled) {
+  border-radius: 0.5vh;
+  box-shadow: inset 0 0 2vh rgba(0, 0, 0, 0.4);
+  text-shadow: none;
+}
+
+.todo__head__name:not(:disabled)[value=''] {
+  background: rgba(255, 0, 0, 0.24);
 }
 
 .todo__head__btn-expand {
@@ -333,7 +346,7 @@ button {
   line-height: 1.5vw;
   text-shadow: none;
   box-shadow: 0 0 10vh #000;
-  transition: transform .15s;
+  transition: transform 0.15s;
 }
 
 .todo__content {
@@ -366,36 +379,36 @@ button {
 }
 
 .new-todo-form {
-  z-index: 1000;
-  position: absolute;
-  display: block;
-  width: 100%;
-  padding: 0;
-  padding-left: 2%;
-  top: 0;
+  z-index: 100;
+  position: relative;
+  height: 0;
+  overflow: visible;
+  display: grid;
+  grid-template-columns: auto 2vh;
+  grid-template-areas: 'form-body form-btn';
+  align-items: start;
+  justify-content: end;
+  transition: 0.25s ease-in-out;
 }
 
-.new-todo-form__input {
-  float: left;
-  width: 60%;
-  height: 100%;
-  background: #fff;
-  border: 2px solid #fff;
+.new-todo-form__body {
+  grid-area: form-body;
+  height: 0;
+  transition: 0.25s;
 }
 
-.new-todo-form__input[value=''] {
-  outline: 2px solid tomato;
+.new-todo-form__body .todo {
+  height: 0;
 }
 
 .new-todo-form__button {
-  position: relative;
-  float: right;
+  grid-area: form-btn;
+  z-index: 100;
+  position: absolute;
   height: 4vh;
   width: 4vh;
-  margin: 0;
-  margin-top: -1vh;
-  right: -1vh;
-  padding: .5vh .5vh 0 0;
+  margin: -2vh -1vh 0 0;
+  padding: 0.5vh 0.5vh 0 0;
   background: #4a4a48;
   border-radius: 50%;
   border: solid 0.2vh rgba(134, 134, 134, 0.3);
@@ -403,11 +416,30 @@ button {
   font-size: 2vh;
   color: rgba(134, 134, 134, 0.8);
   text-shadow: 0 0 1.5vh rgba(0, 0, 0, 0.26);
-  transition: .15s;
+  transition: 0.25s, opacity 0.15s;
   opacity: 0;
 }
 
-.new-todo-form--active__button {
-  opacity: .5;
+.new-todo-form--active {
+  grid-template-columns: 100% 0;
+  margin-bottom: 0;
+  height: 3.5vh;
+}
+
+.new-todo-form--active .new-todo-form__body {
+  height: 100%;
+}
+
+.new-todo-form--active .new-todo-form__body .todo {
+  height: 100%;
+}
+
+.new-todo-form--active .new-todo-form__button {
+  height: 3.5vh;
+  width: 3.5vh;
+  padding: 0;
+  margin: 0vh 0 0 -2vh;
+  background: rgba(95, 158, 160, 0.411);
+  opacity: 1;
 }
 /*# sourceMappingURL=index.css.map */

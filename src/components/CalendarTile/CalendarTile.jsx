@@ -46,9 +46,13 @@ class CalendarTile extends Component {
       >
         {/* TODO: Standardize buttons */}
 
-        <TodoForm onNewTodo={this.withForceUpdate(onNewTodo)} dayObj={dayObj} />
-
-        <div className="tile__content">{todos}</div>
+        <div className="tile__content">
+          <TodoForm
+            onNewTodo={this.withForceUpdate(onNewTodo)}
+            dayObj={dayObj}
+          />
+          {todos}
+        </div>
 
         <div className="tile__label">
           <div className="tile__label__name">{dayObj.date}</div>
