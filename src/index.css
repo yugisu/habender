@@ -218,7 +218,7 @@ button {
   height: 100%;
   margin: 0;
   padding: 0.5vh;
-  overflow: visible overlay;
+  overflow: hidden overlay;
   font-size: 1.5vh;
   opacity: 0.6;
   transition: 0.5s;

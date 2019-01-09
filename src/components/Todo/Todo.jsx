@@ -1,14 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../../helpers';
+import NiceDate from '../../NiceDate';
 
 class Todo extends Component {
+  static propTypes = {
+    todoObj: PropTypes.object,
+    onTodoChange: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    todoObj: {
+      done: false,
+      name: '',
+    },
+    isInputActive: false,
+  };
+
   shouldComponentUpdate({ todoObj: { done: newDone, name: newName } }) {
     const { done, name } = this.props.todoObj;
 
     return newDone !== done || newName !== name;
   }
 
+  // TODO: Remake this one to use with TodoForm / other things
   handleTodoChange = (value) => {
     return (e) => {
       const { todoObj, onTodoChange } = this.props;
@@ -53,18 +68,5 @@ class Todo extends Component {
     );
   }
 }
-
-Todo.defaultProps = {
-  todoObj: {
-    done: false,
-    name: '',
-  },
-  isInputActive: false,
-};
-
-Todo.propTypes = {
-  todoObj: PropTypes.any,
-  onTodoChange: PropTypes.func.isRequired,
-};
 
 export default Todo;

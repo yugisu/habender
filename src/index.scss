@@ -330,7 +330,7 @@ button {
     margin: 0;
     padding: 0.5vh;
     // TODO: do smthng w/ that overflow shit
-    overflow: visible overlay;
+    overflow: hidden overlay;
     font-size: 1.5vh;
     opacity: 0.6;
     transition: 0.5s;
