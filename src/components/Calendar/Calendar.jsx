@@ -131,8 +131,6 @@ class Calendar extends Component {
   });
 
   render() {
-    console.log(this.state);
-
     const { openedMonth, todos } = this.state;
 
     // const prevMonthTodos = todos.filter((el) => el.date.month === openedMonth.month - 1);

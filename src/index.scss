@@ -160,6 +160,8 @@ button {
 
 .app {
   background: theme(bg);
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   width: 100vw;
 }
@@ -395,8 +397,7 @@ button {
 
 .todo {
   $todo-bor-rad: 1vh;
-  display: flex;
-  overflow: hidden;
+  display: flex; // overflow: hidden;
   height: 3.5vh;
   border-radius: 0;
   background: rgba(134, 134, 134, 0.295);
@@ -452,12 +453,12 @@ button {
       padding: 2%;
 
       &:not(:disabled) {
-        border-radius: 0.5vh;
-        box-shadow: inset 0 0 2vh rgba(0, 0, 0, 0.4);
+        border-radius: 0.2vh;
         text-shadow: none;
+        transition: box-shadow 0.25s;
 
         &[value=''] {
-          background: rgba(255, 0, 0, 0.24);
+          box-shadow: 2vh 0 1vh rgba(155, 23, 0, 0.404);
         }
       }
     }
@@ -531,11 +532,11 @@ button {
   height: 0;
   overflow: visible;
   display: grid;
+  padding: 0;
   grid-template-columns: auto 2vh;
   grid-template-areas: 'form-body form-btn';
   align-items: start;
   justify-content: end;
-  transition: 0.25s ease-in-out;
 
   &__body {
     grid-area: form-body;
@@ -544,7 +545,6 @@ button {
     .todo {
       height: 0;
     }
-    transition: 0.25s;
   }
   // TODO: Redesign this button
 
@@ -563,7 +563,8 @@ button {
     font-size: 2vh;
     color: rgba(134, 134, 134, 0.8);
     text-shadow: 0 0 1.5vh rgba(0, 0, 0, 0.26);
-    transition: 0.25s, opacity 0.15s;
+    transition: height 0.25s, margin-top 0.25s, opacity 0.15s,
+      background-color 0.15s;
     opacity: 0;
   }
 
@@ -571,13 +572,14 @@ button {
     grid-template-columns: 100% 0;
     margin-bottom: 0;
     height: 3.5vh;
-    // background: rgba(95, 158, 160, 0.6);
+    transition: height 0.25s;
 
     .new-todo-form__body {
       height: 100%;
+      transition: height 0.25s;
 
       .todo {
-        height: 100%;
+        height: 3.5vh;
       }
     }
 

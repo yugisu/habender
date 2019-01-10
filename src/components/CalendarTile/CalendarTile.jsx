@@ -44,7 +44,7 @@ class CalendarTile extends Component {
           { 'tile--not-empty': !isEmpty }
         )}
       >
-        {/* TODO: Standardize buttons */}
+        {/* TODO: Move TodoForm out of .tile__content */}
 
         <div className="tile__content">
           <TodoForm

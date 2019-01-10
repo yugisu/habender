@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { classNames } from '../../helpers';
-import NiceDate from '../../NiceDate';
 
 class Todo extends Component {
   static propTypes = {
-    todoObj: PropTypes.object,
+    todoObj: PropTypes.shape({
+      id: PropTypes.number,
+      done: PropTypes.bool,
+      name: PropTypes.string,
+    }),
     onTodoChange: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     todoObj: {
+      id: -1,
       done: false,
       name: '',
     },
@@ -23,19 +27,20 @@ class Todo extends Component {
     return newDone !== done || newName !== name;
   }
 
-  // TODO: Remake this one to use with TodoForm / other things
-  handleTodoChange = (value) => {
-    return (e) => {
-      const { todoObj, onTodoChange } = this.props;
-      let change = value == undefined ? e.target.value : value;
-      // If 'change' contains stringed bool, we convert it to bool
-      if (e.target.name === 'done') {
-        change = change === 'true' ? true : false;
-      }
-      onTodoChange(todoObj.id, {
-        [e.target.name]: change,
-      });
-    };
+  onTodoToggleDone = (e) => {
+    const { todoObj, onTodoChange } = this.props;
+
+    onTodoChange(todoObj.id, {
+      [e.target.name]: e.target.value === 'true' ? true : false,
+    });
+  };
+
+  onTodoInput = (e) => {
+    const { todoObj, onTodoChange } = this.props;
+
+    onTodoChange(todoObj.id, {
+      [e.target.name]: e.target.value,
+    });
   };
 
   render() {
@@ -49,19 +54,21 @@ class Todo extends Component {
           <button
             type="checkbox"
             className="todo__head__done"
-            onClick={this.handleTodoChange()}
+            onClick={this.onTodoToggleDone}
             value={!done}
             name="done"
             disabled={isInputActive}
           />
           <input
-            type="text"
             className="todo__head__name"
-            onChange={this.handleTodoChange()}
             value={name}
-            name="name"
+            autoFocus={isInputActive}
             disabled={!isInputActive}
+            onChange={this.onTodoInput}
+            type="text"
+            name="name"
             placeholder="What to do?"
+            autoComplete={'off'}
           />
         </div>
       </div>

@@ -18,6 +18,10 @@ class TodoForm extends Component {
     this.setState({ value: e.target.value });
   };
 
+  handleInput = (_, { name }) => {
+    this.setState({ value: name });
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
 
@@ -48,7 +52,13 @@ class TodoForm extends Component {
         onSubmit={active ? this.handleSubmit : this.toggleActive}
       >
         <div className="new-todo-form__body">
-          {active && <Todo onTodoChange={() => {}} isInputActive />}
+          {active && (
+            <Todo
+              onTodoChange={this.handleInput}
+              todoObj={{ id: -1, done: false, name: value }}
+              isInputActive
+            />
+          )}
         </div>
         <button className="new-todo-form__button">+</button>
       </form>
