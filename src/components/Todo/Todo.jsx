@@ -28,10 +28,13 @@ class Todo extends Component {
   }
 
   onTodoToggleDone = (e) => {
-    const { todoObj, onTodoChange } = this.props;
+    const {
+      todoObj: { id, done },
+      onTodoChange,
+    } = this.props;
 
-    onTodoChange(todoObj.id, {
-      [e.target.name]: e.target.value === 'true' ? true : false,
+    onTodoChange(id, {
+      done: !done,
     });
   };
 
@@ -51,14 +54,7 @@ class Todo extends Component {
     return (
       <div className={classNames('todo', { 'todo--done': done })}>
         <div className="todo__head">
-          <button
-            type="checkbox"
-            className="todo__head__done"
-            onClick={this.onTodoToggleDone}
-            value={!done}
-            name="done"
-            disabled={isInputActive}
-          />
+          <div className="todo__head__done" onClick={this.onTodoToggleDone} />
           <input
             className="todo__head__name"
             value={name}

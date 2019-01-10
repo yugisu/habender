@@ -18,8 +18,13 @@ class TodoForm extends Component {
     this.setState({ value: e.target.value });
   };
 
-  handleInput = (_, { name }) => {
-    this.setState({ value: name });
+  handleInput = (_, { name, done }) => {
+    if (done !== undefined) {
+      this.setState({ active: false });
+    }
+    if (name !== undefined) {
+      this.setState({ value: name });
+    }
   };
 
   handleSubmit = (e) => {
