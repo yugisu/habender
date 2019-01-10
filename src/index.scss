@@ -33,6 +33,9 @@ $theme-light: (
   tile-roundness: 0,
   tile-shadow: 0 2px 2px rgba(0, 0, 0, 0.05),
   selection-color: rgba(173, 216, 230, 0.61),
+  pri: #ff934f,
+  sec: #d6f1f5,
+  acc: #e54b4b,
 );
 // #endregion
 // - Dark
@@ -334,7 +337,7 @@ button {
     // TODO: do smthng w/ that overflow shit
     overflow: hidden overlay;
     font-size: 1.5vh;
-    opacity: 0.6;
+    opacity: 0.5;
     transition: 0.5s;
   }
 
@@ -397,38 +400,30 @@ button {
 
 .todo {
   $todo-bor-rad: 1vh;
-  display: flex; // overflow: hidden;
+  padding: 3%;
+  padding-right: 5%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
   height: 3.5vh;
-  border-radius: 0;
-  background: rgba(134, 134, 134, 0.295);
-  box-shadow: 0 0.2vh 0.2vh rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0.2vh 0.2vh rgba(0, 0, 0, 0.8);
   transition: 0.15s;
+  user-select: none;
 
-  * {
+  > * {
     font-size: 1.2rem;
+    margin: 0 auto;
   }
 
-  &__head {
-    width: 100%;
-    padding: 3%;
-    padding-right: 5%;
-    display: flex;
-    flex: 0 0 row;
-    flex-wrap: nowrap;
-    align-items: center;
-    overflow: hidden;
-    background: rgba(0, 0, 0, 0.4);
-    box-shadow: 0 0.2vh 0.2vh rgba(0, 0, 0, 0.7);
-    transition: 0.15s;
-    user-select: none;
-
-    > * {
-      margin: 0 auto;
-    }
+  &__tooltip {
+    position: relative;
+    margin-right: 3%;
+    height: 1.5vh;
+    width: 1.5vh;
 
     &__done {
-      position: relative;
-      margin-right: 3%;
       height: 1.5vh;
       width: 1.5vh;
       display: flex;
@@ -447,70 +442,37 @@ button {
         line-height: 1.5vh;
       }
     }
-
-    &__name {
-      width: 100%;
-      padding: 2%;
-
-      &:not(:disabled) {
-        border-radius: 0.2vh;
-        text-shadow: none;
-        transition: box-shadow 0.25s;
-
-        &[value=''] {
-          box-shadow: 2vh 0 1vh rgba(155, 23, 0, 0.404);
-        }
-      }
-    }
-
-    &__btn-expand {
-      align-self: auto;
-      transform: rotate(0deg);
-      width: 1.5vw;
-      height: 1.5vw;
-      line-height: 1.5vw;
-      text-shadow: none;
-      // margin: .6vh auto;
-      box-shadow: 0 0 10vh #000;
-      transition: transform 0.15s;
-    }
   }
 
-  &__content {
-    display: none;
+  &__name {
+    width: 100%;
+    padding: 2%;
+
+    &:not(:disabled) {
+      border-radius: 0.2vh;
+      text-shadow: none;
+      transition: box-shadow 0.25s;
+
+      &[value=''] {
+        box-shadow: 2vh 0 1vh rgba(155, 23, 0, 0.404);
+      }
+    }
   }
 
   &:hover {
-
-    .todo__head {
-      background: lighten(rgba(0, 0, 0, 0.4), 10%);
-    }
-  }
-
-  &--expanded {
-    height: 100%;
-    user-select: text;
-
-    .todo__head {
-      height: fit-content;
-
-      &__btn-expand {
-        transform: rotate(180deg);
-      }
-    }
+    background: lighten(rgba(0, 0, 0, 0.4), 10%);
   }
 
   &--done {
 
     &,
     &:hover {
+      background: transparentize(
+        $color: darken(theme(sec), 60%),
+        $amount: 0.3
+      ); // background: darken(theme(sec), 60%);
 
-      .todo__head {
-        background: transparentize(
-          $color: darken(theme(sec), 60%),
-          $amount: 0.3
-        );
-        // background: darken(theme(sec), 60%);
+      .todo__tooltip {
 
         &__done {
 

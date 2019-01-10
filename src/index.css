@@ -222,7 +222,7 @@ button {
   padding: 0.5vh;
   overflow: hidden overlay;
   font-size: 1.5vh;
-  opacity: 0.6;
+  opacity: 0.5;
   transition: 0.5s;
 }
 
@@ -243,6 +243,11 @@ button {
   box-shadow: 2px 2px 0px black;
   border-radius: 50%;
   background: #ff934f;
+}
+
+.tile--hovered .tile__content {
+  height: fit-content;
+  overflow: hidden;
 }
 
 .tile:hover {
@@ -271,40 +276,32 @@ button {
 }
 
 .todo {
-  display: flex;
-  height: 3.5vh;
-  border-radius: 0;
-  background: rgba(134, 134, 134, 0.295);
-  box-shadow: 0 0.2vh 0.2vh rgba(0, 0, 0, 0.7);
-  transition: 0.15s;
-}
-
-.todo * {
-  font-size: 1.2rem;
-}
-
-.todo__head {
-  width: 100%;
   padding: 3%;
   padding-right: 5%;
   display: flex;
-  flex: 0 0 row;
+  flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
-  overflow: hidden;
+  height: 3.5vh;
   background: rgba(0, 0, 0, 0.4);
-  box-shadow: 0 0.2vh 0.2vh rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0.2vh 0.2vh rgba(0, 0, 0, 0.8);
   transition: 0.15s;
   user-select: none;
 }
 
-.todo__head > * {
+.todo > * {
+  font-size: 1.2rem;
   margin: 0 auto;
 }
 
-.todo__head__done {
+.todo__tooltip {
   position: relative;
   margin-right: 3%;
+  height: 1.5vh;
+  width: 1.5vh;
+}
+
+.todo__tooltip__done {
   height: 1.5vh;
   width: 1.5vh;
   display: flex;
@@ -315,7 +312,7 @@ button {
   box-shadow: 0 0 2vh rgba(0, 0, 0, 0.3);
 }
 
-.todo__head__done::before {
+.todo__tooltip__done::before {
   content: '❌';
   display: block;
   text-shadow: none;
@@ -324,58 +321,30 @@ button {
   line-height: 1.5vh;
 }
 
-.todo__head__name {
+.todo__name {
   width: 100%;
   padding: 2%;
 }
 
-.todo__head__name:not(:disabled) {
+.todo__name:not(:disabled) {
   border-radius: 0.2vh;
   text-shadow: none;
   transition: box-shadow 0.25s;
 }
 
-.todo__head__name:not(:disabled)[value=''] {
+.todo__name:not(:disabled)[value=''] {
   box-shadow: 2vh 0 1vh rgba(155, 23, 0, 0.404);
 }
 
-.todo__head__btn-expand {
-  align-self: auto;
-  transform: rotate(0deg);
-  width: 1.5vw;
-  height: 1.5vw;
-  line-height: 1.5vw;
-  text-shadow: none;
-  box-shadow: 0 0 10vh #000;
-  transition: transform 0.15s;
-}
-
-.todo__content {
-  display: none;
-}
-
-.todo:hover .todo__head {
+.todo:hover {
   background: rgba(26, 26, 26, 0.4);
 }
 
-.todo--expanded {
-  height: 100%;
-  user-select: text;
-}
-
-.todo--expanded .todo__head {
-  height: fit-content;
-}
-
-.todo--expanded .todo__head__btn-expand {
-  transform: rotate(180deg);
-}
-
-.todo--done .todo__head, .todo--done:hover .todo__head {
+.todo--done, .todo--done:hover {
   background: rgba(30, 111, 123, 0.7);
 }
 
-.todo--done .todo__head__done::before, .todo--done:hover .todo__head__done::before {
+.todo--done .todo__tooltip__done::before, .todo--done:hover .todo__tooltip__done::before {
   content: '👌';
 }
 

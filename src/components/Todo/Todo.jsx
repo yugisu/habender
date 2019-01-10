@@ -27,7 +27,7 @@ class Todo extends Component {
     return newDone !== done || newName !== name;
   }
 
-  onTodoToggleDone = (e) => {
+  onTodoToggleDone = () => {
     const {
       todoObj: { id, done },
       onTodoChange,
@@ -46,6 +46,14 @@ class Todo extends Component {
     });
   };
 
+  onTodoDelete = () => {
+    const {
+      todoObj: { id },
+      onTodoDelete,
+    } = this.props;
+    this.props.onTodoDelete(id);
+  };
+
   render() {
     const { todoObj, isInputActive } = this.props;
 
@@ -53,20 +61,24 @@ class Todo extends Component {
 
     return (
       <div className={classNames('todo', { 'todo--done': done })}>
-        <div className="todo__head">
-          <div className="todo__head__done" onClick={this.onTodoToggleDone} />
-          <input
-            className="todo__head__name"
-            value={name}
-            autoFocus={isInputActive}
-            disabled={!isInputActive}
-            onChange={this.onTodoInput}
-            type="text"
-            name="name"
-            placeholder="What to do?"
-            autoComplete={'off'}
+        <div className="todo__tooltip">
+          <div
+            className="todo__tooltip__done"
+            onClick={this.onTodoToggleDone}
           />
+          <div className="todo__tooltip__delete" onClick={this.onTodoDelete} />
         </div>
+        <input
+          className="todo__name"
+          value={name}
+          autoFocus={isInputActive}
+          disabled={!isInputActive}
+          onChange={this.onTodoInput}
+          type="text"
+          name="name"
+          placeholder="What to do?"
+          autoComplete={'off'}
+        />
       </div>
     );
   }
