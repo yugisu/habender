@@ -418,12 +418,16 @@ button {
   }
 
   &__tooltip {
-    position: relative;
-    margin-right: 3%;
+    position: absolute;
+    display: grid;
+    grid-template-columns: repeat(2, 1.5vh);
+    grid-gap: 0.2vh;
     height: 1.5vh;
-    width: 1.5vh;
-
-    &__done {
+    width: fit-content;
+    border-radius: 0 25% 25% 0;
+    background: transparent;
+    transition: 0.15s;
+    @mixin tooltip-btn($emoji) {
       height: 1.5vh;
       width: 1.5vh;
       display: flex;
@@ -434,7 +438,7 @@ button {
       box-shadow: 0 0 2vh rgba(0, 0, 0, 0.3);
 
       &::before {
-        content: '❌';
+        content: $emoji;
         display: block;
         text-shadow: none;
         position: absolute;
@@ -442,11 +446,35 @@ button {
         line-height: 1.5vh;
       }
     }
+
+    &__done {
+      @include tooltip-btn('❌');
+    }
+
+    &__delete {
+      @include tooltip-btn('💩');
+      position: absolute;
+      left: -30%;
+      top: -100%;
+      opacity: 0;
+      background: tomato;
+      box-shadow: 0 0 1vh tomato;
+      border-radius: 33%;
+      transition: 0.15s;
+    }
+
+    &:hover {
+
+      .todo__tooltip__delete {
+        opacity: 1;
+      }
+    }
   }
 
   &__name {
     width: 100%;
     padding: 2%;
+    margin-left: 1.5vh;
 
     &:not(:disabled) {
       border-radius: 0.2vh;

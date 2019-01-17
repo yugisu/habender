@@ -245,11 +245,6 @@ button {
   background: #ff934f;
 }
 
-.tile--hovered .tile__content {
-  height: fit-content;
-  overflow: hidden;
-}
-
 .tile:hover {
   background: rgba(0, 0, 0, 0.05);
 }
@@ -295,10 +290,15 @@ button {
 }
 
 .todo__tooltip {
-  position: relative;
-  margin-right: 3%;
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(2, 1.5vh);
+  grid-gap: 0.2vh;
   height: 1.5vh;
-  width: 1.5vh;
+  width: fit-content;
+  border-radius: 0 25% 25% 0;
+  background: transparent;
+  transition: 0.15s;
 }
 
 .todo__tooltip__done {
@@ -313,7 +313,7 @@ button {
 }
 
 .todo__tooltip__done::before {
-  content: '❌';
+  content: "❌";
   display: block;
   text-shadow: none;
   position: absolute;
@@ -321,9 +321,42 @@ button {
   line-height: 1.5vh;
 }
 
+.todo__tooltip__delete {
+  height: 1.5vh;
+  width: 1.5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 2vh rgba(0, 0, 0, 0.3);
+  position: absolute;
+  left: -30%;
+  top: -100%;
+  opacity: 0;
+  background: tomato;
+  box-shadow: 0 0 1vh tomato;
+  border-radius: 33%;
+  transition: 0.15s;
+}
+
+.todo__tooltip__delete::before {
+  content: "💩";
+  display: block;
+  text-shadow: none;
+  position: absolute;
+  font-size: 1.5vh;
+  line-height: 1.5vh;
+}
+
+.todo__tooltip:hover .todo__tooltip__delete {
+  opacity: 1;
+}
+
 .todo__name {
   width: 100%;
   padding: 2%;
+  margin-left: 1.5vh;
 }
 
 .todo__name:not(:disabled) {

@@ -20,8 +20,9 @@ class CalendarTile extends Component {
       dayObj,
       activities,
       isFromOtherMonth,
-      onTodoChange,
       onNewTodo,
+      onTodoChange,
+      onTodoDelete,
     } = this.props;
 
     const isEmpty = activities.length === 0;
@@ -33,6 +34,7 @@ class CalendarTile extends Component {
         todoObj={todo}
         key={`todo-${todo.id}`}
         onTodoChange={this.withForceUpdate(onTodoChange)}
+        onTodoDelete={this.withForceUpdate(onTodoDelete)}
       />
     ));
 

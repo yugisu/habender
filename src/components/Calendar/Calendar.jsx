@@ -68,7 +68,7 @@ class Calendar extends Component {
     }));
   };
 
-  applyChangeInTodo = (todoId, changes) => {
+  handleChangeInTodo = (todoId, changes) => {
     // TODO: Test performance on both variants
 
     // const { idxInTodos, idxInActivities } = this.getTodoById(todoId);
@@ -104,7 +104,7 @@ class Calendar extends Component {
     }));
   };
 
-  onNewTodo = (dayObj, nameOfTodo) => {
+  handleNewTodo = (dayObj, nameOfTodo) => {
     const { todos } = this.state;
     const dayIdx = todos.findIndex(({ date }) => date.show() === dayObj.show());
 
@@ -116,6 +116,22 @@ class Calendar extends Component {
             activities: [Calendar.newActivity(nameOfTodo), ...activities],
           }))
           : [Calendar.newDay(dayObj, [nameOfTodo]), ...todos],
+    }));
+  };
+
+  // FIXME: fix it
+  handleDeleteTodo = (todoId) => {
+    this.setState(({ todos, ...others }) => ({
+      ...others,
+      todos: todos.map(({ date, activities }) => {
+        const filteredActivities = activities.filter(({ id }) => {
+          console.log(`id:${id}, todoId:${todoId}, === ${id !== todoId}`);
+          return id !== todoId;
+        });
+
+        console.log(filteredActivities);
+        return { date, filteredActivities };
+      }),
     }));
   };
 
@@ -149,8 +165,9 @@ class Calendar extends Component {
           <Month
             monthObj={openedMonth}
             todos={currentTodos}
-            onTodoChange={this.applyChangeInTodo}
-            onNewTodo={this.onNewTodo}
+            onTodoChange={this.handleChangeInTodo}
+            onNewTodo={this.handleNewTodo}
+            onTodoDelete={this.handleDeleteTodo}
           />
         </div>
       </div>

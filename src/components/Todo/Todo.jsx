@@ -51,7 +51,8 @@ class Todo extends Component {
       todoObj: { id },
       onTodoDelete,
     } = this.props;
-    this.props.onTodoDelete(id);
+    console.log(`todo #${id} wants to be deleted!`);
+    onTodoDelete(id);
   };
 
   render() {
@@ -62,11 +63,16 @@ class Todo extends Component {
     return (
       <div className={classNames('todo', { 'todo--done': done })}>
         <div className="todo__tooltip">
+          {done && (
+            <div
+              className="todo__tooltip__delete"
+              onClick={this.onTodoDelete}
+            />
+          )}
           <div
             className="todo__tooltip__done"
             onClick={this.onTodoToggleDone}
           />
-          <div className="todo__tooltip__delete" onClick={this.onTodoDelete} />
         </div>
         <input
           className="todo__name"
