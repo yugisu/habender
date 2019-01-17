@@ -1,4 +1,5 @@
 import AH from './arrayFunctions';
 import { classNames } from './classNames';
+import NiceDate from './NiceDate';
 
-export { AH, classNames };
+export { AH, NiceDate, classNames };

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import NiceDate from '../../NiceDate';
 
 import Month from '../Month';
 import CalendarHead from '../CalendarHead';
-import { AH } from '../../helpers';
+import { AH, NiceDate } from '../../helpers';
 
 const giveId = ((counter = 0) => () => counter++)();
 

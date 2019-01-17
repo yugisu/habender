@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import './index.min.css';
+// TODO: MODULARIZE CSS
+import './static/index.min.css';
 import App from './components/App';
 // import * as serviceWorker from './serviceWorker';
 
