@@ -44,16 +44,23 @@ class Calendar extends Component {
     ],
   };
 
-  getTodoById = (id, stateObj = this.state) => {
+  getTodoById = (id, stateObj = this.state, actionsToPerformOnTodo) => {
     const { todos } = stateObj;
 
     for (let i = 0; i < todos.length; i++) {
       const { date, activities } = todos[i];
       for (let j = 0; j < activities.length; j++) {
         const todo = activities[j];
+        const idxInTodos = i;
+        const idxInActivities = j;
+
+        const infoAboutTodo = { todo, date, idxInTodos, idxInActivities };
 
         if (todo.id === id) {
-          return { todo, date, idxInTodos: i, idxInActivities: j };
+          if (actionsToPerformOnTodo) {
+            actionsToPerformOnTodo(infoAboutTodo);
+          }
+          return infoAboutTodo;
         }
       }
     }
@@ -71,37 +78,29 @@ class Calendar extends Component {
   handleChangeInTodo = (todoId, changes) => {
     // TODO: Test performance on both variants
 
-    // const { idxInTodos, idxInActivities } = this.getTodoById(todoId);
+    this.setState(({ todos }) => {
+      const { idxInTodos, idxInActivities } = this.getTodoById(todoId);
+      const { date, activities } = todos[idxInTodos];
 
-    // this.setState(({ todos, ...others }) => {
-    //   const { date, activities } = todos[idxInTodos];
+      return {
+        todos: AH.replaceElement(todos, idxInTodos, {
+          date,
+          activities: AH.replaceElement(activities, idxInActivities, {
+            ...activities[idxInActivities],
+            ...changes,
+          }),
+        }),
+      };
 
-    //   return {
-    //     ...others,
-    //     todos: [
-    //       ...todos.slice(0, idxInTodos),
-    //       {
-    //         date,
-    //         activities: [
-    //           ...activities.slice(0, idxInActivities),
-    //           { ...activities[idxInActivities], ...changes },
-    //           ...activities.slice(idxInActivities + 1),
-    //         ],
-    //       },
-    //       ...todos.slice(idxInTodos + 1),
-    //     ],
-    //   };
-    // });
-
-    this.setState(({ todos, ...others }) => ({
-      todos: todos.map(({ date, activities }) => ({
-        date,
-        activities: activities.map(
-          (todo) => (todo.id === todoId ? { ...todo, ...changes } : todo)
-        ),
-      })),
-      ...others,
-    }));
+      // return {
+      //   todos: todos.map(({ date, activities }) => ({
+      //     date,
+      //     activities: activities.map(
+      //       (todo) => (todo.id === todoId ? { ...todo, ...changes } : todo)
+      //     ),
+      //   })),
+      // };
+    });
   };
 
   handleNewTodo = (dayObj, nameOfTodo) => {
@@ -119,20 +118,18 @@ class Calendar extends Component {
     }));
   };
 
-  // FIXME: fix it
   handleDeleteTodo = (todoId) => {
-    this.setState(({ todos, ...others }) => ({
-      ...others,
-      todos: todos.map(({ date, activities }) => {
-        const filteredActivities = activities.filter(({ id }) => {
-          console.log(`id:${id}, todoId:${todoId}, === ${id !== todoId}`);
-          return id !== todoId;
-        });
+    this.setState(({ todos }) => {
+      const { idxInTodos, idxInActivities } = this.getTodoById(todoId);
+      const { date, activities } = todos[idxInTodos];
 
-        console.log(filteredActivities);
-        return { date, filteredActivities };
-      }),
-    }));
+      return {
+        todos: AH.replaceElement(todos, idxInTodos, {
+          date,
+          activities: AH.deleteElement(activities, idxInActivities),
+        }),
+      };
+    });
   };
 
   static newActivity = (name = 'New TODO') => ({
