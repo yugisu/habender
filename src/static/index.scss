@@ -43,28 +43,28 @@ $theme-light: (
 $theme-dark: (
   bg: #4a4a48,
   text: #fff,
-  text-shadow: 2px 2px 0px rgb(0, 0, 0),
+  text-shadow: none,
   header-bg: darken(rgba(74, 74, 72, 0.527), 5%),
   header-text: #fff,
   header-text-shadow: (
-    -1px -1px 1px rgba(255, 166, 0, 0.8),
-    1px 1px 1px rgba(0, 255, 255, 0.8),
+    -0.1vh -0.1vh 0.1vh rgba(255, 166, 0, 0.8),
+    0.1vh 0.1vh 0.1vh rgba(0, 255, 255, 0.8),
   ),
   calendar-head-text: #fff,
-  calendar-head-text-shadow: 2px 2px 0px rgb(0, 0, 0),
+  calendar-head-text-shadow: 0.2vh 0.2vh 0 rgb(0, 0, 0),
   calendar-head-btn-hover-text: #fff,
   calendar-head-btn-hover-text-shadow: (
-    -1px -1px 1px rgb(223, 213, 129),
-    1px 1px 3px rgba(223, 119, 119, 0.7),
+    -0.1vh -0.1vh 0.1vh rgb(223, 213, 129),
+    0.1vh 0.1vh 0.3vh rgba(223, 119, 119, 0.7),
   ),
-  tile-bg: rgba(0, 0, 0, 0.274),
+  tile-bg: transparent,
+  tile-shadow: none,
   tile-text: #ffffff,
   tile-label-bg: rgba(255, 146, 79, 0.7),
   tile-label-bg-tile--other-month: rgba(238, 238, 238, 0.466),
   tile-label-text: #fff,
-  tile-label-text-shadow: 2px 2px 0px rgb(0, 0, 0),
+  tile-label-text-shadow: 0.3vh 0.3vh 0 rgb(0, 0, 0),
   tile-roundness: 0,
-  tile-shadow: 0 2px 2px rgba(0, 0, 0, 0.25),
   selection-color: rgba(173, 216, 230, 0.288),
   pri: #ff934f,
   sec: #d6f1f5,
@@ -297,8 +297,8 @@ button {
   padding: 0;
   color: theme(tile-text);
   overflow: visible;
-  // box-shadow: theme(tile-shadow);
-  // background: theme(tile-bg);
+  box-shadow: theme(tile-shadow);
+  background: theme(tile-bg);
   border-radius: theme(tile-roundness);
   outline: 0.2vh solid rgba(134, 134, 134, 0.3);
   transition: 0.15s;
@@ -322,7 +322,7 @@ button {
       display: flex;
       align-items: center;
       color: theme(tile-label-text);
-      text-shadow: theme(tile-label-text-shadow), 0 0 10vh #000;
+      text-shadow: theme(tile-label-text-shadow);
       font-size: 5vh;
       font-weight: bold;
     }

@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Header(props) {
+function Header() {
   return (
     <header className="app-header">
-      <span className="app-header__splash"> Habender </span>
+      <span className="app-header__splash"> habender </span>
     </header>
   );
 }
