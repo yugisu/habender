@@ -239,10 +239,10 @@ button {
   display: block;
   width: 1vh;
   height: 1vh;
-  margin-right: 0.3vh;
-  box-shadow: 2px 2px 0px black;
-  border-radius: 50%;
   background: #ff934f;
+  margin-right: 0.3vh;
+  border-radius: 50%;
+  box-shadow: 2px 2px 0px black;
 }
 
 .tile:hover {
@@ -331,13 +331,12 @@ button {
   background: rgba(0, 0, 0, 0.2);
   box-shadow: 0 0 2vh rgba(0, 0, 0, 0.3);
   position: absolute;
-  left: -30%;
-  top: -100%;
+  right: -5%;
+  top: 0;
   opacity: 0;
   background: tomato;
   box-shadow: 0 0 1vh tomato;
   border-radius: 33%;
-  transition: 0.15s;
 }
 
 .todo__tooltip__delete::before {
@@ -446,4 +445,3 @@ button {
   background: rgba(95, 158, 160, 0.411);
   opacity: 1;
 }
-/*# sourceMappingURL=index.css.map */

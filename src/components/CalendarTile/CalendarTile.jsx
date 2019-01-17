@@ -27,8 +27,6 @@ class CalendarTile extends Component {
 
     const isEmpty = activities.length === 0;
 
-    const isHidden = true;
-
     const todos = activities.map((todo) => (
       <Todo
         todoObj={todo}

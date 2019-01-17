@@ -3,7 +3,7 @@ import NiceDate from '../../NiceDate';
 
 import Month from '../Month';
 import CalendarHead from '../CalendarHead';
-import { AH, classNames } from '../../helpers';
+import { AH } from '../../helpers';
 
 const giveId = ((counter = 0) => () => counter++)();
 
@@ -12,9 +12,10 @@ const giveId = ((counter = 0) => () => counter++)();
 class Calendar extends Component {
   today = new NiceDate();
 
-  // reimplement openedMonth logic
+  // TODO: reimplement openedMonth logic
 
   /* 
+  'todos' structure: 
   todos: [
     {
       date,
@@ -25,9 +26,7 @@ class Calendar extends Component {
       ]
     }
   ]
-  
   */
-
   state = {
     openedMonth: new NiceDate(`${this.today.month}.1.${this.today.year}`),
     todos: [
@@ -35,32 +34,25 @@ class Calendar extends Component {
         'Feed a cat',
         'Cook some dinner',
         'Make some tea for my darling ♥',
-        'Make some tea for my darling ♥',
       ]),
-      Calendar.newDay(NiceDate.newDate(this.today, +22), [
+      Calendar.newDay(NiceDate.newDate(this.today, +15), [
         'Drink some cola',
         'Finish that goddamn stoopid todo app',
       ]),
     ],
   };
 
-  getTodoById = (id, stateObj = this.state, actionsToPerformOnTodo) => {
+  getTodoById = (id, stateObj = this.state) => {
     const { todos } = stateObj;
 
     for (let i = 0; i < todos.length; i++) {
       const { date, activities } = todos[i];
+
       for (let j = 0; j < activities.length; j++) {
         const todo = activities[j];
-        const idxInTodos = i;
-        const idxInActivities = j;
-
-        const infoAboutTodo = { todo, date, idxInTodos, idxInActivities };
 
         if (todo.id === id) {
-          if (actionsToPerformOnTodo) {
-            actionsToPerformOnTodo(infoAboutTodo);
-          }
-          return infoAboutTodo;
+          return { todo, date, idxInTodos: i, idxInActivities: j };
         }
       }
     }
@@ -146,11 +138,13 @@ class Calendar extends Component {
   render() {
     const { openedMonth, todos } = this.state;
 
-    // const prevMonthTodos = todos.filter((el) => el.date.month === openedMonth.month - 1);
-    const currentTodos = todos.filter(
-      (el) => el.date.month === openedMonth.month
+    const currentTodos = todos.filter((el) =>
+      [
+        openedMonth.month - 1,
+        openedMonth.month,
+        openedMonth.month + 1,
+      ].includes(el.date.month)
     );
-    // const nextMonthTodos = todos.filter((el) => el.date.month === openedMonth.month + 1);
     return (
       <div className="calendar">
         <CalendarHead

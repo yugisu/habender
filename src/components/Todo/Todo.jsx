@@ -16,7 +16,7 @@ class Todo extends Component {
     todoObj: {
       id: -1,
       done: false,
-      name: '',
+      name: 'DEFAULT THING TO DO',
     },
     isInputActive: false,
   };
@@ -51,14 +51,14 @@ class Todo extends Component {
       todoObj: { id },
       onTodoDelete,
     } = this.props;
-    console.log(`todo #${id} wants to be deleted!`);
+
     onTodoDelete(id);
   };
 
   render() {
     const { todoObj, isInputActive } = this.props;
 
-    const { id, done, name } = todoObj;
+    const { done, name } = todoObj;
 
     return (
       <div className={classNames('todo', { 'todo--done': done })}>
@@ -77,13 +77,14 @@ class Todo extends Component {
         <input
           className="todo__name"
           value={name}
+          alt={name}
           autoFocus={isInputActive}
           disabled={!isInputActive}
           onChange={this.onTodoInput}
           type="text"
           name="name"
           placeholder="What to do?"
-          autoComplete={'off'}
+          autoComplete="off"
         />
       </div>
     );

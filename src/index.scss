@@ -334,7 +334,6 @@ button {
     height: 100%;
     margin: 0;
     padding: 0.5vh;
-    // TODO: do smthng w/ that overflow shit
     overflow: hidden overlay;
     font-size: 1.5vh;
     opacity: 0.5;
@@ -356,10 +355,10 @@ button {
       display: block;
       width: 1vh;
       height: 1vh;
-      margin-right: 0.3vh;
-      box-shadow: theme(tile-label-text-shadow);
-      border-radius: 50%;
       background: theme(pri);
+      margin-right: 0.3vh;
+      border-radius: 50%;
+      box-shadow: theme(tile-label-text-shadow);
     }
   }
 
@@ -454,13 +453,12 @@ button {
     &__delete {
       @include tooltip-btn('💩');
       position: absolute;
-      left: -30%;
-      top: -100%;
+      right: -5%;
+      top: 0;
       opacity: 0;
       background: tomato;
       box-shadow: 0 0 1vh tomato;
       border-radius: 33%;
-      transition: 0.15s;
     }
 
     &:hover {
