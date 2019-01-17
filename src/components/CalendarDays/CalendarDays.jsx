@@ -14,7 +14,7 @@ const CalendarDays = () => {
   return (
     <div className="calendar-days">
       {weekDays.map((day) => (
-        <div>{day.slice(0, 3)}</div>
+        <div key={`day-${day.slice(0, 3)}`}>{day.slice(0, 3)}</div>
       ))}
     </div>
   );

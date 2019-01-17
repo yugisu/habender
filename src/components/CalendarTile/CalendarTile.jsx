@@ -4,24 +4,10 @@ import NiceDate from '../../NiceDate';
 // TODO: borrow tile from tile-ui, rework that
 
 class CalendarTile extends Component {
-  shouldComponentUpdate(props, state) {
+  shouldComponentUpdate(props) {
     //TODO: DO SOMETHING WITH AUTOUPDATING
 
     // this.props.currentActivities IS UPDATING ON EMPTY TILES
-
-    console.log(
-      'tile',
-      this.props.weekNumber + '_' + this.props.dayNumber,
-      'updated!'
-    );
-
-    console.log(
-      this.props.currentActivities !== props.currentActivities,
-      this.props.currentActivities,
-      props.currentActivities,
-      this.props.isInCard !== props.isInCard,
-      this.props.isToday !== props.isToday
-    );
 
     return (
       this.props.currentActivities === props.currentActivities ||
