@@ -1,9 +1,12 @@
 import React from 'react';
 
+import { dinoCat } from '../../static/emojis';
+
 function Header() {
   return (
     <header className="app-header">
-      <span className="app-header__splash"> habender </span>
+      <img className="app-header__icon" src={dinoCat} alt="" />
+      <span className="app-header__splash">habender</span>
     </header>
   );
 }

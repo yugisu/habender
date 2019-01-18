@@ -137,13 +137,14 @@ class Calendar extends Component {
   render() {
     const { openedMonth, todos } = this.state;
 
+    //FIXME: todos from other months are not properly displayed
+
     const currentTodos = todos.filter((el) =>
-      [
-        openedMonth.month - 1,
-        openedMonth.month,
-        openedMonth.month + 1,
-      ].includes(el.date.month)
+      [openedMonth.month - 1, openedMonth.month, openedMonth.month + 1]
+        .map((el) => (el < 0 ? 12 + el : el > 12 ? el - 12 : el))
+        .includes(el.date.month)
     );
+
     return (
       <div className="calendar">
         <CalendarHead

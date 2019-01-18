@@ -190,6 +190,13 @@ button {
     text-shadow: theme(header-text-shadow);
     user-select: none;
   }
+
+  &__icon {
+    height: 3.5vh;
+    margin-left: -4.5vh;
+    margin-right: 1vh;
+    filter: sepia(70%);
+  }
 }
 // #endregion
 // --------
@@ -397,7 +404,7 @@ button {
 
 .todo {
   $todo-bor-rad: 1vh;
-  padding: 3%;
+  padding: 2%;
   padding-right: 5%;
   display: flex;
   flex-direction: row;
@@ -411,16 +418,17 @@ button {
 
   > * {
     font-size: 1.2rem;
-    margin: 0 auto;
   }
 
   &__tooltip {
     position: absolute;
+    height: 2vh;
     display: grid;
     grid-template-columns: repeat(2, 1.5vh);
-    grid-gap: 0.2vh;
-    height: 1.5vh;
+    grid-gap: 0.3vw;
     width: fit-content;
+    justify-content: center;
+    align-items: center;
     border-radius: 0 25% 25% 0;
     background: transparent;
     transition: 0.15s;
@@ -444,19 +452,8 @@ button {
       }
     }
 
-    &__done {
-      @include tooltip-btn('❌');
-    }
-
     &__delete {
-      @include tooltip-btn('💩');
-      position: absolute;
-      right: -5%;
-      top: 0;
       opacity: 0;
-      background: tomato;
-      box-shadow: 0 0 1vh tomato;
-      border-radius: 33%;
     }
 
     &:hover {
@@ -470,7 +467,7 @@ button {
   &__name {
     width: 100%;
     padding: 2%;
-    margin-left: 1.5vh;
+    margin-left: 1.75vh;
 
     &:not(:disabled) {
       border-radius: 0.2vh;
@@ -495,16 +492,6 @@ button {
         $color: darken(theme(sec), 60%),
         $amount: 0.3
       ); // background: darken(theme(sec), 60%);
-
-      .todo__tooltip {
-
-        &__done {
-
-          &::before {
-            content: '👌';
-          }
-        }
-      }
     }
   }
 }
