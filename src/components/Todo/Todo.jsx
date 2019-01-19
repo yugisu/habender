@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { classNames } from '../../helpers';
-import { crossMark, okHand, wastebasket } from '../../static/emojis';
+import { crossMark, okHand, wastebasket, poop } from '../../static/emojis';
 import ToolButton from '../ToolButton/ToolButton';
 
 class Todo extends Component {
@@ -74,7 +74,7 @@ class Todo extends Component {
           />
           {done && (
             <ToolButton
-              emoji={wastebasket}
+              emoji={poop}
               className="tool-button--warning todo__tooltip__delete"
               alt="Delete"
               onClick={this.onTodoDelete}
