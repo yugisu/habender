@@ -1,3 +1,5 @@
+// TODO: MAKE EMOJIS BE MORE LIGHTWEIGHT
+
 import soap from './bar-of-soap.png';
 import blackHeart from './black-heart.png';
 import crossMark from './cross-mark.png';

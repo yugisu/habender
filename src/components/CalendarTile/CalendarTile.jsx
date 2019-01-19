@@ -44,15 +44,8 @@ class CalendarTile extends Component {
           { 'tile--not-empty': !isEmpty }
         )}
       >
-        {/* TODO: Move TodoForm out of .tile__content */}
-
-        <div className="tile__content">
-          <TodoForm
-            onNewTodo={this.withForceUpdate(onNewTodo)}
-            dayObj={dayObj}
-          />
-          {todos}
-        </div>
+        <TodoForm onNewTodo={this.withForceUpdate(onNewTodo)} dayObj={dayObj} />
+        <div className="tile__content">{todos}</div>
 
         <div className="tile__label">
           <div className="tile__label__name">{dayObj.date}</div>
