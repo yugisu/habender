@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+
 import { classNames } from '../../helpers';
+import { crossMark, okHand, wastebasket, poop } from '../../static/emojis';
+import ToolButton from '../ToolButton/ToolButton';
 
 class Todo extends Component {
   static propTypes = {
@@ -63,16 +66,20 @@ class Todo extends Component {
     return (
       <div className={classNames('todo', { 'todo--done': done })}>
         <div className="todo__tooltip">
+          <ToolButton
+            emoji={done ? okHand : crossMark}
+            className="todo__tooltip__done"
+            alt="Mark as done"
+            onClick={this.onTodoToggleDone}
+          />
           {done && (
-            <div
-              className="todo__tooltip__delete"
+            <ToolButton
+              emoji={poop}
+              className="tool-button--warning todo__tooltip__delete"
+              alt="Delete"
               onClick={this.onTodoDelete}
             />
           )}
-          <div
-            className="todo__tooltip__done"
-            onClick={this.onTodoToggleDone}
-          />
         </div>
         <input
           className="todo__name"

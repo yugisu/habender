@@ -56,6 +56,7 @@ $theme-dark: (
     0.1vh 0.1vh 0.3vh rgba(223, 119, 119, 0.7),
   ),
   tile-bg: transparent,
+  tile-bg--hover: rgba(0, 0, 0, 0.05),
   tile-shadow: none,
   tile-text: #ffffff,
   tile-label-bg: rgba(255, 146, 79, 0.7),
@@ -190,6 +191,13 @@ button {
     text-shadow: theme(header-text-shadow);
     user-select: none;
   }
+
+  &__icon {
+    height: 3.5vh;
+    margin-left: -4.5vh;
+    margin-right: 1vh;
+    filter: sepia(70%);
+  }
 }
 // #endregion
 // --------
@@ -294,7 +302,7 @@ button {
   height: 13vh;
   padding: 0;
   color: theme(tile-text);
-  overflow: visible;
+  overflow: hidden;
   box-shadow: theme(tile-shadow);
   background: theme(tile-bg);
   border-radius: theme(tile-roundness);
@@ -302,9 +310,11 @@ button {
   transition: 0.15s;
 
   &__label {
-    position: relative;
+    position: absolute;
+    top: 0;
     z-index: 50;
     height: 100%;
+    width: 100%;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
@@ -314,7 +324,6 @@ button {
     user-select: none;
     transition: 0.15s;
     border-radius: theme(tile-roundness);
-    transform: translate(0, -100%);
 
     &__name {
       display: flex;
@@ -361,7 +370,7 @@ button {
   }
 
   &:hover {
-    background: rgba(0, 0, 0, 0.05);
+    background: theme(tile-bg--hover);
 
     .new-todo-form {
 
@@ -397,7 +406,7 @@ button {
 
 .todo {
   $todo-bor-rad: 1vh;
-  padding: 3%;
+  padding: 2%;
   padding-right: 5%;
   display: flex;
   flex-direction: row;
@@ -408,55 +417,27 @@ button {
   box-shadow: 0 0.2vh 0.2vh rgba(0, 0, 0, 0.8);
   transition: 0.15s;
   user-select: none;
+  overflow: hidden;
 
   > * {
     font-size: 1.2rem;
-    margin: 0 auto;
   }
 
   &__tooltip {
     position: absolute;
+    height: 2vh;
     display: grid;
     grid-template-columns: repeat(2, 1.5vh);
-    grid-gap: 0.2vh;
-    height: 1.5vh;
+    grid-gap: 0.3vw;
     width: fit-content;
+    justify-content: center;
+    align-items: center;
     border-radius: 0 25% 25% 0;
     background: transparent;
     transition: 0.15s;
-    @mixin tooltip-btn($emoji) {
-      height: 1.5vh;
-      width: 1.5vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 20px;
-      background: rgba(0, 0, 0, 0.2);
-      box-shadow: 0 0 2vh rgba(0, 0, 0, 0.3);
-
-      &::before {
-        content: $emoji;
-        display: block;
-        text-shadow: none;
-        position: absolute;
-        font-size: 1.5vh;
-        line-height: 1.5vh;
-      }
-    }
-
-    &__done {
-      @include tooltip-btn('❌');
-    }
 
     &__delete {
-      @include tooltip-btn('💩');
-      position: absolute;
-      right: -5%;
-      top: 0;
       opacity: 0;
-      background: tomato;
-      box-shadow: 0 0 1vh tomato;
-      border-radius: 33%;
     }
 
     &:hover {
@@ -470,7 +451,8 @@ button {
   &__name {
     width: 100%;
     padding: 2%;
-    margin-left: 1.5vh;
+    margin-left: 1.75vh;
+    transition: 0.5s;
 
     &:not(:disabled) {
       border-radius: 0.2vh;
@@ -478,7 +460,8 @@ button {
       transition: box-shadow 0.25s;
 
       &[value=''] {
-        box-shadow: 2vh 0 1vh rgba(155, 23, 0, 0.404);
+        box-shadow: 0 0.6vh 0.2vh -0.5vh transparentize($color: theme(pri), $amount:
+              0.6);
       }
     }
   }
@@ -495,16 +478,6 @@ button {
         $color: darken(theme(sec), 60%),
         $amount: 0.3
       ); // background: darken(theme(sec), 60%);
-
-      .todo__tooltip {
-
-        &__done {
-
-          &::before {
-            content: '👌';
-          }
-        }
-      }
     }
   }
 }
@@ -514,12 +487,15 @@ button {
 
 .new-todo-form {
   z-index: 100;
-  position: relative;
+  position: absolute;
   height: 0;
+  width: 100%;
+  margin: 0.5vh;
+  margin-bottom: -0.5vh;
   overflow: visible;
   display: grid;
   padding: 0;
-  grid-template-columns: auto 2vh;
+  grid-template-columns: auto 3vh;
   grid-template-areas: 'form-body form-btn';
   align-items: start;
   justify-content: end;
@@ -537,10 +513,10 @@ button {
   &__button {
     grid-area: form-btn;
     z-index: 100;
-    position: absolute;
+    position: relative;
     height: 4vh;
     width: 4vh;
-    margin: -2vh -1vh 0 0;
+    margin: -2vh 0;
     padding: 0.5vh 0.5vh 0 0;
     background: #4a4a48;
     border-radius: 50%;
@@ -555,8 +531,8 @@ button {
   }
 
   &--active {
-    grid-template-columns: 100% 0;
-    margin-bottom: 0;
+    position: relative;
+    grid-template-columns: calc(100% - 1vh) 1vh;
     height: 3.5vh;
     transition: height 0.25s;
 
@@ -573,8 +549,8 @@ button {
       height: 3.5vh;
       width: 3.5vh;
       padding: 0;
-      margin: 0vh 0 0 -2vh;
-      background: rgba(95, 158, 160, 0.411);
+      margin: 0 0 0 -2vh;
+      background: transparentize(theme(sec), 0.8);
       opacity: 1;
     }
   }

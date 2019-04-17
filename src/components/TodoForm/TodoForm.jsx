@@ -65,7 +65,9 @@ class TodoForm extends Component {
             />
           )}
         </div>
-        <button className="new-todo-form__button">+</button>
+        <button className="new-todo-form__button" tabIndex="-1">
+          +
+        </button>
       </form>
     );
   }
